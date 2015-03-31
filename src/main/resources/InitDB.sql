@@ -11,7 +11,7 @@ CREATE TABLE users (
   id           INTEGER PRIMARY KEY DEFAULT nextval('GLOBAL_SEQUENCE'),
   first_name   VARCHAR(20)        NOT NULL,
   second_name  VARCHAR(20)        NOT NULL,
-  login        VARCHAR(20) UNIQUE NOT NULL,
+  email        VARCHAR(20) UNIQUE NOT NULL,
   password     VARCHAR(20) UNIQUE NOT NULL,
   registration TIMESTAMP          DEFAULT now()
 );
@@ -34,7 +34,7 @@ CREATE TABLE flights (
   point_of_departure VARCHAR(3)    NOT NULL REFERENCES airports (IATA_code) ON DELETE CASCADE,
   destination        VARCHAR(3)    NOT NULL REFERENCES airports (IATA_code) ON DELETE CASCADE,
   time               TIMESTAMP     NOT NULL,
-  prise              DECIMAL(7, 2) NOT NULL,
+  price              DECIMAL(7, 2) NOT NULL,
   CHECK (point_of_departure <> flights.destination)
 );
 

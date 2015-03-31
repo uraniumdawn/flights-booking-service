@@ -2,14 +2,15 @@ DELETE FROM booking;
 DELETE FROM flights;
 DELETE FROM airports;
 DELETE FROM users;
-
 ALTER SEQUENCE global_sequence RESTART WITH 1000;
 
-INSERT INTO users (first_name, second_name, login, password)
-VALUES ('Laura', 'Palmer', 'WhoKillLauraPalmer?', 'FireWalkWithMe');
-INSERT INTO users (first_name, second_name, login, password) VALUES ('Dale', 'Cooper', 'coop', 'cherry pie');
-INSERT INTO users (first_name, second_name, login, password) VALUES ('Maddy', 'Ferguson', 'Sheryl', 'Lee');
-INSERT INTO users (first_name, second_name, login, password) VALUES ('Audrey', 'Horne', 'Sherilyn', 'Fenn');
+INSERT INTO users (first_name, second_name, email, password)
+VALUES ('Laura', 'Palmer', 'WhoKillLauraPalmer', 'FireWalkWithMe');
+INSERT INTO users (first_name, second_name, email, password) VALUES ('Dale', 'Cooper', 'coop@linch.com', 'cherry pie');
+INSERT INTO users (first_name, second_name, email, password) VALUES ('Maddy', 'Ferguson', 'Sheryl@linch.com', 'Lee');
+INSERT INTO users (first_name, second_name, email, password) VALUES ('Audrey', 'Horne', 'Sherilyn@linch.com', 'Fenn');
+
+SELECT * FROM users;
 
 INSERT INTO user_roles (user_id, role) VALUES (1000, 'ROLE_ADMIN');
 INSERT INTO user_roles (user_id, role) VALUES (1001, 'ROLE_USER');
