@@ -1,6 +1,6 @@
 package net.petrovsky.flights.model;
 
-public class Airport extends BaseEntity {
+public class Airport {
 
     private String IATAcode;
     private String name;
@@ -10,8 +10,7 @@ public class Airport extends BaseEntity {
     public Airport () {
     }
 
-    public Airport (Integer id, String IATAcode, String name, String city) {
-        super(id);
+    public Airport (String IATAcode, String name, String city) {
         this.IATAcode = IATAcode;
         this.name = name;
         this.city = city;
