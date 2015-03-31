@@ -1,9 +1,9 @@
-package net.petrovsky.flights.repository;
+package net.petrovsky.flights.service;
 
 import net.petrovsky.flights.model.User;
 import java.util.List;
 
-public interface UserRepositoty {
+public interface UserService {
 
     User save (User user);
 
