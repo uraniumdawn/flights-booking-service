@@ -59,7 +59,6 @@ public class UserRepositoryJdbcImplTest {
     @Test(expected = DuplicateKeyException.class)
     public void testDuplicateMailSave() throws Exception {
         userRepository.save(shelly);
-
         userRepository.save(bot);
     }
 
