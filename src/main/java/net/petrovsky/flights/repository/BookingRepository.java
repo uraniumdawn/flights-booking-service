@@ -8,6 +8,8 @@ public interface BookingRepository {
 
     Booking save (Booking booking, int userID);
 
+    Booking update (Booking booking, int userID);
+
     boolean delete (int id);
 
     Booking getByID (int id);

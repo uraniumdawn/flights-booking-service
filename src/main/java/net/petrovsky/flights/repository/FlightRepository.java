@@ -8,6 +8,8 @@ public interface FlightRepository {
 
     Flight save (Flight flight);
 
+    Flight update (Flight flight);
+
     boolean delete (int id);
 
     Flight getByID (int id);

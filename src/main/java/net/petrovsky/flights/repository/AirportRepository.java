@@ -8,6 +8,8 @@ public interface AirportRepository {
 
     Airport save (Airport airport);
 
+    Airport update (Airport airport);
+
     boolean delete (String IATAcode);
 
     Airport getByName (String name);

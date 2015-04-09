@@ -1,6 +1,7 @@
 package net.petrovsky.flights.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.Set;
 
 public class User extends BaseEntity {
@@ -9,22 +10,22 @@ public class User extends BaseEntity {
     private String secondName;
     private String email;
     private String password;
+    private LocalDateTime registration;
     private boolean enabled;
-    private LocalDateTime registered;
     private Set<Role> roles;
 
     public User() {
     }
 
     public User (Integer id, String firstName, String secondName, String email, String password,
-                 boolean enabled, LocalDateTime registered, Set<Role> roles) {
+                 LocalDateTime registered, boolean enabled, Set<Role> roles) {
         super(id);
         this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
         this.password = password;
+        this.registration = registered;
         this.enabled = enabled;
-        this.registered = registered;
         this.roles = roles;
     }
 
@@ -68,12 +69,12 @@ public class User extends BaseEntity {
         this.enabled = enabled;
     }
 
-    public LocalDateTime getRegistered () {
-        return registered;
+    public LocalDateTime getRegistration () {
+        return registration;
     }
 
-    public void setRegistered (LocalDateTime registered) {
-        this.registered = registered;
+    public void setRegistration (LocalDateTime registration) {
+        this.registration = registration;
     }
 
     public Set<Role> getRoles () {
@@ -83,4 +84,35 @@ public class User extends BaseEntity {
     public void setRoles (Set<Role> roles) {
         this.roles = roles;
     }
+
+    @Override
+    public String toString () {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", registration=" + registration +
+                ", enabled=" + enabled +
+                ", roles=" + roles +
+                '}';
+    }
+
+    @Override
+    public boolean equals (Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(firstName, user.firstName) &&
+                Objects.equals(secondName, user.secondName) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password);
+    }
+
+    @Override
+    public int hashCode () {
+        return Objects.hash(firstName, secondName, email, password, enabled);
+    }
+
+
 }

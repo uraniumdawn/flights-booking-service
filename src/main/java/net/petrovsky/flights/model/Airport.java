@@ -10,10 +10,11 @@ public class Airport {
     public Airport () {
     }
 
-    public Airport (String IATAcode, String name, String city) {
+    public Airport (String IATAcode, String name, String city, String country) {
         this.IATAcode = IATAcode;
         this.name = name;
         this.city = city;
+        this.country = country;
     }
 
     public String getIATAcode () {

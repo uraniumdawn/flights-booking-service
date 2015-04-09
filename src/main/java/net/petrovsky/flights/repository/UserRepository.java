@@ -3,9 +3,11 @@ package net.petrovsky.flights.repository;
 import net.petrovsky.flights.model.User;
 import java.util.List;
 
-public interface UserRepositoty {
+public interface UserRepository {
 
     User save (User user);
+
+    User update (User user);
 
     boolean delete (int id);
 
@@ -13,7 +15,7 @@ public interface UserRepositoty {
 
     User getByEmail (String email);
 
-    User getBySecondName (String secondName);
+    List<User> getBySecondName (String secondName);
 
     List<User> getAll ();
 }
