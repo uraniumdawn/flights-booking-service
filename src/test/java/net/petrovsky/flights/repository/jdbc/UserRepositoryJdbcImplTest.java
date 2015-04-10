@@ -31,11 +31,6 @@ public class UserRepositoryJdbcImplTest {
     @Autowired
     private UserRepository userRepository;
 
-    private static final User donna = new User(null, "Donna", "Hayward", "Lara_Flynn_Boyle@linch.com", "James", null, true, null);
-    private static final User shelly = new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, null);
-    private static final User leo = new User(null, "Leo", "Johnson", "Renault@linch.com", "Hank", null, true, null);
-    private static final User bot = new User(null, "bot", "bot", "Leo@linch.com", "bot", null, true, null);
-
     private static final User[] all = {
             new User(1000, "Laura", "Palmer", "WhoKillLauraPalmer@linch.com", "FireWalkWithMe", null, true, null),
             new User(1001, "Dale", "Cooper", "coop@linch.com", "cherrypie", null, true, null),
@@ -44,26 +39,31 @@ public class UserRepositoryJdbcImplTest {
 
     @Test
     public void testSave () throws Exception {
+        User donna = new User(null, "Donna", "Hayward", "Lara_Flynn_Boyle@linch.com", "James", null, true, null);
         userRepository.save(donna);
         Assert.assertEquals(userRepository.getByID(1018), donna);
     }
 
     @Test
     public void testUpdate () throws Exception {
+        User shelly = new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, null);
         userRepository.save(shelly);
-        donna.setEmail("Die_Leo_Die@linch.com");
+        shelly.setEmail("Die_Leo_Die@linch.com");
         userRepository.update(shelly);
         Assert.assertEquals(userRepository.getByID(1018), shelly);
     }
 
     @Test(expected = DuplicateKeyException.class)
     public void testDuplicateMailSave() throws Exception {
+        User shelly = new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, null);
+        User bot = new User(null, "bot", "bot", "Leo@linch.com", "bot", null, true, null);
         userRepository.save(shelly);
         userRepository.save(bot);
     }
 
     @Test
     public void testDelete () throws Exception {
+        User donna = new User(null, "Donna", "Hayward", "Lara_Flynn_Boyle@linch.com", "James", null, true, null);
         userRepository.save(donna);
         userRepository.delete(1018);
         Assert.assertArrayEquals(all, userRepository.getAll().toArray());
@@ -76,12 +76,15 @@ public class UserRepositoryJdbcImplTest {
 
     @Test
     public void testGetByEmail () throws Exception {
+        User shelly = new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, null);
         userRepository.save(shelly);
-        Assert.assertEquals(userRepository.getByEmail("Leo@linch.com"), shelly);
+        Assert.assertEquals(shelly, userRepository.getByEmail("Leo@linch.com"));
     }
 
     @Test
     public void testGetBySecondName () throws Exception {
+        User shelly = new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, null);
+        User leo = new User(null, "Leo", "Johnson", "Renault@linch.com", "Hank", null, true, null);
         userRepository.save(shelly);
         userRepository.save(leo);
         Object[] johnsons = {shelly, leo};

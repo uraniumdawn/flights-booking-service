@@ -33,10 +33,10 @@
         <constructor-arg ref="dataSource"/>
     </bean>
 
-    <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
-        <jdbc:script location="classpath:${jdbc.initScriptLocation}"/>
-        <jdbc:script location="classpath:${jdbc.populateScriptLocation}"/>
-    </jdbc:initialize-database>
+    <!--<jdbc:initialize-database data-source="dataSource" enabled="${database.init}">-->
+        <!--<jdbc:script location="classpath:${jdbc.initScriptLocation}"/>-->
+        <!--<jdbc:script location="classpath:${jdbc.populateScriptLocation}"/>-->
+    <!--</jdbc:initialize-database>-->
 
     <bean class="net.petrovsky.flights.util.DbPopulator">
         <constructor-arg name="populateScriptLocation" value="classpath:${jdbc.populateScriptLocation}"/>
