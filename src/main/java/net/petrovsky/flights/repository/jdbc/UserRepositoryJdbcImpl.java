@@ -1,7 +1,6 @@
 package net.petrovsky.flights.repository.jdbc;
 
 import net.petrovsky.flights.model.User;
-import net.petrovsky.flights.model.UserBuilder;
 import net.petrovsky.flights.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -30,15 +29,6 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     }
 
     public User mapRow (ResultSet rs, int rowNum) throws SQLException {
-        UserBuilder userBuilder = UserBuilder.anUser()
-                .withId(rs.getInt("id"))
-                .withFirstName(rs.getString("first_name"))
-                .withSecondName(rs.getString("second_name"))
-                .withEmail(rs.getString("email"))
-                .withPassword(rs.getString("password"))
-                .withRegistration(rs.getTimestamp("registration").toLocalDateTime())
-                .withEnabled(rs.getBoolean("enabled"));
-        userBuilder.build();
 
         User user = new User();
         user.setId(rs.getInt("id"));
