@@ -57,8 +57,7 @@ public class UserRepositoryJdbcImplTest {
 
     @Test(expected = DuplicateKeyException.class)
     public void testDuplicateMailSave() throws Exception {
-        User bot = new User(null, "bot", "bot", "Leo@linch.com", "bot", null, true, null);
-        userRepository.save(shelly);
+        User bot = new User(null, "bot", "bot", "Sherilyn@linch.com", "bot", null, true, null);
         userRepository.save(bot);
     }
 

@@ -22,16 +22,16 @@ VALUES ('ATL', 'Hartsfield-Jackson Atlanta International Airport', 'Atlanta', 'U
 INSERT INTO airports (iata_code, name, city, country)
 VALUES ('LAX', 'Los Angeles International Airport', 'Los Angeles', 'USA');
 INSERT INTO airports (iata_code, name, city, country)
-VALUES ('ORD', 'Chicago OHare International Airport', 'Chikago', 'USA');
+VALUES ('ORD', 'Chicago OHare International Airport', 'Chiсago', 'USA');
 INSERT INTO airports (iata_code, name, city, country)
 VALUES ('YYZ', 'Toronto Pearson International Airport', 'Toronto', 'Canada');
 INSERT INTO airports (iata_code, name, city, country)
-VALUES ('YUL', 'Montreal-Pierre Elliott Trudeau International Airport', 'Montreal', 'Canada');
+VALUES ('YVR', 'Vancouver International Airport', 'Vancouver', 'Canada');
 INSERT INTO airports (iata_code, name, city, country)
 VALUES ('YUC', 'Calgary International Airport', 'Calgary', 'Canada');
 
-INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YUL', '2014-10-20 17:05', 125.00);
-INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YUL', 'YYZ', '2014-11-14 04:17:00', 152.00);
+INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YVR', '2014-10-20 17:05', 125.00);
+INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YVR', 'YYZ', '2014-11-14 04:17:00', 152.00);
 INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YUC', '2014-09-07 10:45:00', 95.00);
 INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('ATL', 'LAX', '2014-07-18 17:58:00', 58.00);
 INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'ATL', '2014-06-07 15:24:00', 115.00);

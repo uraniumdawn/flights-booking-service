@@ -12,9 +12,11 @@ public interface AirportRepository {
 
     boolean delete (String IATAcode);
 
+    Airport getByIATAcode (String IATAcode);
+
     Airport getByName (String name);
 
-    Airport getByCountry (String country);
+    List<Airport> getByCountry (String country);
 
     List<Airport> getAll();
 }

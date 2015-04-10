@@ -29,7 +29,6 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     }
 
     public User mapRow (ResultSet rs, int rowNum) throws SQLException {
-
         User user = new User();
         user.setId(rs.getInt("id"));
         user.setFirstName(rs.getString("first_name"));
@@ -85,9 +84,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
         return namedParameterJdbcTemplate.update(
-                "DELETE FROM users " +
-                        "WHERE id=:id",
-                mapSqlParameterSource) != 0;
+                "DELETE FROM users WHERE id=:id", mapSqlParameterSource) != 0;
     }
 
     @Override
@@ -95,10 +92,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
         return namedParameterJdbcTemplate.queryForObject(
-                "SELECT id, first_name, second_name, email, password, registration, enabled " +
-                        "FROM users " +
-                        "WHERE id=:id",
-                mapSqlParameterSource, this::mapRow);
+                "SELECT * FROM users WHERE id=:id", mapSqlParameterSource, this::mapRow);
     }
 
     @Override
@@ -106,9 +100,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("second_name", secondName);
         return namedParameterJdbcTemplate.query(
-                "SELECT id, first_name, second_name, email, password, registration, enabled " +
-                        "FROM users " +
-                        "WHERE second_name=:second_name",
+                "SELECT * FROM users WHERE second_name=:second_name",
                 mapSqlParameterSource, this::mapRow);
     }
 
@@ -117,17 +109,13 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("email", email);
         return namedParameterJdbcTemplate.queryForObject(
-                "SELECT id, first_name, second_name, email, password, registration, enabled " +
-                        "FROM users " +
-                        "WHERE email=:email",
+                "SELECT * FROM users WHERE email=:email",
                 mapSqlParameterSource, this::mapRow);
     }
 
     @Override
     public List<User> getAll () {
         return namedParameterJdbcTemplate.query(
-                "SELECT id, first_name, second_name, email, password, registration, enabled " +
-                        "FROM users",
-                this::mapRow);
+                "SELECT * FROM users", this::mapRow);
     }
 }
