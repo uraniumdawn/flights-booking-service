@@ -30,7 +30,7 @@ VALUES ('YVR', 'Vancouver International Airport', 'Vancouver', 'Canada');
 INSERT INTO airports (iata_code, name, city, country)
 VALUES ('YUC', 'Calgary International Airport', 'Calgary', 'Canada');
 
-INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YVR', '2014-10-20 17:05', 125.00);
+INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YVR', '2014-10-20 17:05:00', 125.00);
 INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YVR', 'YYZ', '2014-11-14 04:17:00', 152.00);
 INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YUC', '2014-09-07 10:45:00', 95.00);
 INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('ATL', 'LAX', '2014-07-18 17:58:00', 58.00);
