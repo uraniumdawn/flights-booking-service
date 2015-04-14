@@ -1,6 +1,7 @@
 package net.petrovsky.flights.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Flight extends BaseEntity {
 
@@ -50,5 +51,31 @@ public class Flight extends BaseEntity {
 
     public void setPrice (Double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString () {
+        return "Flight{" +
+                "pointOfDeparture='" + pointOfDeparture + '\'' +
+                ", Destination='" + Destination + '\'' +
+                ", time=" + time +
+                ", price=" + price +
+                '}';
+    }
+
+    @Override
+    public boolean equals (Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Flight flight = (Flight) o;
+        return Objects.equals(pointOfDeparture, flight.pointOfDeparture) &&
+                Objects.equals(Destination, flight.Destination) &&
+                Objects.equals(time, flight.time) &&
+                Objects.equals(price, flight.price);
+    }
+
+    @Override
+    public int hashCode () {
+        return Objects.hash(pointOfDeparture, Destination, time, price);
     }
 }
