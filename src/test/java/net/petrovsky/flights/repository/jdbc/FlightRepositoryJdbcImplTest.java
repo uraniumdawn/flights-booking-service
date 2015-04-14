@@ -14,10 +14,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDateTime;
 
-//@ContextConfiguration({
-//        "classpath:spring/spring-app-test.xml",
-//        "classpath:spring/spring-db.xml"
-//})
 @ContextConfiguration("classpath:spring/spring-app-test.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class FlightRepositoryJdbcImplTest {
@@ -93,7 +89,7 @@ public class FlightRepositoryJdbcImplTest {
     @Test
     public void testGetByBetween () throws Exception {
         LocalDateTime from = LocalDateTime.of(2014, 5, 02, 0, 0, 0);
-        LocalDateTime to = LocalDateTime.of(2014, 10, 19, 0, 0, 0);
+        LocalDateTime to = LocalDateTime.of(2014, 10, 20, 17, 05, 00);
         Flight[] actRes = {all[2], all[3], all[4]};
         Assert.assertArrayEquals(actRes, flightRepository.getBetween(from, to).toArray());
     }
