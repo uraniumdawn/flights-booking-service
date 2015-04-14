@@ -14,9 +14,9 @@ public interface FlightRepository {
 
     Flight getByID (int id);
 
-    Flight getByPointOfDeparture (String pointOfDeparture);
+    List<Flight> getByPointOfDeparture (String pointOfDeparture);
 
-    Flight getByDestination (String destination);
+    List<Flight> getByDestination (String destination);
 
     List<Flight> getBetween (LocalDateTime from, LocalDateTime to);
 
