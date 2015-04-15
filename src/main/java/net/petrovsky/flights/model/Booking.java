@@ -1,5 +1,7 @@
 package net.petrovsky.flights.model;
 
+import java.util.Objects;
+
 public class Booking extends BaseEntity {
 
     private User user;
@@ -28,5 +30,27 @@ public class Booking extends BaseEntity {
 
     public void setFlight (Flight flight) {
         this.flight = flight;
+    }
+
+    @Override
+    public String toString () {
+        return "Booking{" +
+                "user=" + user +
+                ", flight=" + flight +
+                '}';
+    }
+
+    @Override
+    public boolean equals (Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Booking booking = (Booking) o;
+        return Objects.equals(user, booking.user) &&
+                Objects.equals(flight, booking.flight);
+    }
+
+    @Override
+    public int hashCode () {
+        return Objects.hash(user, flight);
     }
 }
