@@ -45,3 +45,5 @@ INSERT INTO booking (user_id, flight_id) VALUES (1001, 1006);
 INSERT INTO booking (user_id, flight_id) VALUES (1002, 1009);
 INSERT INTO booking (user_id, flight_id) VALUES (1003, 1008);
 INSERT INTO booking (user_id, flight_id) VALUES (1003, 1004);
+
+

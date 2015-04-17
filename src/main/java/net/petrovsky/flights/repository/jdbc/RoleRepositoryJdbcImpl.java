@@ -44,7 +44,7 @@ public class RoleRepositoryJdbcImpl implements RoleRepository {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("user_id", user_id)
                 .addValue("role", role.toString());
-        return namedParameterJdbcTemplate.update("DELETE FROM user_roles WHERE user_id=:user_id", mapSqlParameterSource) != 0;
+        return namedParameterJdbcTemplate.update("DELETE FROM user_roles WHERE user_id=:user_id AND role=:role", mapSqlParameterSource) != 0;
         //todo: realize constraint for user that have al least one row
     }
 
@@ -57,6 +57,6 @@ public class RoleRepositoryJdbcImpl implements RoleRepository {
     public List<Role> getByUserID (int user_id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("user_id", user_id);
-        return namedParameterJdbcTemplate.query("SELECT * FROM user_roles WHERE user_id=:user_id", mapSqlParameterSource, this::mapRow);
+        return namedParameterJdbcTemplate.query("SELECT * FROM user_roles WHERE user_id=:user_id ORDER BY role", mapSqlParameterSource, this::mapRow);
     }
 }

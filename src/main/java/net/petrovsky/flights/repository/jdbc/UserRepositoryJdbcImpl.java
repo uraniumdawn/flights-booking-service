@@ -1,6 +1,8 @@
 package net.petrovsky.flights.repository.jdbc;
 
+import net.petrovsky.flights.model.Role;
 import net.petrovsky.flights.model.User;
+import net.petrovsky.flights.repository.RoleRepository;
 import net.petrovsky.flights.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -18,6 +21,9 @@ public class UserRepositoryJdbcImpl implements UserRepository {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     private SimpleJdbcInsert insertUser;
 
@@ -47,11 +53,12 @@ public class UserRepositoryJdbcImpl implements UserRepository {
                 .addValue("first_name", user.getFirstName())
                 .addValue("second_name", user.getSecondName())
                 .addValue("email", user.getEmail())
-                .addValue("password", user.getPassword())
-                .addValue("enabled", user.isEnabled());
+                .addValue("password", user.getPassword());
         if (user.isNew()) {
             Number newKey = insertUser.executeAndReturnKey(mapSqlParameterSource);
             user.setId(newKey.intValue());
+            roleRepository.create(user.getId(), Role.ROLE_USER);
+            user.setRoles(Collections.singleton(Role.ROLE_USER));
         } else {
             //todo: Add realization of service message of existing such user
         }

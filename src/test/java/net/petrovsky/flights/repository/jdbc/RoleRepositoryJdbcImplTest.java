@@ -16,7 +16,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.Collections;
 
-@ContextConfiguration("classpath:spring/spring-app-test.xml")
+@ContextConfiguration({
+        "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-db.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RoleRepositoryJdbcImplTest {
 
@@ -45,9 +47,11 @@ public class RoleRepositoryJdbcImplTest {
 
     @Test
     public void testCreate () throws Exception {
-        userRepository.save(shelly);
-        roleRepository.create(1018, Role.ROLE_ADMIN);
-        Assert.assertEquals(Collections.singletonList(Role.ROLE_ADMIN), roleRepository.getByUserID(1018));
+        Role[] all = {
+                Role.ROLE_ADMIN,
+                Role.ROLE_USER};
+        roleRepository.create(1001, Role.ROLE_ADMIN);
+        Assert.assertArrayEquals(all, roleRepository.getByUserID(1001).toArray());
     }
 
     @Test (expected = DuplicateKeyException.class)
@@ -62,9 +66,9 @@ public class RoleRepositoryJdbcImplTest {
 
     @Test
     public void testDelete () throws Exception {
-        userRepository.save(shelly);
-        roleRepository.delete(1018, Role.ROLE_ADMIN);
-        Assert.assertArrayEquals(all, roleRepository.getAllRoles().toArray());
+        roleRepository.create(1001, Role.ROLE_ADMIN);
+        roleRepository.delete(1001, Role.ROLE_ADMIN);
+        Assert.assertEquals(Collections.singletonList(Role.ROLE_USER), roleRepository.getByUserID(1001));
     }
 
     @Test
