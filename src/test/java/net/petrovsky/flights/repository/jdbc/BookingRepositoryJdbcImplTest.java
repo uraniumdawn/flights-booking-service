@@ -59,7 +59,6 @@ public class BookingRepositoryJdbcImplTest {
     public void testGetByID () throws Exception {
         Booking booking = new Booking(null, userRepository.getByID(1000), flightRepository.getByID(1004));
         Assert.assertEquals(bookingRepository.getByID(1010), booking);
-
     }
 
     @Test

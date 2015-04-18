@@ -102,8 +102,10 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public User getByID (int id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
-        return namedParameterJdbcTemplate.queryForObject(
+        User user = namedParameterJdbcTemplate.queryForObject(
                 "SELECT * FROM users WHERE id=:id", mapSqlParameterSource, this::mapRow);
+        user.setRoles(roleRepository.getByUserID(id));
+        return user;
     }
 
     @Override
@@ -111,9 +113,11 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public List<User> getBySecondName (String secondName) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("second_name", secondName);
-        return namedParameterJdbcTemplate.query(
+        List<User> users = namedParameterJdbcTemplate.query(
                 "SELECT * FROM users WHERE second_name=:second_name",
                 mapSqlParameterSource, this::mapRow);
+        users.forEach((user) -> user.setRoles(roleRepository.getByUserID(user.getId())));
+        return users;
     }
 
     @Override
@@ -121,15 +125,19 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public User getByEmail (String email) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("email", email);
-        return namedParameterJdbcTemplate.queryForObject(
+        User user = namedParameterJdbcTemplate.queryForObject(
                 "SELECT * FROM users WHERE email=:email",
                 mapSqlParameterSource, this::mapRow);
+        user.setRoles(roleRepository.getByUserID(user.getId()));
+        return user;
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<User> getAll () {
-        return namedParameterJdbcTemplate.query(
+        List<User> users = namedParameterJdbcTemplate.query(
                 "SELECT * FROM users", this::mapRow);
+        users.forEach((user) -> user.setRoles(roleRepository.getByUserID(user.getId())));
+        return users;
     }
 }

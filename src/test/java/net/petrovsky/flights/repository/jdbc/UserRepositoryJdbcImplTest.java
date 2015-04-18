@@ -73,7 +73,6 @@ public class UserRepositoryJdbcImplTest {
 
     @Test
     public void testGetByEmail () throws Exception {
-
         Assert.assertEquals(laura, userRepository.getByEmail("WhoKillLauraPalmer@linch.com"));
     }
 

@@ -12,9 +12,9 @@
         </encoder>
     </appender>
 
-    <logger name="org.postgresql" level="DEBUG"/>
+    <!--<logger name="org.postgresql" level="DEBUG"/>-->
 
-    <root level="DEBUG">
-        <appender-ref ref="console"/>
-    </root>
+    <!--<root level="DEBUG">-->
+        <!--<appender-ref ref="console"/>-->
+    <!--</root>-->
 </configuration>
