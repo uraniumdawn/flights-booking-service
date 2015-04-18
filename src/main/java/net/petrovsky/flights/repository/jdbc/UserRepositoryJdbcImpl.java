@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -47,6 +48,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public User save (User user) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", user.getId())
@@ -66,6 +68,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     }
 
     @Override
+    @Transactional
     public User update (User user) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", user.getId())
@@ -95,6 +98,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getByID (int id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
@@ -103,6 +107,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getBySecondName (String secondName) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("second_name", secondName);
@@ -112,6 +117,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public User getByEmail (String email) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("email", email);
@@ -121,6 +127,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<User> getAll () {
         return namedParameterJdbcTemplate.query(
                 "SELECT * FROM users", this::mapRow);
