@@ -1,8 +1,7 @@
 package net.petrovsky.flights.model;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class User extends BaseEntity {
 
@@ -81,14 +80,15 @@ public class User extends BaseEntity {
         return roles;
     }
 
-    public void setRoles (Set<Role> roles) {
-        this.roles = roles;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = Collections.unmodifiableSet(EnumSet.copyOf(roles));
     }
 
     @Override
     public String toString () {
         return "User{" +
-                "firstName='" + firstName + '\'' +
+                "id=" + super.getId() +
+                ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

@@ -35,7 +35,8 @@ public class Booking extends BaseEntity {
     @Override
     public String toString () {
         return "Booking{" +
-                "user=" + user +
+                "id=" + super.getId() +
+                ", user=" + user +
                 ", flight=" + flight +
                 '}';
     }

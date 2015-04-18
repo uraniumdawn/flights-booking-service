@@ -56,7 +56,8 @@ public class Flight extends BaseEntity {
     @Override
     public String toString () {
         return "Flight{" +
-                "pointOfDeparture='" + pointOfDeparture + '\'' +
+                "id=" + super.getId() +
+                ", pointOfDeparture='" + pointOfDeparture + '\'' +
                 ", Destination='" + Destination + '\'' +
                 ", time=" + time +
                 ", price=" + price +
