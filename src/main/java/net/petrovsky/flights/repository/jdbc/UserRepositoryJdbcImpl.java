@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -60,7 +59,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
             Number newKey = insertUser.executeAndReturnKey(mapSqlParameterSource);
             user.setId(newKey.intValue());
             roleRepository.create(user.getId(), Role.ROLE_USER);
-            user.setRoles(Collections.singleton(Role.ROLE_USER));
+            user.setRole(Role.ROLE_USER);
         } else {
             //todo: Add realization of service message of existing such user
         }
@@ -104,7 +103,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
                 .addValue("id", id);
         User user = namedParameterJdbcTemplate.queryForObject(
                 "SELECT * FROM users WHERE id=:id", mapSqlParameterSource, this::mapRow);
-        user.setRoles(roleRepository.getByUserID(id));
+        user.setRole(roleRepository.getByUserID(id));
         return user;
     }
 
@@ -116,7 +115,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         List<User> users = namedParameterJdbcTemplate.query(
                 "SELECT * FROM users WHERE second_name=:second_name",
                 mapSqlParameterSource, this::mapRow);
-        users.forEach((user) -> user.setRoles(roleRepository.getByUserID(user.getId())));
+        users.forEach((user) -> user.setRole(roleRepository.getByUserID(user.getId())));
         return users;
     }
 
@@ -128,7 +127,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         User user = namedParameterJdbcTemplate.queryForObject(
                 "SELECT * FROM users WHERE email=:email",
                 mapSqlParameterSource, this::mapRow);
-        user.setRoles(roleRepository.getByUserID(user.getId()));
+        user.setRole(roleRepository.getByUserID(user.getId()));
         return user;
     }
 
@@ -137,7 +136,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public List<User> getAll () {
         List<User> users = namedParameterJdbcTemplate.query(
                 "SELECT * FROM users", this::mapRow);
-        users.forEach((user) -> user.setRoles(roleRepository.getByUserID(user.getId())));
+        users.forEach((user) -> user.setRole(roleRepository.getByUserID(user.getId())));
         return users;
     }
 }

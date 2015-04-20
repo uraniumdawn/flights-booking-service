@@ -14,8 +14,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.Collections;
-
 @ContextConfiguration({
         "classpath:spring/spring-app-test.xml",
         "classpath:spring/spring-db.xml"})
@@ -31,27 +29,15 @@ public class RoleRepositoryJdbcImplTest {
     @Autowired
     private UserRepository userRepository;
 
-    User shelly;
-
-    private static Role[] all = {
-            Role.ROLE_ADMIN,
-            Role.ROLE_USER,
-            Role.ROLE_USER,
-            Role.ROLE_USER};
-
     @Before
     public void doPopulate() throws Exception {
         dbPopulator.execute();
-        shelly = new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, null);
     }
 
     @Test
-    public void testCreate () throws Exception {
-        Role[] all = {
-                Role.ROLE_ADMIN,
-                Role.ROLE_USER};
-        roleRepository.create(1001, Role.ROLE_ADMIN);
-        Assert.assertArrayEquals(all, roleRepository.getByUserID(1001).toArray());
+    public void testCreate() throws Exception {
+        userRepository.save (new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, null));
+        Assert.assertEquals(Role.ROLE_USER, roleRepository.getByUserID(1018));
     }
 
     @Test (expected = DuplicateKeyException.class)
@@ -65,25 +51,7 @@ public class RoleRepositoryJdbcImplTest {
     }
 
     @Test
-    public void testDelete () throws Exception {
-        roleRepository.create(1001, Role.ROLE_ADMIN);
-        roleRepository.delete(1001, Role.ROLE_ADMIN);
-        Assert.assertEquals(Collections.singletonList(Role.ROLE_USER), roleRepository.getByUserID(1001));
-    }
-
-    @Test
-    public void testGetAllRoles () throws Exception {
-        Assert.assertArrayEquals(all, roleRepository.getAllRoles().toArray());
-    }
-
-    @Test
     public void testGetByUserID () throws Exception {
-        roleRepository.create(1000, Role.ROLE_USER);
-        Role[] all = {
-                Role.ROLE_ADMIN,
-                Role.ROLE_USER};
-        Assert.assertArrayEquals(all, roleRepository.getByUserID(1000).toArray());
+        Assert.assertEquals(Role.ROLE_ADMIN, roleRepository.getByUserID(1000));
     }
-
-
 }

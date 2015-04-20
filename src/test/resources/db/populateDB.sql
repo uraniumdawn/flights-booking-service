@@ -4,8 +4,6 @@ DELETE FROM airports;
 DELETE FROM users;
 ALTER SEQUENCE global_sequence RESTART WITH 1000;
 
-
-
 INSERT INTO users (first_name, second_name, email, password)
 VALUES ('Laura', 'Palmer', 'WhoKillLauraPalmer@linch.com', 'FireWalkWithMe');
 INSERT INTO users (first_name, second_name, email, password) VALUES ('Dale', 'Cooper', 'coop@linch.com', 'cherrypie');

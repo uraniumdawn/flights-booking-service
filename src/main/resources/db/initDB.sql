@@ -20,9 +20,8 @@ CREATE TABLE users (
 );
 
 CREATE TABLE user_roles (
-  user_id INTEGER NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-  role    VARCHAR,
-  CONSTRAINT user_roles_idx UNIQUE (user_id, role)
+  user_id INTEGER UNIQUE NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+  role    VARCHAR
 );
 
 CREATE TABLE airports (

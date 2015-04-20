@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 @Repository
 public class RoleRepositoryJdbcImpl implements RoleRepository {
@@ -40,23 +39,9 @@ public class RoleRepositoryJdbcImpl implements RoleRepository {
     }
 
     @Override
-    public boolean delete (int user_id, Role role) {
-        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
-                .addValue("user_id", user_id)
-                .addValue("role", role.toString());
-        return namedParameterJdbcTemplate.update("DELETE FROM user_roles WHERE user_id=:user_id AND role=:role", mapSqlParameterSource) != 0;
-        //todo: realize constraint for user that have al least one row
-    }
-
-    @Override
-    public List<Role> getAllRoles () {
-        return namedParameterJdbcTemplate.query("SELECT * FROM user_roles", this::mapRow);
-    }
-
-    @Override
-    public List<Role> getByUserID (int user_id) {
+    public Role getByUserID (int user_id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("user_id", user_id);
-        return namedParameterJdbcTemplate.query("SELECT * FROM user_roles WHERE user_id=:user_id ORDER BY role", mapSqlParameterSource, this::mapRow);
+        return namedParameterJdbcTemplate.queryForObject("SELECT * FROM user_roles WHERE user_id=:user_id ORDER BY role", mapSqlParameterSource, this::mapRow);
     }
 }

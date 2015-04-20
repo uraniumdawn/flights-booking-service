@@ -11,13 +11,13 @@ public class User extends BaseEntity {
     private String password;
     private LocalDateTime registration;
     private boolean enabled;
-    private Set<Role> roles;
+    private Role role;
 
     public User() {
     }
 
     public User (Integer id, String firstName, String secondName, String email, String password,
-                 LocalDateTime registered, boolean enabled, Set<Role> roles) {
+                 LocalDateTime registered, boolean enabled, Role role) {
         super(id);
         this.firstName = firstName;
         this.secondName = secondName;
@@ -25,7 +25,7 @@ public class User extends BaseEntity {
         this.password = password;
         this.registration = registered;
         this.enabled = enabled;
-        this.roles = roles;
+        this.role = role;
     }
 
     public String getFirstName () {
@@ -76,12 +76,12 @@ public class User extends BaseEntity {
         this.registration = registration;
     }
 
-    public Set<Role> getRoles () {
-        return roles;
+    public Role getRole () {
+        return role;
     }
 
-    public void setRoles(Collection<Role> roles) {
-        this.roles = Collections.unmodifiableSet(EnumSet.copyOf(roles));
+    public void setRole (Role role) {
+        this.role = role;
     }
 
     @Override
@@ -94,7 +94,7 @@ public class User extends BaseEntity {
                 ", password='" + password + '\'' +
                 ", registration=" + registration +
                 ", enabled=" + enabled +
-                ", roles=" + roles +
+                ", role=" + role +
                 '}';
     }
 
