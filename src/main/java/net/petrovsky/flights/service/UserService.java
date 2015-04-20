@@ -7,13 +7,15 @@ public interface UserService {
 
     User save (User user);
 
+    User update(User user);
+
     boolean delete (int id);
 
     User getByID (int id);
 
     User getByEmail (String email);
 
-    User getBySecondName (String secondName);
+    List<User> getBySecondName (String secondName);
 
     List<User> getAll ();
 }

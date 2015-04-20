@@ -8,13 +8,15 @@ public interface FlightService {
 
     Flight save (Flight flight);
 
+    Flight update (Flight flight);
+
     boolean delete (int id);
 
     Flight getByID (int id);
 
-    Flight getByPointOfDeparture (String pointOfDeparture);
+    List<Flight> getByPointOfDeparture (String pointOfDeparture);
 
-    Flight getByDestination (String destination);
+    List<Flight> getByDestination (String destination);
 
     List<Flight> getBetween (LocalDateTime from, LocalDateTime to);
 
