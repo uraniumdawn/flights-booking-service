@@ -6,7 +6,6 @@ DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS global_sequence;
 
 
-
 CREATE SEQUENCE global_sequence START 1000;
 
 CREATE TABLE users (
@@ -32,7 +31,7 @@ CREATE TABLE airports (
 );
 
 CREATE TABLE flights (
-  id                 INT PRIMARY KEY DEFAULT nextval('GLOBAL_SEQUENCE'),
+  id                 INTEGER PRIMARY KEY DEFAULT nextval('GLOBAL_SEQUENCE'),
   point_of_departure VARCHAR(3)    NOT NULL REFERENCES airports (IATA_code) ON DELETE CASCADE,
   destination        VARCHAR(3)    NOT NULL REFERENCES airports (IATA_code) ON DELETE CASCADE,
   time               TIMESTAMP     NOT NULL,
@@ -42,6 +41,6 @@ CREATE TABLE flights (
 
 CREATE TABLE booking (
   id        BIGINT PRIMARY KEY DEFAULT nextval('GLOBAL_SEQUENCE'),
-  user_id   INT NOT NULL REFERENCES users (id),
-  flight_id INT NOT NULL REFERENCES flights (id)
+  user_id   INTEGER NOT NULL REFERENCES users (id),
+  flight_id INTEGER NOT NULL REFERENCES flights (id)
 );

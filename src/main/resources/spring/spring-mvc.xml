@@ -10,25 +10,13 @@
        http://www.springframework.org/schema/mvc
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <context:component-scan base-package="ru.javawebinar.**.web"/>
-
     <mvc:annotation-driven/>
 
-    <!--  all resources inside folder src/main/webapp/resources are mapped so they can be refered to inside JSP files -->
-    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <context:component-scan base-package="net.petrovsky.**.web"/>
+
+    <!--<mvc:resources mapping="/resources/**" location="/resources/"/>-->
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp"/>
-
-    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource"
-          p:cacheSeconds="60"
-          p:defaultEncoding="UTF-8">
-
-        <property name="basenames">
-            <list>
-                <value>messages/app</value>
-            </list>
-        </property>
-    </bean>
 </beans>

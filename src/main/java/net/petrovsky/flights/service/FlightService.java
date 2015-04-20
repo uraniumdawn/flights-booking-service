@@ -1,9 +1,12 @@
 package net.petrovsky.flights.service;
 
 import net.petrovsky.flights.model.Flight;
+import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public interface FlightService {
 
     Flight save (Flight flight);
