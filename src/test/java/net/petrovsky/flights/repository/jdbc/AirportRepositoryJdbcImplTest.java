@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @ContextConfiguration({
-        "classpath:spring/spring-app-test.xml",
+        "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AirportRepositoryJdbcImplTest {
