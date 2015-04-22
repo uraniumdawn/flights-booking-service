@@ -3,9 +3,11 @@ package net.petrovsky.flights.service;
 import net.petrovsky.flights.model.Booking;
 import net.petrovsky.flights.repository.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BookingServiceImpl implements BookingService {
 
     @Autowired

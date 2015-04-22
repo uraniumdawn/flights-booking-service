@@ -1,11 +1,9 @@
 package net.petrovsky.flights.service;
 
 import net.petrovsky.flights.model.Airport;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 public interface AirportService {
 
     Airport save (Airport airport);

@@ -3,10 +3,12 @@ package net.petrovsky.flights.service;
 import net.petrovsky.flights.model.Flight;
 import net.petrovsky.flights.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class FlightServiceImpl implements FlightService {
 
     @Autowired

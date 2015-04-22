@@ -3,9 +3,11 @@ package net.petrovsky.flights.service;
 import net.petrovsky.flights.model.Airport;
 import net.petrovsky.flights.repository.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AirportServiceImpl implements AirportService {
 
     @Autowired
