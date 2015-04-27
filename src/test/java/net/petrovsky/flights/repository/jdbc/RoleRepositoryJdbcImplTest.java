@@ -36,7 +36,7 @@ public class RoleRepositoryJdbcImplTest {
 
     @Test
     public void testCreate() throws Exception {
-        userRepository.save (new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, null));
+        userRepository.save (new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, Role.ROLE_USER));
         Assert.assertEquals(Role.ROLE_USER, roleRepository.getByUserID(1018));
     }
 

@@ -5,7 +5,6 @@ DROP TABLE IF EXISTS user_Roles;
 DROP TABLE IF EXISTS users;
 DROP SEQUENCE IF EXISTS global_sequence;
 
-
 CREATE SEQUENCE global_sequence START 1000;
 
 CREATE TABLE users (

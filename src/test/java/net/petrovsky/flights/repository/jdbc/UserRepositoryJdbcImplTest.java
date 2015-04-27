@@ -1,5 +1,6 @@
 package net.petrovsky.flights.repository.jdbc;
 
+import net.petrovsky.flights.model.Role;
 import net.petrovsky.flights.model.User;
 import net.petrovsky.flights.repository.UserRepository;
 import net.petrovsky.flights.util.DbPopulator;
@@ -30,7 +31,7 @@ public class UserRepositoryJdbcImplTest {
     @Before
     public void doPopulate() throws Exception {
         dbPopulator.execute();
-        shelly = new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, null);
+        shelly = new User(null, "Shelly", "Johnson", "Leo@linch.com", "Bobby", null, true, Role.ROLE_USER);
         laura =  new User(1000, "Laura", "Palmer", "WhoKillLauraPalmer@linch.com", "FireWalkWithMe", null, true, null);
     }
 
@@ -78,7 +79,7 @@ public class UserRepositoryJdbcImplTest {
 
     @Test
     public void testGetBySecondName () throws Exception {
-        User leo = new User(null, "Leo", "Johnson", "Renault@linch.com", "Hank", null, true, null);
+        User leo = new User(null, "Leo", "Johnson", "Renault@linch.com", "Hank", null, true, Role.ROLE_USER);
         userRepository.save(shelly);
         userRepository.save(leo);
         Object[] johnsons = {shelly, leo};
@@ -88,5 +89,10 @@ public class UserRepositoryJdbcImplTest {
     @Test
     public void testGetAll () throws Exception {
         Assert.assertArrayEquals(all, userRepository.getAll().toArray());
+    }
+
+    @Test
+    public  void testCheck () throws Exception {
+        System.out.println(userRepository.check("WhoKillLauraPalmer@linch.com", "FireWalkWithMe"));
     }
 }

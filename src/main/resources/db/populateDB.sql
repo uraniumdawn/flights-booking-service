@@ -20,7 +20,7 @@ VALUES ('ATL', 'Hartsfield-Jackson Atlanta International Airport', 'Atlanta', 'U
 INSERT INTO airports (iata_code, name, city, country)
 VALUES ('LAX', 'Los Angeles International Airport', 'Los Angeles', 'USA');
 INSERT INTO airports (iata_code, name, city, country)
-VALUES ('ORD', 'Chicago OHare International Airport', 'Chiсago', 'USA');
+VALUES ('ORD', 'Chicago OHare International Airport', 'Chicago', 'USA');
 INSERT INTO airports (iata_code, name, city, country)
 VALUES ('YYZ', 'Toronto Pearson International Airport', 'Toronto', 'Canada');
 INSERT INTO airports (iata_code, name, city, country)
@@ -43,5 +43,3 @@ INSERT INTO booking (user_id, flight_id) VALUES (1001, 1006);
 INSERT INTO booking (user_id, flight_id) VALUES (1002, 1009);
 INSERT INTO booking (user_id, flight_id) VALUES (1003, 1008);
 INSERT INTO booking (user_id, flight_id) VALUES (1003, 1004);
-
-

@@ -10,4 +10,8 @@
 
     <context:component-scan base-package="net.petrovsky.**.service"/>
 
+    <bean class="net.petrovsky.flights.util.DbPopulator">
+        <constructor-arg name="populateScriptLocation" value="classpath:db/populateDB.sql"/>
+    </bean>
+
 </beans>
