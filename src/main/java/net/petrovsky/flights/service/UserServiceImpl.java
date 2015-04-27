@@ -47,4 +47,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll () {
         return userRepository.getAll();
     }
+
+    @Override
+    public boolean check (String email, String password) {
+        return userRepository.check(email, password);
+    }
 }

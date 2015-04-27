@@ -18,4 +18,6 @@ public interface UserRepository {
     List<User> getBySecondName (String secondName);
 
     List<User> getAll ();
+
+    boolean check (String email, String password);
 }
