@@ -74,24 +74,21 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
     public boolean delete (int id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
-        return namedParameterJdbcTemplate.update(
-                "DELETE FROM flights WHERE id=:id", mapSqlParameterSource) != 0;
+        return namedParameterJdbcTemplate.update("DELETE FROM flights WHERE id=:id", mapSqlParameterSource) != 0;
     }
 
     @Override
     public Flight getByID (int id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
-        return namedParameterJdbcTemplate.queryForObject(
-                "SELECT * FROM flights WHERE id=:id", mapSqlParameterSource, this::mapRow);
+        return namedParameterJdbcTemplate.queryForObject("SELECT * FROM flights WHERE id=:id", mapSqlParameterSource, this::mapRow);
     }
 
     @Override
     public List<Flight> getByPointOfDeparture (String pointOfDeparture) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("point_of_departure", pointOfDeparture);
-        return namedParameterJdbcTemplate.query(
-                "SELECT * FROM flights WHERE point_of_departure=:point_of_departure",
+        return namedParameterJdbcTemplate.query("SELECT * FROM flights WHERE point_of_departure=:point_of_departure",
                 mapSqlParameterSource, this::mapRow);
     }
 
@@ -99,8 +96,7 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
     public List<Flight> getByDestination (String destination) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("destination", destination);
-        return namedParameterJdbcTemplate.query(
-                "SELECT * FROM flights WHERE destination=:destination",
+        return namedParameterJdbcTemplate.query("SELECT * FROM flights WHERE destination=:destination",
                 mapSqlParameterSource, this::mapRow);
     }
 
@@ -109,14 +105,12 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("from", Timestamp.valueOf(from))
                 .addValue("to", Timestamp.valueOf(to));
-        return namedParameterJdbcTemplate.query(
-                "SELECT * FROM flights WHERE time >=:from AND time <:to ORDER BY time DESC",
+        return namedParameterJdbcTemplate.query("SELECT * FROM flights WHERE time >=:from AND time <:to ORDER BY time DESC",
                 mapSqlParameterSource, this::mapRow);
     }
 
     @Override
     public List<Flight> getAll () {
-        return namedParameterJdbcTemplate.query(
-                "SELECT * FROM flights", this::mapRow);
+        return namedParameterJdbcTemplate.query("SELECT * FROM flights", this::mapRow);
     }
 }

@@ -81,8 +81,7 @@ public class BookingRepositoryJdbcImpl implements BookingRepository{
     public Booking getByID (int id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
-        return namedParameterJdbcTemplate.queryForObject(
-                "SELECT * FROM booking WHERE id=:id",
+        return namedParameterJdbcTemplate.queryForObject("SELECT * FROM booking WHERE id=:id",
                 mapSqlParameterSource, this::mapRow);
     }
 

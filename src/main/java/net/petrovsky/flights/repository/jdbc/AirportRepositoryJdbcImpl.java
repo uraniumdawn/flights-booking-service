@@ -60,8 +60,7 @@ public class AirportRepositoryJdbcImpl implements AirportRepository {
     public boolean delete (String IATAcode) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("iata_code", IATAcode);
-        return namedParameterJdbcTemplate.update(
-                "DELETE FROM airports WHERE iata_code=:iata_code",
+        return namedParameterJdbcTemplate.update("DELETE FROM airports WHERE iata_code=:iata_code",
                 mapSqlParameterSource) != 0;
     }
 
@@ -69,8 +68,7 @@ public class AirportRepositoryJdbcImpl implements AirportRepository {
     public Airport getByIATAcode (String IATAcode) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("iata_code", IATAcode);
-        return namedParameterJdbcTemplate.queryForObject(
-                "SELECT * FROM airports WHERE iata_code=:iata_code",
+        return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE iata_code=:iata_code",
                 mapSqlParameterSource, this::mapRow);
     }
 
@@ -78,8 +76,7 @@ public class AirportRepositoryJdbcImpl implements AirportRepository {
     public Airport getByName (String name) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("name", name);
-        return namedParameterJdbcTemplate.queryForObject(
-                "SELECT * FROM airports WHERE name=:name",
+        return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE name=:name",
                 mapSqlParameterSource, this::mapRow);
     }
 
@@ -87,14 +84,12 @@ public class AirportRepositoryJdbcImpl implements AirportRepository {
     public List<Airport> getByCountry (String country) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("country", country);
-        return namedParameterJdbcTemplate.query(
-                "SELECT * FROM airports WHERE country=:country",
+        return namedParameterJdbcTemplate.query("SELECT * FROM airports WHERE country=:country",
                 mapSqlParameterSource, this::mapRow);
     }
 
     @Override
     public List<Airport> getAll () {
-        return namedParameterJdbcTemplate.query(
-                "SELECT * FROM airports", this::mapRow);
+        return namedParameterJdbcTemplate.query("SELECT * FROM airports", this::mapRow);
     }
 }
