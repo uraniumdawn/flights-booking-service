@@ -1,6 +1,5 @@
 package net.petrovsky.flights.repository.jdbc;
 
-import net.petrovsky.flights.model.Role;
 import net.petrovsky.flights.model.User;
 import net.petrovsky.flights.repository.RoleRepository;
 import net.petrovsky.flights.repository.UserRepository;
@@ -58,8 +57,8 @@ public class UserRepositoryJdbcImpl implements UserRepository {
         if (user.isNew()) {
             Number newKey = insertUser.executeAndReturnKey(mapSqlParameterSource);
             user.setId(newKey.intValue());
-            roleRepository.create(user.getId(), Role.ROLE_USER);
-            user.setRole(Role.ROLE_USER);
+            roleRepository.create(user.getId(), user.getRole());
+            //user.setRole(Role.ROLE_USER);
         } else {
             //todo: Add realization of service message of existing such user
         }
@@ -92,8 +91,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public boolean delete (int id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
-        return namedParameterJdbcTemplate.update(
-                "DELETE FROM users WHERE id=:id", mapSqlParameterSource) != 0;
+        return namedParameterJdbcTemplate.update("DELETE FROM users WHERE id=:id", mapSqlParameterSource) != 0;
     }
 
     @Override
@@ -101,8 +99,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public User getByID (int id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
-        User user = namedParameterJdbcTemplate.queryForObject(
-                "SELECT * FROM users WHERE id=:id", mapSqlParameterSource, this::mapRow);
+        User user = namedParameterJdbcTemplate.queryForObject("SELECT * FROM users WHERE id=:id", mapSqlParameterSource, this::mapRow);
         user.setRole(roleRepository.getByUserID(id));
         return user;
     }
@@ -112,8 +109,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public List<User> getBySecondName (String secondName) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("second_name", secondName);
-        List<User> users = namedParameterJdbcTemplate.query(
-                "SELECT * FROM users WHERE second_name=:second_name",
+        List<User> users = namedParameterJdbcTemplate.query("SELECT * FROM users WHERE second_name=:second_name",
                 mapSqlParameterSource, this::mapRow);
         users.forEach((user) -> user.setRole(roleRepository.getByUserID(user.getId())));
         return users;
@@ -124,8 +120,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public User getByEmail (String email) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("email", email);
-        User user = namedParameterJdbcTemplate.queryForObject(
-                "SELECT * FROM users WHERE email=:email",
+        User user = namedParameterJdbcTemplate.queryForObject("SELECT * FROM users WHERE email=:email",
                 mapSqlParameterSource, this::mapRow);
         user.setRole(roleRepository.getByUserID(user.getId()));
         return user;
@@ -134,9 +129,17 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     @Override
     @Transactional(readOnly = true)
     public List<User> getAll () {
-        List<User> users = namedParameterJdbcTemplate.query(
-                "SELECT * FROM users", this::mapRow);
+        List<User> users = namedParameterJdbcTemplate.query("SELECT * FROM users", this::mapRow);
         users.forEach((user) -> user.setRole(roleRepository.getByUserID(user.getId())));
         return users;
+    }
+
+    @Override
+    public boolean check (String email, String password) {
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
+                .addValue("email", email)
+                .addValue("password", password);
+        return namedParameterJdbcTemplate.queryForObject("SELECT COUNT(*) FROM users WHERE email=:email AND password=:password",
+                mapSqlParameterSource, Integer.class) == 1;
     }
 }
