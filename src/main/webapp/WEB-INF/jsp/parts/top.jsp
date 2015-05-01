@@ -5,12 +5,12 @@
 <% User user = (User)session.getAttribute("user"); %>
 
 <div>
-    <%--<script type="text/javascript" src="jquery.min.js"/>--%>
     <c:choose>
         <c:when test="<%= user != null %>">
             <p>Profile:</p>
             <%=user.getFirstName()%>
             <%=user.getSecondName()%>
+            <a href="/editprofile">Edit profile</a>
         </c:when>
         <c:otherwise>
             <input type="button" onclick="window.location='/login'" value="Log In"/>
@@ -18,11 +18,4 @@
         </c:otherwise>
     </c:choose>
         <hr/>
-    <%--<script>--%>
-        <%--$(document).ready(function(){--%>
-            <%--$('#login').onclick(function(){--%>
-                <%--window.location="/login"--%>
-            <%--})--%>
-        <%--});--%>
-    <%--</script>--%>
 </div>
