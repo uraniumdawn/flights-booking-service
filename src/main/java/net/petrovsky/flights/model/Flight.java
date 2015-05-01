@@ -5,15 +5,15 @@ import java.util.Objects;
 
 public class Flight extends BaseEntity {
 
-    private String pointOfDeparture;
-    private String Destination;
+    private Airport pointOfDeparture;
+    private Airport Destination;
     private LocalDateTime time;
     private Double price;
 
     public Flight () {
     }
 
-    public Flight (Integer id, String pointOfDeparture, String destination, LocalDateTime time, Double price) {
+    public Flight (Integer id, Airport pointOfDeparture, Airport destination, LocalDateTime time, Double price) {
         super(id);
         this.pointOfDeparture = pointOfDeparture;
         Destination = destination;
@@ -21,19 +21,19 @@ public class Flight extends BaseEntity {
         this.price = price;
     }
 
-    public String getPointOfDeparture () {
+    public Airport getPointOfDeparture () {
         return pointOfDeparture;
     }
 
-    public void setPointOfDeparture (String pointOfDeparture) {
+    public void setPointOfDeparture (Airport pointOfDeparture) {
         this.pointOfDeparture = pointOfDeparture;
     }
 
-    public String getDestination () {
+    public Airport getDestination () {
         return Destination;
     }
 
-    public void setDestination (String destination) {
+    public void setDestination (Airport destination) {
         Destination = destination;
     }
 

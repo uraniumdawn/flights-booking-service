@@ -1,6 +1,7 @@
 package net.petrovsky.flights.repository.jdbc;
 
 import net.petrovsky.flights.model.Flight;
+import net.petrovsky.flights.repository.AirportRepository;
 import net.petrovsky.flights.repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -24,6 +25,9 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
     private SimpleJdbcInsert insertUser;
 
     @Autowired
+    private AirportRepository airportRepository;
+
+    @Autowired
     public void init (DataSource dataSource) {
         this.insertUser = new SimpleJdbcInsert(dataSource)
                 .withTableName("flights").usingGeneratedKeyColumns("id");
@@ -32,8 +36,8 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
     public Flight mapRow (ResultSet rs, int rowNum) throws SQLException {
         Flight flight = new Flight();
         flight.setId(rs.getInt("id"));
-        flight.setPointOfDeparture(rs.getString("point_of_departure"));
-        flight.setDestination(rs.getString("destination"));
+        flight.setPointOfDeparture(airportRepository.getByIATAcode(rs.getString("point_of_departure")));
+        flight.setDestination(airportRepository.getByIATAcode(rs.getString("destination")));
         flight.setTime(rs.getTimestamp("time").toLocalDateTime());
         flight.setPrice(rs.getDouble("price"));
         return flight;
