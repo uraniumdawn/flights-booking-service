@@ -20,6 +20,7 @@
         <slf4j.version>1.7.7</slf4j.version>
         <junit.version>4.12</junit.version>
         <spring-data-jpa.version>1.8.0.RELEASE</spring-data-jpa.version>
+        <webjars-jquery.version>2.1.1</webjars-jquery.version>
     </properties>
 
     <build>
@@ -73,6 +74,11 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>${webjars-jquery.version}</version>
         </dependency>
         <!-- Data base-->
         <dependency>
