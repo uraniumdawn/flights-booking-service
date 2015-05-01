@@ -2,6 +2,7 @@ package net.petrovsky.flights.web;
 
 import net.petrovsky.flights.model.Role;
 import net.petrovsky.flights.model.User;
+import net.petrovsky.flights.service.FlightService;
 import net.petrovsky.flights.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private FlightService flightService;
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String userList(Model model) {
         model.addAttribute("userList", userService.getAll());
@@ -25,19 +29,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("flightList", flightService.getAll());
         return "main";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password, HttpSession session) {
-
         if (userService.check(email, password)){
             session.setAttribute("user", userService.getByEmail(email));
-            return "main";
+            return "redirect:/";
         } else {
-            return "signup";
+            return "redirect:/signup";
         }
     }
 
@@ -50,13 +54,31 @@ public class UserController {
         return "main";
     }
 
+    @RequestMapping(value = "/editprofile", method = RequestMethod.POST)
+    public void editprofile(@RequestParam("first_name") String firstName,
+                         @RequestParam("second_name") String secondName,
+                         @RequestParam("email") String email,
+                         @RequestParam("password") String password, HttpSession session) {
+        User  user = (User)session.getAttribute("user");
+        user.setFirstName(firstName);
+        user.setSecondName(secondName);
+        user.setEmail(email);
+        user.setPassword(password);
+        session.setAttribute("user", userService.update(user));
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {
         return "login";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
-    public String registration() {
+    public String signup() {
         return "signup";
+    }
+
+    @RequestMapping(value = "/editprofile", method = RequestMethod.GET)
+    public String editprofile() {
+        return "editprofile";
     }
 }
