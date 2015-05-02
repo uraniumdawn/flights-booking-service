@@ -50,6 +50,11 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public List<Flight> getFlightToOrder (String pointOfDeparture, String destination, LocalDateTime from, LocalDateTime to) {
+        return flightRepository.getFlightToOrder(pointOfDeparture, destination, from, to);
+    }
+
+    @Override
     public List<Flight> getAll () {
         return flightRepository.getAll();
     }

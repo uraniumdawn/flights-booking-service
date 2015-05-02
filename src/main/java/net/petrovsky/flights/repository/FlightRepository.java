@@ -20,5 +20,7 @@ public interface FlightRepository {
 
     List<Flight> getBetween (LocalDateTime from, LocalDateTime to);
 
+    List<Flight> getFlightToOrder (String pointOfDeparture, String destination, LocalDateTime from, LocalDateTime to);
+
     List<Flight> getAll();
 }

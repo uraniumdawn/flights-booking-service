@@ -114,6 +114,18 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
     }
 
     @Override
+    public List<Flight> getFlightToOrder (String pointOfDeparture, String destination, LocalDateTime from, LocalDateTime to) {
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
+                .addValue("point_of_departure", pointOfDeparture)
+                .addValue("destination", destination)
+                .addValue("from", Timestamp.valueOf(from))
+                .addValue("to", Timestamp.valueOf(to));
+        return namedParameterJdbcTemplate.query("SELECT * FROM flights WHERE time >=:from AND time <:to AND point_of_departure=:point_of_departure AND destination=:destination" +
+                        " ORDER BY time DESC",
+                mapSqlParameterSource, this::mapRow);
+    }
+
+    @Override
     public List<Flight> getAll () {
         return namedParameterJdbcTemplate.query("SELECT * FROM flights", this::mapRow);
     }

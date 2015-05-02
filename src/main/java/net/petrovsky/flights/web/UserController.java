@@ -2,6 +2,7 @@ package net.petrovsky.flights.web;
 
 import net.petrovsky.flights.model.Role;
 import net.petrovsky.flights.model.User;
+import net.petrovsky.flights.service.AirportService;
 import net.petrovsky.flights.service.FlightService;
 import net.petrovsky.flights.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class UserController {
     @Autowired
     private FlightService flightService;
 
+    @Autowired
+    private AirportService airportService;
+
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String userList(Model model) {
         model.addAttribute("userList", userService.getAll());
@@ -30,7 +34,7 @@ public class UserController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("flightList", flightService.getAll());
+        model.addAttribute("airportList", airportService.getAll());
         return "main";
     }
 
