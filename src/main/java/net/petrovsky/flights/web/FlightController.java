@@ -22,7 +22,7 @@ public class FlightController {
     private AirportService airportService;
 
     @RequestMapping(value = "/flights", method = RequestMethod.GET)
-    public String userList(Model model) {
+    public String allFlights(Model model) {
         model.addAttribute("flightList", flightService.getAll());
         return "flightList";
     }

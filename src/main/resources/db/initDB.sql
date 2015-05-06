@@ -41,5 +41,6 @@ CREATE TABLE flights (
 CREATE TABLE booking (
   id        BIGINT PRIMARY KEY DEFAULT nextval('GLOBAL_SEQUENCE'),
   user_id   INTEGER NOT NULL REFERENCES users (id),
-  flight_id INTEGER NOT NULL REFERENCES flights (id)
+  flight_id INTEGER NOT NULL REFERENCES flights (id),
+  CONSTRAINT user_flight_index UNIQUE (user_id, flight_id)
 );

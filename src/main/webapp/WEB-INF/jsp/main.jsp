@@ -2,7 +2,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="net.petrovsky.flights.util.TimeUtil" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
@@ -11,7 +10,7 @@
     <title>Main</title>
 </head>
 <body>
-<jsp:include page="parts/top.jsp"/>
+<jsp:include page="parts/header.jsp"/>
 <% List selectedFlightList = (List)session.getAttribute("selectedFlightList"); %>
     <div>
         <form action="/selectflights" method="get">
@@ -43,7 +42,6 @@
                         <th>Destination</th>
                         <th>Time</th>
                         <th>Price</th>
-                        <th>PreOrder</th>
                     </tr>
                     </thead>
                     <c:forEach items="<%= selectedFlightList %>" var="flight">
@@ -56,7 +54,7 @@
                             <td>
                                 <c:choose>
                                     <c:when test='<%= session.getAttribute("user") != null %>'>
-                                        <a href="/addtopreorder?flight_id=${flight.id}">Add Flight</a>
+                                        <a href="/addtopreorder?flight_id=${flight.id}">Add to preorder list</a>
                                     </c:when>
                                     <c:otherwise>
                                         <p>Only for registered users</p>
@@ -72,6 +70,6 @@
             </c:otherwise>
         </c:choose>
     </div>
-    <jsp:include page="parts/bottom.jsp"/>
+    <jsp:include page="parts/preorderList.jsp"/>
 </body>
 </html>

@@ -28,18 +28,18 @@ VALUES ('YVR', 'Vancouver International Airport', 'Vancouver', 'Canada');
 INSERT INTO airports (iata_code, name, city, country)
 VALUES ('YUC', 'Calgary International Airport', 'Calgary', 'Canada');
 
-INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YVR', '2014-10-20 17:05:00', 125.00);
-INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YVR', 'YYZ', '2014-11-14 04:17:00', 152.00);
-INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YUC', '2014-09-07 10:45:00', 95.00);
-INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('ATL', 'LAX', '2014-07-18 17:58:00', 58.00);
-INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'ATL', '2014-06-07 15:24:00', 115.00);
-INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YUC', 'ORD', '2014-05-01 03:07:00', 45.00);
+INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YVR', '2015-10-20 17:05:00', 125.00);
+INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YVR', 'YYZ', '2015-11-14 04:17:00', 152.00);
+INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'YUC', '2015-09-07 10:45:00', 95.00);
+INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('ATL', 'LAX', '2015-02-18 17:58:00', 58.00);
+INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'ATL', '2015-03-12 15:24:00', 115.00);
+INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YUC', 'ORD', '2015-05-01 03:07:00', 45.00);
 
 INSERT INTO booking (user_id, flight_id) VALUES (1000, 1004);
 INSERT INTO booking (user_id, flight_id) VALUES (1000, 1007);
 INSERT INTO booking (user_id, flight_id) VALUES (1000, 1005);
 INSERT INTO booking (user_id, flight_id) VALUES (1001, 1006);
-INSERT INTO booking (user_id, flight_id) VALUES (1001, 1006);
+INSERT INTO booking (user_id, flight_id) VALUES (1001, 1005);
 INSERT INTO booking (user_id, flight_id) VALUES (1002, 1009);
 INSERT INTO booking (user_id, flight_id) VALUES (1003, 1008);
 INSERT INTO booking (user_id, flight_id) VALUES (1003, 1004);
