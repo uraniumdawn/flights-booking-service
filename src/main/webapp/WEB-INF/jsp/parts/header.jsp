@@ -11,6 +11,8 @@
             <%=user.getFirstName()%>
             <%=user.getSecondName()%>
             <a href="/editprofile">Edit profile</a>
+            <a href="/logout">Log out</a>
+            <a href="/userbookinglist">Ordered flights</a>
         </c:when>
         <c:otherwise>
             <input type="button" onclick="window.location='/login'" value="Log In"/>
