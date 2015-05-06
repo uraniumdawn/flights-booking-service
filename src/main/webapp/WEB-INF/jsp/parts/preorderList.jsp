@@ -1,10 +1,12 @@
 <%@ page import="net.petrovsky.flights.util.TimeUtil" %>
+<%@ page import="java.util.List" %>
 <%@ page import="java.util.Map" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div>
     <hr/>
+    <p>Preorder list of flights</p>
     <c:choose>
         <c:when test='<%= (session.getAttribute("user") != null)&& (session.getAttribute("preorder") != null) %>'>
             <table>
@@ -14,7 +16,6 @@
                     <th>Destination</th>
                     <th>Time</th>
                     <th>Price</th>
-                    <th>PreOrder</th>
                 </tr>
                 </thead>
                 <c:forEach items='<%= ((Map)session.getAttribute("preorder")).values() %>' var="flight">
@@ -26,6 +27,22 @@
                         <td><%=flight.getPrice()%></td>
                         <td>
                             <a href="/delfrompreorder?flight_id=${flight.id}">Delete</a>
+                            <a href="/order?flight_id=${flight.id}">Book</a>
+                        </td>
+                        <td>
+                            <% List indexList = (List) session.getAttribute("IDOfOrderedFlights"); %>
+                            <c:if test="<%= (indexList != null) && (indexList.contains(flight.getId()))%>">
+                                <div>
+                                    Odered
+                                </div>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${not empty existentOrder}">
+                                <div>
+                                    This order already exist
+                                </div>
+                            </c:if>
                         </td>
                     </tr>
                 </c:forEach>
