@@ -44,11 +44,11 @@ public class BookingRepositoryJdbcImpl implements BookingRepository{
     }
 
     @Override
-    public Booking save (Booking booking, int userID, int flightID) {
+    public Booking save (Booking booking) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", booking.getId())
-                .addValue("user_id", userID)
-                .addValue("flight_id", flightID);
+                .addValue("user_id", booking.getUser().getId())
+                .addValue("flight_id", booking.getFlight().getId());
         if (booking.isNew()) {
             Number newKey = insertUser.executeAndReturnKey(mapSqlParameterSource);
             booking.setId(newKey.intValue());
@@ -59,11 +59,11 @@ public class BookingRepositoryJdbcImpl implements BookingRepository{
     }
 
     @Override
-    public Booking update (Booking booking, int userID, int flightID) {
+    public Booking update (Booking booking) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", booking.getId())
-                .addValue("user_id", userID)
-                .addValue("flight_id", flightID);
+                .addValue("user_id", booking.getUser().getId())
+                .addValue("flight_id", booking.getFlight().getId());
         namedParameterJdbcTemplate.update("UPDATE booking SET user_id=:user_id, flight_id=:flight_id WHERE id=:id",
                 mapSqlParameterSource);
         return booking;

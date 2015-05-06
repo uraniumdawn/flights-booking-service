@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface BookingService {
 
-    Booking save (Booking booking, int userID, int flightID);
+    Booking save (Booking booking);
 
-    Booking update (Booking booking, int userID, int flightID);
+    Booking update (Booking booking);
 
     boolean delete (int id);
 

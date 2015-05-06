@@ -14,13 +14,13 @@ public class BookingServiceImpl implements BookingService {
     private BookingRepository bookingRepository;
 
     @Override
-    public Booking save (Booking booking, int userID, int flightID) {
-        return bookingRepository.save(booking, userID, flightID);
+    public Booking save (Booking booking) {
+        return bookingRepository.save(booking);
     }
 
     @Override
-    public Booking update (Booking booking, int userID, int flightID) {
-        return bookingRepository.update(booking, userID, flightID);
+    public Booking update (Booking booking) {
+        return bookingRepository.update(booking);
     }
 
     @Override

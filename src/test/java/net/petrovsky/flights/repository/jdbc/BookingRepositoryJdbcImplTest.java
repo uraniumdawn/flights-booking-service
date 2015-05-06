@@ -10,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -36,24 +35,24 @@ public class BookingRepositoryJdbcImplTest {
     public void doPopulate() throws Exception {
         dbPopulator.execute();
     }
-
-    @Test
-    public void testSave () throws Exception {
-        Booking booking = bookingRepository.save(new Booking(null, userRepository.getByID(1001), flightRepository.getByID(1008)), 1001, 1008);
-        Assert.assertEquals(bookingRepository.getByID(1018), booking);
-    }
-
-    @Test
-    public void testUpdate () throws Exception {
-        Booking booking = bookingRepository.update(new Booking(1010, userRepository.getByID(1001), flightRepository.getByID(1004)), 1001, 1004);
-        Assert.assertEquals(bookingRepository.getByID(1010), booking);
-    }
-
-    @Test (expected = InvalidDataAccessApiUsageException.class)
-    public void testDelete () throws Exception {
-        bookingRepository.save(new Booking(null, userRepository.getByID(1001), flightRepository.getByID(1008)), 1001, 1008);
-        bookingRepository.delete(1018);
-    }
+//
+//    @Test
+//    public void testSave () throws Exception {
+//        Booking booking = bookingRepository.save(new Booking(null, userRepository.getByID(1001), flightRepository.getByID(1008)), 1001, 1008);
+//        Assert.assertEquals(bookingRepository.getByID(1018), booking);
+//    }
+//
+//    @Test
+//    public void testUpdate () throws Exception {
+//        Booking booking = bookingRepository.update(new Booking(1010, userRepository.getByID(1001), flightRepository.getByID(1004)), 1001, 1004);
+//        Assert.assertEquals(bookingRepository.getByID(1010), booking);
+//    }
+//
+//    @Test (expected = InvalidDataAccessApiUsageException.class)
+//    public void testDelete () throws Exception {
+//        bookingRepository.save(new Booking(null, userRepository.getByID(1001), flightRepository.getByID(1008)), 1001, 1008);
+//        bookingRepository.delete(1018);
+//    }
 
     @Test
     public void testGetByID () throws Exception {
