@@ -3,6 +3,7 @@ package net.petrovsky.flights.web;
 import net.petrovsky.flights.model.Booking;
 import net.petrovsky.flights.model.Flight;
 import net.petrovsky.flights.model.User;
+import net.petrovsky.flights.service.AirportService;
 import net.petrovsky.flights.service.BookingService;
 import net.petrovsky.flights.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,13 @@ import java.util.Map;
 public class BookingController {
 
     @Autowired
-    private BookingService bookingService;
+    private AirportService airportService;
 
     @Autowired
     private FlightService flightService;
+
+    @Autowired
+    private BookingService bookingService;
 
     @RequestMapping(value = "/addtopreorder", method = RequestMethod.GET)
     public String addToPreorder(@RequestParam("flight_id") String flightId, HttpSession session) {
@@ -36,13 +40,13 @@ public class BookingController {
         } else {
             ((Map)session.getAttribute("preorder")).put(flightId, flightService.getByID(Integer.valueOf(flightId)));
         }
-        return "redirect:/";
+        return "forward:/";
     }
 
     @RequestMapping(value = "/delfrompreorder", method = RequestMethod.GET)
     public String deleteFromPreorder(@RequestParam("flight_id") String flightId, HttpSession session) {
         ((Map)session.getAttribute("preorder")).remove(flightId);
-        return "redirect:/";
+        return "forward:/";
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
@@ -59,7 +63,7 @@ public class BookingController {
                 bookingService.save(new Booking(null, ((User) session.getAttribute("user")), flightService.getByID(Integer.valueOf(flightId))));
             }
         }
-        return "main";
+        return "forward:/";
     }
 
     @RequestMapping(value = "/userbookinglist", method = RequestMethod.GET)

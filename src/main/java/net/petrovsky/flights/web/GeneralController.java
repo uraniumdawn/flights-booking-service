@@ -48,7 +48,7 @@ public class GeneralController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session) {
         session.removeAttribute("user");
-        return "redirect:/";
+        return "forward:/";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)

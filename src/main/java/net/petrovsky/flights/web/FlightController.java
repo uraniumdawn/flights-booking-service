@@ -35,6 +35,6 @@ public class FlightController {
                                 HttpSession session) {
         session.setAttribute("selectedFlightList", flightService.getFlightToOrder(destination, point_of_departure,
                 TimeUtil.toDate(from).atTime(0, 0, 0), TimeUtil.toDate(to).atTime(0, 0, 0)));
-        return "redirect:/";
+        return "forward:/";
     }
 }
