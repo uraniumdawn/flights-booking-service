@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class FlightController {
@@ -29,12 +31,18 @@ public class FlightController {
 
     @RequestMapping(value = "/selectflights", method = RequestMethod.GET)
     public String selectFlights(@RequestParam("destination") String destination,
-                                @RequestParam("point_of_departure") String point_of_departure,
+                                @RequestParam("point_of_departure") String pointOfDeparture,
                                 @RequestParam("from") String from,
                                 @RequestParam("to") String to,
                                 HttpSession session) {
-        session.setAttribute("selectedFlightList", flightService.getFlightToOrder(destination, point_of_departure,
+        session.setAttribute("selectedFlightList", flightService.getFlightToOrder(destination, pointOfDeparture,
                 TimeUtil.toDate(from).atTime(0, 0, 0), TimeUtil.toDate(to).atTime(0, 0, 0)));
+        Map choice = new HashMap<>();
+        choice.put("destination", destination);
+        choice.put("point_of_departure", pointOfDeparture);
+        choice.put("from", from);
+        choice.put("to", to);
+        session.setAttribute("choice", choice);
         return "forward:/";
     }
 }

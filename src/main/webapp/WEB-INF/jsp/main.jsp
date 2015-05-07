@@ -2,6 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="net.petrovsky.flights.util.TimeUtil" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
@@ -10,27 +11,46 @@
     <title>Main</title>
 </head>
 <body>
+
 <jsp:include page="parts/header.jsp"/>
+
 <% List selectedFlightList = (List)session.getAttribute("selectedFlightList"); %>
-    <div>
-        <form action="/selectflights" method="get">
-            <p>Destination:</p>
-                <select name="destination">
-                    <option value="NONE">---Select---</option>
-                    <c:forEach items="${airportList}" var="airport">
-                        <jsp:useBean id="airport" scope="page" type="net.petrovsky.flights.model.Airport"/>
-                        <option value="${airport.IATAcode}">${airport.name}</option>
-                    </c:forEach>
-                </select>
-            <p>Point Of Departure:</p>
-            <select name="point_of_departure">
+<% Map choiceExist = (Map)session.getAttribute("choice"); %>
+<div>
+
+    <form action="/selectflights" method="get">
+        <p>Destination:</p>
+        <select name="destination" required>
                 <option value="NONE">---Select---</option>
-                <c:forEach items="${airportList}" var="airport">
-                    <option value="${airport.IATAcode}">${airport.name}</option>
+                <c:forEach items="${airportList}" var="airportD">
+                    <jsp:useBean id="airportD" scope="page" class="net.petrovsky.flights.model.Airport"/>
+                    <c:choose>
+                        <c:when test="<%= choiceExist != null %>">
+                            <option value="${airportD.IATAcode}" <%= choiceExist.get("destination").equals(airportD.getIATAcode())? "selected" : "" %>>${airportD.name}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${airportD.IATAcode}">${airportD.name}</option>
+                        </c:otherwise>
+                    </c:choose>
                 </c:forEach>
             </select>
-            <p>Returning:</p><input type="date" name="from">
-            <p>Departing:</p><input type="date" name="to">
+            <p>Point Of Departure:</p>
+            <select name="point_of_departure" required>
+                <option value="NONE">---Select---</option>
+                <c:forEach items="${airportList}" var="airportPOD">
+                    <jsp:useBean id="airportPOD" scope="page" type="net.petrovsky.flights.model.Airport"/>
+                    <c:choose>
+                        <c:when test="<%= choiceExist != null %>">
+                            <option value="${airportPOD.IATAcode}" <%= choiceExist.get("point_of_departure").equals(airportPOD.getIATAcode())? "selected" : "" %>>${airportPOD.name}</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="${airportPOD.IATAcode}">${airportPOD.name}</option>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </select>
+            <p>Returning:</p><input type="date" name="from" value='<%= choiceExist != null ? (String)choiceExist.get("from") : "NONE" %>' required>
+            <p>Departing:</p><input type="date" name="to" value='<%= choiceExist != null ? (String)choiceExist.get("to") : "NONE" %>' required>
             <input type="submit" value="Select">
         </form>
         <c:choose>
