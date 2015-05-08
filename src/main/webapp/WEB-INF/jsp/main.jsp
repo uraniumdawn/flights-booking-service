@@ -15,7 +15,7 @@
 <jsp:include page="parts/header.jsp"/>
 
 <% List selectedFlightList = (List)session.getAttribute("selectedFlightList"); %>
-<% Map choiceExist = (Map)session.getAttribute("choice"); %>
+<% Map choice = (Map)session.getAttribute("choice"); %>
 <div>
 
     <form action="/selectflights" method="get">
@@ -25,8 +25,8 @@
                 <c:forEach items="${airportList}" var="airportD">
                     <jsp:useBean id="airportD" scope="page" class="net.petrovsky.flights.model.Airport"/>
                     <c:choose>
-                        <c:when test="<%= choiceExist != null %>">
-                            <option value="${airportD.IATAcode}" <%= choiceExist.get("destination").equals(airportD.getIATAcode())? "selected" : "" %>>${airportD.name}</option>
+                        <c:when test="<%= choice != null %>">
+                            <option value="${airportD.IATAcode}" <%= choice.get("destination").equals(airportD.getIATAcode())? "selected" : "" %>>${airportD.name}</option>
                         </c:when>
                         <c:otherwise>
                             <option value="${airportD.IATAcode}">${airportD.name}</option>
@@ -40,8 +40,8 @@
                 <c:forEach items="${airportList}" var="airportPOD">
                     <jsp:useBean id="airportPOD" scope="page" type="net.petrovsky.flights.model.Airport"/>
                     <c:choose>
-                        <c:when test="<%= choiceExist != null %>">
-                            <option value="${airportPOD.IATAcode}" <%= choiceExist.get("point_of_departure").equals(airportPOD.getIATAcode())? "selected" : "" %>>${airportPOD.name}</option>
+                        <c:when test="<%= choice != null %>">
+                            <option value="${airportPOD.IATAcode}" <%= choice.get("point_of_departure").equals(airportPOD.getIATAcode())? "selected" : "" %>>${airportPOD.name}</option>
                         </c:when>
                         <c:otherwise>
                             <option value="${airportPOD.IATAcode}">${airportPOD.name}</option>
@@ -49,8 +49,8 @@
                     </c:choose>
                 </c:forEach>
             </select>
-            <p>Returning:</p><input type="date" name="from" value='<%= choiceExist != null ? (String)choiceExist.get("from") : "NONE" %>' required>
-            <p>Departing:</p><input type="date" name="to" value='<%= choiceExist != null ? (String)choiceExist.get("to") : "NONE" %>' required>
+            <p>Returning:</p><input type="date" name="from" value='<%= choice != null ? (String)choice.get("from") : "NONE" %>' required>
+            <p>Departing:</p><input type="date" name="to" value='<%= choice != null ? (String)choice.get("to") : "NONE" %>' required>
             <input type="submit" value="Select">
         </form>
         <c:choose>

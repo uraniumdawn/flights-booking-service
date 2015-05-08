@@ -7,6 +7,34 @@
     <title></title>
 </head>
 <body>
+
+<form action="/admin/users/select/bysecondname" method="get">
+    <div>Second name:</div>
+    <input type="text" name="second_name">
+    <input type="submit" value="Select">
+    <c:if test="${not empty errorChoice}">
+        <div>
+            ${errorChoice}
+        </div>
+    </c:if>
+</form>
+<form action="/admin/users/select/byemail" method="get">
+    <div>Email:</div>
+    <input type="text" name="email">
+    <input type="submit" value="Select">
+    <c:if test="${not empty errorChoice}">
+        <div>
+                ${errorChoice}
+        </div>
+    </c:if>
+    <c:if test="${not empty deletingSuccessful}">
+        <div>
+                ${deletingSuccessful}
+        </div>
+    </c:if>
+</form>
+
+
 <table>
     <thead>
         <tr>
@@ -18,7 +46,7 @@
             <th>Role</th>
         </tr>
     </thead>
-        <c:forEach items="${userList}" var="user">
+        <c:forEach items="${selectedUsers}" var="user">
             <jsp:useBean id="user" scope="page" type="net.petrovsky.flights.model.User"/>
             <tr>
                 <td><c:out value="${user.firstName}"/></td>
@@ -27,6 +55,7 @@
                 <td><%=TimeUtil.toString(user.getRegistration())%></td>
                 <td><%=user.isEnabled()%></td>
                 <td>${user.role}</td>
+                <td><a href="/deleteuser?user_id=${user.id}">Delete</a></td>
             </tr>
         </c:forEach>
 </table>
