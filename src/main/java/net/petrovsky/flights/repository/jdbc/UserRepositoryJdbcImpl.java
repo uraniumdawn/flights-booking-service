@@ -4,6 +4,7 @@ import net.petrovsky.flights.model.User;
 import net.petrovsky.flights.repository.RoleRepository;
 import net.petrovsky.flights.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -118,12 +119,16 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     @Override
     @Transactional(readOnly = true)
     public User getByEmail (String email) {
-        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
-                .addValue("email", email);
-        User user = namedParameterJdbcTemplate.queryForObject("SELECT * FROM users WHERE email=:email",
-                mapSqlParameterSource, this::mapRow);
-        user.setRole(roleRepository.getByUserID(user.getId()));
-        return user;
+        try {
+            MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
+                    .addValue("email", email);
+            User user = namedParameterJdbcTemplate.queryForObject("SELECT * FROM users WHERE email=:email",
+                    mapSqlParameterSource, this::mapRow);
+            user.setRole(roleRepository.getByUserID(user.getId()));
+            return user;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
