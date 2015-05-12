@@ -51,4 +51,10 @@ public class AdminController {
         }
         return "userManagement";
     }
+
+    @RequestMapping(value = "/admin/users/select/all", method = RequestMethod.GET)
+    public String selectAllUsers (Model model) {
+        model.addAttribute("selectedUsers", userService.getAll());
+        return "userManagement";
+    }
 }
