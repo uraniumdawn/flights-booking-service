@@ -12,40 +12,40 @@
     <div>Second name:</div>
     <input type="text" name="second_name">
     <input type="submit" value="Select">
-    <c:if test="${not empty errorChoice}">
+    <c:if test="${not empty errorName}">
         <div>
-            ${errorChoice}
+            ${errorName}
         </div>
     </c:if>
 </form>
 <form action="/admin/users/select/byemail" method="get">
     <div>Email:</div>
-    <input type="text" name="email">
+    <input type="email" name="email">
     <input type="submit" value="Select">
-    <c:if test="${not empty errorChoice}">
+    <c:if test="${not empty errorEmail}">
         <div>
-                ${errorChoice}
-        </div>
-    </c:if>
-    <c:if test="${not empty deletingSuccessful}">
-        <div>
-                ${deletingSuccessful}
+            ${errorEmail}
         </div>
     </c:if>
 </form>
-
-
-<table>
-    <thead>
-        <tr>
-            <th>First name</th>
-            <th>Second name</th>
-            <th>Email</th>
-            <th>Registration</th>
-            <th>Enabled</th>
-            <th>Role</th>
-        </tr>
-    </thead>
+<a href="/admin/users/select/all">All users</a>
+<c:if test="${not empty emptyResult}">
+    <div>
+        ${emptyResult}
+    </div>
+</c:if>
+<c:if test="${not empty selectedUsers}">
+    <table>
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Second name</th>
+                <th>Email</th>
+                <th>Registration</th>
+                <th>Enabled</th>
+                <th>Role</th>
+            </tr>
+        </thead>
         <c:forEach items="${selectedUsers}" var="user">
             <jsp:useBean id="user" scope="page" type="net.petrovsky.flights.model.User"/>
             <tr>
@@ -55,9 +55,9 @@
                 <td><%=TimeUtil.toString(user.getRegistration())%></td>
                 <td><%=user.isEnabled()%></td>
                 <td>${user.role}</td>
-                <td><a href="/deleteuser?user_id=${user.id}">Delete</a></td>
             </tr>
         </c:forEach>
-</table>
+    </table>
+</c:if>
 </body>
 </html>
