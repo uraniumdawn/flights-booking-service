@@ -19,7 +19,7 @@ public class AdminController {
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
     public String main() {
-                return "admin";
+        return "admin";
     }
 
     @RequestMapping(value = "/admin/users/management", method = RequestMethod.GET)
