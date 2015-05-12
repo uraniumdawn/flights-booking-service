@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User>getBySecondName (String secondName) {
+    public List<User> getBySecondName (String secondName) {
         return userRepository.getBySecondName(secondName);
     }
 

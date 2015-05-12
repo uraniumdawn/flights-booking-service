@@ -13,6 +13,8 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Collections;
+
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"})
@@ -93,6 +95,7 @@ public class UserRepositoryJdbcImplTest {
 
     @Test
     public  void testCheck () throws Exception {
+        System.out.println(Collections.singletonList(userRepository.getByEmail("g")));
         System.out.println(userRepository.check("WhoKillLauraPalmer@linch.com", "FireWalkWithMe"));
     }
 }
