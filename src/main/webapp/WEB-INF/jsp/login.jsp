@@ -5,9 +5,14 @@
     <title></title>
 </head>
 <body>
+    <c:if test="${not empty requestScope.accessDenied}">
+        <div>
+            ${requestScope.accessDenied}
+        </div>
+    </c:if>
     <c:if test="${not empty error}">
         <div>
-            ${error}
+                ${error}
         </div>
     </c:if>
     <form action="/login" method="post">
