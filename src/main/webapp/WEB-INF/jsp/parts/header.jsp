@@ -1,15 +1,17 @@
-<%@ page import="net.petrovsky.flights.model.User" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<% User user = (User)session.getAttribute("user"); %>
-
 <div>
     <c:choose>
-        <c:when test="<%= user != null %>">
-            <p>Profile:</p>
-            <%=user.getFirstName()%>
-            <%=user.getSecondName()%>
+        <c:when test="${not empty user}">
+            <c:if test="${!user.enabled}">
+                <div>You are blocked</div>
+            </c:if>
+            <div>
+                Profile:
+                ${user.firstName}
+                ${user.secondName}
+            </div>
             <a href="/editprofile">Edit profile</a>
             <a href="/logout">Log out</a>
             <a href="/userbookinglist">Ordered flights</a>
@@ -19,5 +21,5 @@
             <input type="button" onclick="window.location='/signup'" value="Sign Up"/>
         </c:otherwise>
     </c:choose>
-        <hr/>
+    <hr/>
 </div>
