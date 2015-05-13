@@ -1,4 +1,4 @@
-package net.petrovsky.flights.web;
+package net.petrovsky.flights.web.interceptors;
 
 import net.petrovsky.flights.model.Role;
 import net.petrovsky.flights.model.User;
