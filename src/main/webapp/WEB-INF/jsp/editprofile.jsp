@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-    <title></title>
+    <title>Edit profile</title>
 </head>
 <body>
     <form action="/editprofile" method="post">

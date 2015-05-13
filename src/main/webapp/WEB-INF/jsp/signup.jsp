@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-    <title></title>
+    <title>Sign Up</title>
 </head>
 <body>
     <form action="/signup" method="post">

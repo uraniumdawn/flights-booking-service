@@ -7,6 +7,7 @@
 </head>
 <body>
 
+<jsp:include page="parts/adminControlPanel.jsp"/>
 <form action="/admin/airports/select/byiatacode" method="get">
     <div>IATA code:</div>
     <input type="text" name="IATA_code" required>
@@ -25,9 +26,7 @@
 <a href="/admin/airports/select/all">All airports</a>
 <a href="/admin/airports/addnew">Add a new airport</a>
 <c:if test="${not empty emptyResult}">
-    <div>
-        ${emptyResult}
-    </div>
+    <div>${emptyResult}</div>
 </c:if>
 <c:if test="${not empty selectedAirports}">
     <table>

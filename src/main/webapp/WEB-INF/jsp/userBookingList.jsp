@@ -5,7 +5,7 @@
 
 <html>
 <head>
-    <title>Main</title>
+    <title>Your all orders</title>
 </head>
 <body>
 <jsp:include page="parts/header.jsp"/>

@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<jsp:include page="parts/adminControlPanel.jsp"/>
 <form action="/admin/users/select/bysecondname" method="get">
     <div>Second name:</div>
     <input type="text" name="second_name" required>
