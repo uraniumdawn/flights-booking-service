@@ -8,9 +8,7 @@
                 <div>You are blocked</div>
             </c:if>
             <div>
-                Profile:
-                ${user.firstName}
-                ${user.secondName}
+                Profile: ${user.firstName} ${user.secondName}
             </div>
             <a href="/editprofile">Edit profile</a>
             <a href="/logout">Log out</a>
