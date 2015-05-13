@@ -59,7 +59,6 @@ public class UserRepositoryJdbcImpl implements UserRepository {
             Number newKey = insertUser.executeAndReturnKey(mapSqlParameterSource);
             user.setId(newKey.intValue());
             roleRepository.create(user.getId(), user.getRole());
-            //user.setRole(Role.ROLE_USER);
         } else {
             //todo: Add realization of service message of existing such user
         }
