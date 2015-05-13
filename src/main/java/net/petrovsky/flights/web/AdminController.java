@@ -57,4 +57,12 @@ public class AdminController {
         model.addAttribute("selectedUsers", userService.getAll());
         return "userManagement";
     }
+
+    @RequestMapping(value = "/admin/users/state", method = RequestMethod.GET)
+    public String stateUser (@RequestParam(value = "user_id") String userId, Model model) {
+        User user = userService.getByID(Integer.valueOf(userId));
+        user.setEnabled(!user.isEnabled());
+        userService.update(user);
+        return "forward:/admin/users/select/all";
+    }
 }
