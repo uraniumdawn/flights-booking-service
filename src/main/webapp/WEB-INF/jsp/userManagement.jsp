@@ -53,8 +53,9 @@
                 <td><c:out value="${user.secondName}"/></td>
                 <td><a href="mailto:${user.email}">${user.email}</a></td>
                 <td><%=TimeUtil.toString(user.getRegistration())%></td>
-                <td><%=user.isEnabled()%></td>
+                <td>${user.enabled}</td>
                 <td>${user.role}</td>
+                <td><a href="/admin/users/state?user_id=${user.id}">Change state</a> </td>
             </tr>
         </c:forEach>
     </table>
