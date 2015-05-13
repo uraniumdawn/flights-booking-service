@@ -28,11 +28,11 @@
             <mvc:exclude-mapping path="/login"/>
             <mvc:exclude-mapping path="/singup"/>
             <mvc:exclude-mapping path="/admin/**"/>
-            <bean class="net.petrovsky.flights.web.UserActionInterceptor"/>
+            <bean class="net.petrovsky.flights.web.interceptors.UserActionInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/admin/**"/>
-            <bean class="net.petrovsky.flights.web.AdminActionInterceptor"/>
+            <bean class="net.petrovsky.flights.web.interceptors.AdminActionInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 
