@@ -20,7 +20,7 @@
                     <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                     <tr>
                         <td>${flight.pointOfDeparture.name}</td>
-                        <td>${flight.destination.name}"/></td>
+                        <td>${flight.destination.name}"</td>
                         <td><%=TimeUtil.toString(flight.getTime())%></td>
                         <td>${flight.price}</td>
                         <td>
