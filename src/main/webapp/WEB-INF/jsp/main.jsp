@@ -67,17 +67,17 @@
                     <c:forEach items="<%= selectedFlightList %>" var="flight">
                         <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                         <tr>
-                            <td><c:out value="${flight.pointOfDeparture.name}"/></td>
-                            <td><c:out value="${flight.destination.name}"/></td>
+                            <td>${flight.pointOfDeparture.name}</td>
+                            <td>${flight.destination.name}</td>
                             <td><%=TimeUtil.toString(flight.getTime())%></td>
-                            <td><c:out value="${flight.price}"/></td>
+                            <td>${flight.price}</td>
                             <td>
                                 <c:choose>
                                     <c:when test='<%= session.getAttribute("user") != null %>'>
                                         <a href="/addtopreorder?flight_id=${flight.id}">Add to preorder list</a>
                                     </c:when>
                                     <c:otherwise>
-                                        <p>Only for registered users</p>
+                                        <div>Only for registered users</div>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
@@ -86,7 +86,7 @@
                 </table>
             </c:when>
             <c:otherwise>
-                <p>You did not chose any flights</p>
+                <div>You did not chose any flights</div>
             </c:otherwise>
         </c:choose>
     </div>

@@ -4,29 +4,19 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-    <title></title>
+    <title>User Management</title>
 </head>
 <body>
 
 <form action="/admin/users/select/bysecondname" method="get">
     <div>Second name:</div>
-    <input type="text" name="second_name">
+    <input type="text" name="second_name" required>
     <input type="submit" value="Select">
-    <c:if test="${not empty errorName}">
-        <div>
-            ${errorName}
-        </div>
-    </c:if>
 </form>
 <form action="/admin/users/select/byemail" method="get">
     <div>Email:</div>
-    <input type="email" name="email">
+    <input type="email" name="email" required>
     <input type="submit" value="Select">
-    <c:if test="${not empty errorEmail}">
-        <div>
-            ${errorEmail}
-        </div>
-    </c:if>
 </form>
 <a href="/admin/users/select/all">All users</a>
 <c:if test="${not empty emptyResult}">
@@ -49,8 +39,8 @@
         <c:forEach items="${selectedUsers}" var="user">
             <jsp:useBean id="user" scope="page" type="net.petrovsky.flights.model.User"/>
             <tr>
-                <td><c:out value="${user.firstName}"/></td>
-                <td><c:out value="${user.secondName}"/></td>
+                <td>${user.firstName}</td>
+                <td>${user.secondName}</td>
                 <td><a href="mailto:${user.email}">${user.email}</a></td>
                 <td><%=TimeUtil.toString(user.getRegistration())%></td>
                 <td>${user.enabled}</td>

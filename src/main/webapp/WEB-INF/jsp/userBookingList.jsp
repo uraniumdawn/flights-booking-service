@@ -3,7 +3,6 @@
 <%@ page import="net.petrovsky.flights.util.TimeUtil" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <html>
 <head>
     <title>Main</title>
@@ -11,14 +10,8 @@
 <body>
 <jsp:include page="parts/header.jsp"/>
     <div>
-        <c:if test="${not empty successfullOrder}">
-            <div>
-                ${successfullOrder}
-            </div>
-        </c:if>
-        <div>
-            <p>Your previous orders</p>
-        </div>
+        <c:if test="${not empty successfullOrder}"><div>${successfullOrder}</div></c:if>
+        <div>Your previous orders</div>
         <c:choose>
             <c:when test="${not empty orders}">
                 <table>
@@ -33,16 +26,16 @@
                     <c:forEach items="${orders}" var="order">
                         <jsp:useBean id="order" scope="page" type="net.petrovsky.flights.model.Booking"/>
                         <tr>
-                            <td><c:out value="${order.flight.pointOfDeparture.name}"/></td>
-                            <td><c:out value="${order.flight.destination.name}"/></td>
+                            <td>${order.flight.pointOfDeparture.name}</td>
+                            <td>${order.flight.destination.name}</td>
                             <td><%=TimeUtil.toString(order.getFlight().getTime())%></td>
-                            <td><c:out value="${order.flight.price}"/></td>
+                            <td>${order.flight.price}</td>
                         </tr>
                     </c:forEach>
                 </table>
             </c:when>
             <c:otherwise>
-                <p>You do nor have any booked flights</p>
+                <div>You do nor have any booked flights</div>
             </c:otherwise>
         </c:choose>
     </div>

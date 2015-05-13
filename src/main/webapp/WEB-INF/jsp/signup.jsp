@@ -8,19 +8,19 @@
         <table>
             <tr>
                 <td>First Name:</td>
-                <td><input type="text" name="first_name"/></td>
+                <td><input type="text" name="first_name" required/></td>
             </tr>
             <tr>
                 <td>Second Name:</td>
-                <td><input type="text" name="second_name"/></td>
+                <td><input type="text" name="second_name" required/></td>
             </tr>
             <tr>
                 <td>Email:</td>
-                <td><input type="email" name="email"/></td>
+                <td><input type="email" name="email" required/></td>
             </tr>
             <tr>
                 <td>Password:</td>
-                <td><input type="password" name="password"/></td>
+                <td><input type="password" name="password" required/></td>
             </tr>
             <tr>
                 <td><input type="submit" name="signup" value="Sign Up"/></td>

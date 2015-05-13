@@ -118,9 +118,9 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     @Override
     @Transactional(readOnly = true)
     public User getByEmail (String email) {
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
+                .addValue("email", email);
         try {
-            MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
-                    .addValue("email", email);
             User user = namedParameterJdbcTemplate.queryForObject("SELECT * FROM users WHERE email=:email",
                     mapSqlParameterSource, this::mapRow);
             user.setRole(roleRepository.getByUserID(user.getId()));
