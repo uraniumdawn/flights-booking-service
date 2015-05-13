@@ -3,6 +3,7 @@ package net.petrovsky.flights.repository.jdbc;
 import net.petrovsky.flights.model.Airport;
 import net.petrovsky.flights.repository.AirportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -68,16 +69,24 @@ public class AirportRepositoryJdbcImpl implements AirportRepository {
     public Airport getByIATAcode (String IATAcode) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("iata_code", IATAcode);
-        return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE iata_code=:iata_code",
-                mapSqlParameterSource, this::mapRow);
+        try {
+            return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE iata_code=:iata_code",
+                    mapSqlParameterSource, this::mapRow);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
     public Airport getByName (String name) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("name", name);
-        return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE name=:name",
-                mapSqlParameterSource, this::mapRow);
+        try {
+            return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE name=:name",
+                    mapSqlParameterSource, this::mapRow);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override

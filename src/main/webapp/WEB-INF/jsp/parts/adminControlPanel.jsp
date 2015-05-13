@@ -13,7 +13,7 @@
     </div>
     <div>
         <a href="/admin/users/management">Users management</a>
-        <a href="">Airport management</a>
+        <a href="/admin/airports/management">Airport management</a>
         <a href="">Flight management</a>
         <a href="">Booking management</a>
     </div>

@@ -25,8 +25,8 @@ CREATE TABLE user_roles (
 CREATE TABLE airports (
   iata_code VARCHAR(3) PRIMARY KEY,
   name      VARCHAR(100) UNIQUE NOT NULL,
-  city      VARCHAR(20),
-  country   VARCHAR(10)
+  city      VARCHAR(20) NOT NULL,
+  country   VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE flights (
