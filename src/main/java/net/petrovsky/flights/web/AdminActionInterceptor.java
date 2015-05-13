@@ -2,14 +2,13 @@ package net.petrovsky.flights.web;
 
 import net.petrovsky.flights.model.Role;
 import net.petrovsky.flights.model.User;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AdminActionInterceptor implements HandlerInterceptor {
+public class AdminActionInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle (HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         User user = (User) httpServletRequest.getSession().getAttribute("user");
@@ -26,15 +25,5 @@ public class AdminActionInterceptor implements HandlerInterceptor {
             httpServletResponse.sendRedirect("/login");
             return false;
         }
-    }
-
-    @Override
-    public void postHandle (HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        //NOP
-    }
-
-    @Override
-    public void afterCompletion (HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        //NOP
     }
 }
