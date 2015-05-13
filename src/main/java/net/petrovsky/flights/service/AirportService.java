@@ -12,6 +12,8 @@ public interface AirportService {
 
     boolean delete (String IATAcode);
 
+    Airport getByIATAcode (String IATAcode);
+
     Airport getByName (String name);
 
     List<Airport> getByCountry (String country);

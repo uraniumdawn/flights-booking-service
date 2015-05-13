@@ -29,6 +29,11 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
+    public Airport getByIATAcode (String IATAcode) {
+        return airportRepository.getByIATAcode(IATAcode);
+    }
+
+    @Override
     public Airport getByName (String name) {
         return airportRepository.getByName(name);
     }
