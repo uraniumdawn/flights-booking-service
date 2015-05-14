@@ -1,8 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="net.petrovsky.flights.util.TimeUtil" %>
-<%@ page import="java.util.List" %>
-<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -12,9 +10,6 @@
 <body>
 
 <jsp:include page="parts/header.jsp"/>
-
-<% List selectedFlightList = (List)session.getAttribute("selectedFlightList"); %>
-<% Map choice = (Map)session.getAttribute("choice"); %>
 <div>
 
     <form action="/selectflights" method="get">
@@ -50,6 +45,7 @@
             </select>
             <div>Returning:</div><input type="date" name="from" value="${choice['from']}" required>
             <div>Departing:</div><input type="date" name="to" value="${choice['to']}" required>
+            <c:if test="${not empty msgIncorrectDates}"><div>${msgIncorrectDates}</div></c:if>
             <input type="submit" value="Select">
         </form>
         <c:choose>

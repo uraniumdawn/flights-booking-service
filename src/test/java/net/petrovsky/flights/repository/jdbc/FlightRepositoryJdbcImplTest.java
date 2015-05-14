@@ -3,6 +3,7 @@ package net.petrovsky.flights.repository.jdbc;
 import net.petrovsky.flights.model.Flight;
 import net.petrovsky.flights.repository.FlightRepository;
 import net.petrovsky.flights.util.DbPopulator;
+import net.petrovsky.flights.util.TimeUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +104,9 @@ public class FlightRepositoryJdbcImplTest {
         System.out.println(flightRepository.getFlightToOrder("YYZ", "YUC", LocalDateTime.of(2015, 8, 1, 0, 0, 0), LocalDateTime.of(2015, 10, 1, 0, 0, 0)));
     }
 
-
+    @Test
+    public void testTest () throws Exception {
+        System.out.println(TimeUtil.toDate("2015-01-01").isAfter(LocalDateTime.now().toLocalDate()) && TimeUtil.toDate("2015-12-31").isAfter(LocalDateTime.now().toLocalDate()));
+        System.out.println(LocalDateTime.now().toLocalDate());
+    }
 }
