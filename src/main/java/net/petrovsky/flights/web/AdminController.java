@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.Collections;
 import java.util.List;
 
@@ -123,21 +124,18 @@ public class AdminController {
         return "forward:/admin/airports/management";
     }
 
-    @RequestMapping(value = "/admin/airports/addnew", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/airports/add", method = RequestMethod.GET)
     public String addAirport(){
         return "additionAirport";
     }
 
-    @RequestMapping(value = "/admin/airports/addnew", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/airports/add", method = RequestMethod.POST)
     public String addAirport(@RequestParam("IATA_code") String IATAcode,
                       @RequestParam("name") String name,
                       @RequestParam("city") String city,
                       @RequestParam("country") String country, Model model) {
         if (IATAcode.length() > 3){
-            model.addAttribute("enteredValueIATA", IATAcode);
-            model.addAttribute("enteredValueName", name);
-            model.addAttribute("enteredValueCity", city);
-            model.addAttribute("enteredValueCountry", country);
+            model.addAttribute("airport", new Airport(IATAcode, name, city, country));
             model.addAttribute("msgIATALength", "Length of IATA code must be less then 3 characters");
             return "additionAirport";
         }
@@ -157,7 +155,7 @@ public class AdminController {
         List<Flight> flights = flightService.getByPointOfDeparture(pointOfDeparture);
         if (!flights.isEmpty()) {
             model.addAttribute("selectedFlights", flights);
-            model.addAttribute("choiceD", pointOfDeparture);
+            model.addAttribute("choicePOD", pointOfDeparture);
         } else {
             model.addAttribute("emptyResult", "There are not items according your request");
         }
@@ -182,21 +180,59 @@ public class AdminController {
         return "forward:/admin/flights/management";
     }
 
-    @RequestMapping(value = "/admin/flights/addnew", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/flights/add", method = RequestMethod.GET)
     public String addFlight(Model model){
         model.addAttribute("airportList", airportService.getAll());
         return "additionFlight";
     }
 
-    @RequestMapping(value = "/admin/flights/addnew", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/flights/add", method = RequestMethod.POST)
     public String addFlight(@RequestParam("destination") String destination,
                             @RequestParam("point_of_departure") String pointOfDeparture,
                             @RequestParam("time") String time,
-                            @RequestParam("price") String price, Model model) {
+                            @RequestParam("price") String price) {
         flightService.save(new Flight(null, airportService.getByIATAcode(pointOfDeparture), airportService.getByIATAcode(destination),
                 TimeUtil.toLocalDateTime(time), Double.valueOf(price)));
         return "redirect:/admin/flights/management";
     }
+
+    @RequestMapping(value = "/admin/flights/edit", method = RequestMethod.GET)
+    public String editFlight(@RequestParam("flight_id") String flightId, HttpSession session, Model model) {
+        model.addAttribute("airportList", airportService.getAll());
+        session.setAttribute("currentFlight", flightService.getByID(Integer.valueOf(flightId)));
+        return "editingFlight";
+    }
+
+    @RequestMapping(value = "/admin/flights/edit", method = RequestMethod.POST)
+    public String editFlight(@RequestParam("destination") String destination,
+                             @RequestParam("point_of_departure") String pointOfDeparture,
+                             @RequestParam("time") String time,
+                             @RequestParam("price") String price, HttpSession session) {
+        flightService.update(new Flight(((Flight) session.getAttribute("currentFlight")).getId(), airportService.getByIATAcode(pointOfDeparture),
+                airportService.getByIATAcode(destination), TimeUtil.toLocalDateTime(time), Double.valueOf(price)));
+        session.removeAttribute("currentFlight");
+        return "redirect:/admin/flights/management";
+    }
+
+    @RequestMapping(value = "/admin/airports/edit", method = RequestMethod.GET)
+    public String editAirport(@RequestParam("IATAcode") String IATAcode, Model model){
+        model.addAttribute("airport", airportService.getByIATAcode(IATAcode));
+        return "editingAirport";
+    }
+
+    @RequestMapping(value = "/admin/airports/edit", method = RequestMethod.POST)
+    public String editAirport(@RequestParam("IATA_code") String IATAcode,
+                             @RequestParam("name") String name,
+                             @RequestParam("city") String city,
+                             @RequestParam("country") String country, Model model) {
+        if (IATAcode.length() > 3){
+            model.addAttribute("msgIATALength", "Length of IATA code must be less then 3 characters");
+            return "additionAirport";
+        }
+        airportService.update(new Airport(IATAcode, name, city, country));
+        return "redirect:/admin/airports/management";
+    }
+
 
 
     /*Booking section*/

@@ -24,7 +24,7 @@
     <input type="submit" value="Select">
 </form>
 <a href="/admin/airports/select/all">All airports</a>
-<a href="/admin/airports/addnew">Add a new airport</a>
+<a href="/admin/airports/add">Add a new airport</a>
 <c:if test="${not empty emptyResult}">
     <div>${emptyResult}</div>
 </c:if>
@@ -45,6 +45,7 @@
                 <td>${airport.name}</td>
                 <td>${airport.city}</td>
                 <td>${airport.country}</td>
+                <td><a href="/admin/airports/edit?IATAcode=${airport.IATAcode}">Edit</a> </td>
             </tr>
         </c:forEach>
     </table>

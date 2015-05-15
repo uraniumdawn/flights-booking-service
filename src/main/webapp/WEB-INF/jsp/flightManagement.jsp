@@ -46,7 +46,7 @@
     <input type="submit" value="Select">
 </form>
 <a href="/admin/flights/select/all">All flights</a>
-<a href="/admin/flights/addnew">Add flight</a>
+<a href="/admin/flights/add">Add flight</a>
 <c:if test="${not empty emptyResult}">
     <div>
         ${emptyResult}
@@ -70,6 +70,7 @@
                     <td>${flight.destination.name}</td>
                     <td><%=TimeUtil.toString(flight.getTime())%></td>
                     <td>${flight.price}</td>
+                    <td><a href="/admin/flights/edit?flight_id=${flight.id}">Edit</a> </td>
                 </tr>
             </c:forEach>
         </table>
