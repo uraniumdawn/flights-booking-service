@@ -16,4 +16,8 @@ public class TimeUtil {
     public static LocalDate toDate(String str) {
         return StringUtils.isEmpty(str) ? LocalDate.now() : LocalDate.parse(str, DateTimeFormatter.ISO_LOCAL_DATE);
     }
+
+    public static LocalDateTime toLocalDateTime(String str) {
+        return StringUtils.isEmpty(str) ? LocalDateTime.now() : LocalDateTime.parse(str, DateTimeFormatter.ISO_DATE_TIME);
+    }
 }

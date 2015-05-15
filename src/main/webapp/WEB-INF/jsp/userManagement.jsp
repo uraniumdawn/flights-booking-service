@@ -20,11 +20,7 @@
     <input type="submit" value="Select">
 </form>
 <a href="/admin/users/select/all">All users</a>
-<c:if test="${not empty emptyResult}">
-    <div>
-        ${emptyResult}
-    </div>
-</c:if>
+<c:if test="${not empty emptyResult}"><div>${emptyResult}</div></c:if>
 <c:if test="${not empty selectedUsers}">
     <table>
         <thead>
