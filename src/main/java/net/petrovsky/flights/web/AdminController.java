@@ -1,9 +1,12 @@
 package net.petrovsky.flights.web;
 
 import net.petrovsky.flights.model.Airport;
+import net.petrovsky.flights.model.Flight;
 import net.petrovsky.flights.model.User;
 import net.petrovsky.flights.service.AirportService;
+import net.petrovsky.flights.service.FlightService;
 import net.petrovsky.flights.service.UserService;
+import net.petrovsky.flights.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -21,6 +25,9 @@ public class AdminController {
 
     @Autowired
     private AirportService airportService;
+
+    @Autowired
+    private FlightService flightService;
 
     /*Common section*/
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -37,8 +44,13 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/users/select/bysecondname", method = RequestMethod.GET)
     public String selectUserBySecondName (@RequestParam(value = "second_name") String secondName, Model model) {
-        model.addAttribute("selectedUsers", userService.getBySecondName(secondName));
-        return "userManagement";
+        List<User> users = userService.getBySecondName(secondName);
+        if (!users.isEmpty()) {
+            model.addAttribute("selectedUsers", users);
+        } else {
+            model.addAttribute("emptyResult", "There are not items according your request");
+        }
+        return "forward:/admin/users/management";
     }
 
     @RequestMapping(value = "/admin/users/select/byemail", method = RequestMethod.GET)
@@ -49,13 +61,13 @@ public class AdminController {
         } else {
             model.addAttribute("emptyResult", "There are not items according your request");
         }
-        return "userManagement";
+        return "forward:/admin/users/management";
     }
 
     @RequestMapping(value = "/admin/users/select/all", method = RequestMethod.GET)
     public String selectAllUsers (Model model) {
         model.addAttribute("selectedUsers", userService.getAll());
-        return "userManagement";
+        return "forward:/admin/users/management";
     }
 
     @RequestMapping(value = "/admin/users/state", method = RequestMethod.GET)
@@ -80,7 +92,7 @@ public class AdminController {
         } else {
             model.addAttribute("emptyResult", "There are not items according your request");
         }
-        return "airportManagement";
+        return "forward:/admin/airports/management";
     }
 
     @RequestMapping(value = "/admin/airports/select/byname", method = RequestMethod.GET)
@@ -91,28 +103,33 @@ public class AdminController {
         } else {
             model.addAttribute("emptyResult", "There are not items according your request");
         }
-        return "airportManagement";
+        return "forward:/admin/airports/management";
     }
 
     @RequestMapping(value = "/admin/airports/select/bycountry", method = RequestMethod.GET)
     public String selectAirportsByCountry (@RequestParam(value = "country") String country, Model model) {
-        model.addAttribute("selectedAirports", airportService.getByCountry(country));
-        return "airportManagement";
+        List<Airport> airports = airportService.getByCountry(country);
+        if (!airports.isEmpty()) {
+            model.addAttribute("selectedAirports", airports);
+        } else {
+            model.addAttribute("emptyResult", "There are not items according your request");
+        }
+        return "forward:/admin/airports/management";
     }
 
     @RequestMapping(value = "/admin/airports/select/all", method = RequestMethod.GET)
     public String selectAllAirports (Model model) {
         model.addAttribute("selectedAirports", airportService.getAll());
-        return "airportManagement";
+        return "forward:/admin/airports/management";
     }
 
     @RequestMapping(value = "/admin/airports/addnew", method = RequestMethod.GET)
-    public String add(){
+    public String addAirport(){
         return "additionAirport";
     }
 
     @RequestMapping(value = "/admin/airports/addnew", method = RequestMethod.POST)
-    public String add(@RequestParam("IATA_code") String IATAcode,
+    public String addAirport(@RequestParam("IATA_code") String IATAcode,
                       @RequestParam("name") String name,
                       @RequestParam("city") String city,
                       @RequestParam("country") String country, Model model) {
@@ -127,4 +144,61 @@ public class AdminController {
         airportService.save(new Airport(IATAcode, name, city, country));
         return "redirect:/admin/airports/management";
     }
+
+    /*Flight section*/
+    @RequestMapping(value = "/admin/flights/management", method = RequestMethod.GET)
+    public String flightManagement (Model model) {
+        model.addAttribute("airportList", airportService.getAll());
+        return "flightManagement";
+    }
+
+    @RequestMapping(value = "/admin/flights/select/by/pointod", method = RequestMethod.GET)
+    public String selectFlightsByPointOfDeparture (@RequestParam(value = "point_of_departure") String pointOfDeparture, Model model) {
+        List<Flight> flights = flightService.getByPointOfDeparture(pointOfDeparture);
+        if (!flights.isEmpty()) {
+            model.addAttribute("selectedFlights", flights);
+            model.addAttribute("choiceD", pointOfDeparture);
+        } else {
+            model.addAttribute("emptyResult", "There are not items according your request");
+        }
+        return "forward:/admin/flights/management";
+    }
+
+    @RequestMapping(value = "/admin/flights/select/by/destination", method = RequestMethod.GET)
+    public String selectFlightsByDestination (@RequestParam(value = "destination") String destination, Model model) {
+        List<Flight> flights = flightService.getByDestination(destination);
+        if (!flights.isEmpty()) {
+            model.addAttribute("selectedFlights", flights);
+            model.addAttribute("choiceD", destination);
+        } else {
+            model.addAttribute("emptyResult", "There are not items according your request");
+        }
+        return "forward:/admin/flights/management";
+    }
+
+    @RequestMapping(value = "/admin/flights/select/all", method = RequestMethod.GET)
+    public String selectAllFlights (Model model) {
+        model.addAttribute("selectedFlights", flightService.getAll());
+        return "forward:/admin/flights/management";
+    }
+
+    @RequestMapping(value = "/admin/flights/addnew", method = RequestMethod.GET)
+    public String addFlight(Model model){
+        model.addAttribute("airportList", airportService.getAll());
+        return "additionFlight";
+    }
+
+    @RequestMapping(value = "/admin/flights/addnew", method = RequestMethod.POST)
+    public String addFlight(@RequestParam("destination") String destination,
+                            @RequestParam("point_of_departure") String pointOfDeparture,
+                            @RequestParam("time") String time,
+                            @RequestParam("price") String price, Model model) {
+        flightService.save(new Flight(null, airportService.getByIATAcode(pointOfDeparture), airportService.getByIATAcode(destination),
+                TimeUtil.toLocalDateTime(time), Double.valueOf(price)));
+        return "redirect:/admin/flights/management";
+    }
+
+
+    /*Booking section*/
+
 }
