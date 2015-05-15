@@ -27,7 +27,7 @@ public class FlightController {
                                 @RequestParam("to") String to,
                                 HttpSession session, Model model) {
         if (TimeUtil.toDate(from).isAfter(LocalDateTime.now().toLocalDate()) && TimeUtil.toDate(to).isAfter(LocalDateTime.now().toLocalDate())) {
-            session.setAttribute("selectedFlightList", flightService.getFlightToOrder(destination, pointOfDeparture,
+            session.setAttribute("selectedFlights", flightService.getFlightToOrder(destination, pointOfDeparture,
                     TimeUtil.toDate(from).atTime(0, 0, 0), TimeUtil.toDate(to).atTime(0, 0, 0)));
         } else {
             model.addAttribute("msgIncorrectDates", "Incorrect dates");
