@@ -47,8 +47,8 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
     public Flight save (Flight flight) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", flight.getId())
-                .addValue("point_of_departure", flight.getPointOfDeparture())
-                .addValue("destination", flight.getDestination())
+                .addValue("point_of_departure", flight.getPointOfDeparture().getIATAcode())
+                .addValue("destination", flight.getDestination().getIATAcode())
                 .addValue("time", Timestamp.valueOf(flight.getTime()))
                 .addValue("price", flight.getPrice());
         if (flight.isNew()) {
@@ -64,8 +64,8 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
     public Flight update (Flight flight) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", flight.getId())
-                .addValue("point_of_departure", flight.getPointOfDeparture())
-                .addValue("destination", flight.getDestination())
+                .addValue("point_of_departure", flight.getPointOfDeparture().getIATAcode())
+                .addValue("destination", flight.getDestination().getIATAcode())
                 .addValue("time", Timestamp.valueOf(flight.getTime()))
                 .addValue("price", flight.getPrice());
         namedParameterJdbcTemplate.update(
@@ -124,6 +124,7 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
                         " ORDER BY time DESC",
                 mapSqlParameterSource, this::mapRow);
     }
+
 
     @Override
     public List<Flight> getAll () {
