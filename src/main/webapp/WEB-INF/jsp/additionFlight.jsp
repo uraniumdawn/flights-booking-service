@@ -5,7 +5,7 @@
     <title>Addition of a new Airport</title>
 </head>
 <body>
-    <form action="/admin/flights/addnew" method="post">
+    <form action="/admin/flights/add" method="post">
         <table>
             <tr>
                 <td>Destination:</td>
