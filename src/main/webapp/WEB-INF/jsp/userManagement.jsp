@@ -9,18 +9,18 @@
 <body>
 
 <jsp:include page="parts/adminControlPanel.jsp"/>
-<form action="/admin/users/select/bysecondname" method="get">
+<form action="/admin/users/select/by/secondname" method="get">
     <div>Second name:</div>
     <input type="text" name="second_name" required>
     <input type="submit" value="Select">
 </form>
-<form action="/admin/users/select/byemail" method="get">
+<form action="/admin/users/select/by/email" method="get">
     <div>Email:</div>
     <input type="email" name="email" required>
     <input type="submit" value="Select">
 </form>
 <a href="/admin/users/select/all">All users</a>
-<c:if test="${not empty emptyResult}"><div>${emptyResult}</div></c:if>
+<c:if test="${not empty msgEmptyResult}"><div>${msgEmptyResult}</div></c:if>
 <c:if test="${not empty selectedUsers}">
     <table>
         <thead>

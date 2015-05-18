@@ -24,7 +24,7 @@
                         <td><%=TimeUtil.toString(flight.getTime())%></td>
                         <td>${flight.price}</td>
                         <td>
-                            <a href="/delfrompreorder?flight_id=${flight.id}">Delete</a>
+                            <a href="/preorder/delete?flight_id=${flight.id}">Delete</a>
                             <a href="/order?flight_id=${flight.id}">Book</a>
                         </td>
                         <td>
@@ -33,7 +33,7 @@
                             </c:if>
                         </td>
                         <td>
-                            <c:if test="${not empty existentOrder}">
+                            <c:if test="${not empty msgExistentOrder}">
                                 <div>This order already exist</div>
                             </c:if>
                         </td>

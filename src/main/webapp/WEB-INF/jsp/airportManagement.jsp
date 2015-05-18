@@ -8,25 +8,25 @@
 <body>
 
 <jsp:include page="parts/adminControlPanel.jsp"/>
-<form action="/admin/airports/select/byiatacode" method="get">
+<form action="/admin/airports/select/by/iatacode" method="get">
     <div>IATA code:</div>
     <input type="text" name="IATA_code" required>
     <input type="submit" value="Select">
 </form>
-<form action="/admin/airports/select/byname" method="get">
+<form action="/admin/airports/select/by/name" method="get">
     <div>Name:</div>
     <input type="text" name="name" required>
     <input type="submit" value="Select">
 </form>
-<form action="/admin/airports/select/bycountry" method="get">
+<form action="/admin/airports/select/by/country" method="get">
     <div>Country:</div>
     <input type="text" name="country" required>
     <input type="submit" value="Select">
 </form>
 <a href="/admin/airports/select/all">All airports</a>
 <a href="/admin/airports/add">Add a new airport</a>
-<c:if test="${not empty emptyResult}">
-    <div>${emptyResult}</div>
+<c:if test="${not empty msgEmptyResult}">
+    <div>${msgEmptyResult}</div>
 </c:if>
 <c:if test="${not empty selectedAirports}">
     <table>

@@ -40,7 +40,7 @@ public class GeneralController {
             session.setAttribute("user", userService.getByEmail(email));
             return "redirect:/";
         } else {
-            model.addAttribute("error", "Invalid email/password or you have not registered yet!");
+            model.addAttribute("msgIncorrectCredentials", "Invalid email/password or you have not registered yet!");
             return "login";
         }
     }

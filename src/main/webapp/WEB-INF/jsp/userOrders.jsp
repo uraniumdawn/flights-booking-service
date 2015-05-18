@@ -10,7 +10,6 @@
 <body>
 <jsp:include page="parts/header.jsp"/>
     <div>
-        <c:if test="${not empty successfullOrder}"><div>${successfullOrder}</div></c:if>
         <div>Your previous orders</div>
         <c:choose>
             <c:when test="${not empty orders}">
@@ -35,7 +34,7 @@
                 </table>
             </c:when>
             <c:otherwise>
-                <div>You do nor have any booked flights</div>
+                <div>You do not have any booked flights</div>
             </c:otherwise>
         </c:choose>
     </div>

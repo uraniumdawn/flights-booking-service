@@ -6,7 +6,7 @@
 </head>
 <body>
     <c:if test="${not empty requestScope.accessDenied}"><div>${requestScope.accessDenied}</div></c:if>
-    <c:if test="${not empty error}"><div>${error}</div></c:if>
+    <c:if test="${not empty msgIncorrectCredentials}"><div>${msgIncorrectCredentials}</div></c:if>
     <form action="/login" method="post">
         <table>
             <tr>

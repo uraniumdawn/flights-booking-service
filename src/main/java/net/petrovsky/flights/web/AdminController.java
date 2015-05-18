@@ -43,24 +43,24 @@ public class AdminController {
         return "userManagement";
     }
 
-    @RequestMapping(value = "/admin/users/select/bysecondname", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/users/select/by/secondname", method = RequestMethod.GET)
     public String selectUserBySecondName (@RequestParam(value = "second_name") String secondName, Model model) {
         List<User> users = userService.getBySecondName(secondName);
         if (!users.isEmpty()) {
             model.addAttribute("selectedUsers", users);
         } else {
-            model.addAttribute("emptyResult", "There are not items according your request");
+            model.addAttribute("msgEmptyResult", "There are not items according your request");
         }
         return "forward:/admin/users/management";
     }
 
-    @RequestMapping(value = "/admin/users/select/byemail", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/users/select/by/email", method = RequestMethod.GET)
     public String selectUserByEmail (@RequestParam(value = "email") String email, Model model) {
         User user = userService.getByEmail(email);
         if (user != null) {
             model.addAttribute("selectedUsers", Collections.singletonList(user));
         } else {
-            model.addAttribute("emptyResult", "There are not items according your request");
+            model.addAttribute("msgEmptyResult", "There are not items according your request");
         }
         return "forward:/admin/users/management";
     }
@@ -85,35 +85,35 @@ public class AdminController {
         return "airportManagement";
     }
 
-    @RequestMapping(value = "/admin/airports/select/byiatacode", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/airports/select/by/iatacode", method = RequestMethod.GET)
     public String selectAirportsByIATAcode (@RequestParam(value = "IATA_code") String IATAcode, Model model) {
         Airport airport = airportService.getByIATAcode(IATAcode);
         if (airport != null) {
             model.addAttribute("selectedAirports", Collections.singletonList(airport));
         } else {
-            model.addAttribute("emptyResult", "There are not items according your request");
+            model.addAttribute("msgEmptyResult", "There are not items according your request");
         }
         return "forward:/admin/airports/management";
     }
 
-    @RequestMapping(value = "/admin/airports/select/byname", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/airports/select/by/name", method = RequestMethod.GET)
     public String selectAirportsByName (@RequestParam(value = "name") String name, Model model) {
         Airport airport = airportService.getByName(name);
         if (airport != null) {
             model.addAttribute("selectedAirports", Collections.singletonList(airport));
         } else {
-            model.addAttribute("emptyResult", "There are not items according your request");
+            model.addAttribute("msgEmptyResult", "There are not items according your request");
         }
         return "forward:/admin/airports/management";
     }
 
-    @RequestMapping(value = "/admin/airports/select/bycountry", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/airports/select/by/country", method = RequestMethod.GET)
     public String selectAirportsByCountry (@RequestParam(value = "country") String country, Model model) {
         List<Airport> airports = airportService.getByCountry(country);
         if (!airports.isEmpty()) {
             model.addAttribute("selectedAirports", airports);
         } else {
-            model.addAttribute("emptyResult", "There are not items according your request");
+            model.addAttribute("msgEmptyResult", "There are not items according your request");
         }
         return "forward:/admin/airports/management";
     }
@@ -143,6 +143,25 @@ public class AdminController {
         return "redirect:/admin/airports/management";
     }
 
+    @RequestMapping(value = "/admin/airports/edit", method = RequestMethod.GET)
+    public String editAirport(@RequestParam("IATAcode") String IATAcode, Model model){
+        model.addAttribute("airport", airportService.getByIATAcode(IATAcode));
+        return "editingAirport";
+    }
+
+    @RequestMapping(value = "/admin/airports/edit", method = RequestMethod.POST)
+    public String editAirport(@RequestParam("IATA_code") String IATAcode,
+                              @RequestParam("name") String name,
+                              @RequestParam("city") String city,
+                              @RequestParam("country") String country, Model model) {
+        if (IATAcode.length() > 3){
+            model.addAttribute("msgIATALength", "Length of IATA code must be less then 3 characters");
+            return "additionAirport";
+        }
+        airportService.update(new Airport(IATAcode, name, city, country));
+        return "redirect:/admin/airports/management";
+    }
+
     /*Flight section*/
     @RequestMapping(value = "/admin/flights/management", method = RequestMethod.GET)
     public String flightManagement (Model model) {
@@ -157,7 +176,7 @@ public class AdminController {
             model.addAttribute("selectedFlights", flights);
             model.addAttribute("choicePOD", pointOfDeparture);
         } else {
-            model.addAttribute("emptyResult", "There are not items according your request");
+            model.addAttribute("msgEmptyResult", "There are not items according your request");
         }
         return "forward:/admin/flights/management";
     }
@@ -169,7 +188,7 @@ public class AdminController {
             model.addAttribute("selectedFlights", flights);
             model.addAttribute("choiceD", destination);
         } else {
-            model.addAttribute("emptyResult", "There are not items according your request");
+            model.addAttribute("msgEmptyResult", "There are not items according your request");
         }
         return "forward:/admin/flights/management";
     }
@@ -214,24 +233,7 @@ public class AdminController {
         return "redirect:/admin/flights/management";
     }
 
-    @RequestMapping(value = "/admin/airports/edit", method = RequestMethod.GET)
-    public String editAirport(@RequestParam("IATAcode") String IATAcode, Model model){
-        model.addAttribute("airport", airportService.getByIATAcode(IATAcode));
-        return "editingAirport";
-    }
 
-    @RequestMapping(value = "/admin/airports/edit", method = RequestMethod.POST)
-    public String editAirport(@RequestParam("IATA_code") String IATAcode,
-                             @RequestParam("name") String name,
-                             @RequestParam("city") String city,
-                             @RequestParam("country") String country, Model model) {
-        if (IATAcode.length() > 3){
-            model.addAttribute("msgIATALength", "Length of IATA code must be less then 3 characters");
-            return "additionAirport";
-        }
-        airportService.update(new Airport(IATAcode, name, city, country));
-        return "redirect:/admin/airports/management";
-    }
 
 
 

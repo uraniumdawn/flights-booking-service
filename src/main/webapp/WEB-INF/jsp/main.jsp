@@ -11,7 +11,7 @@
 
 <jsp:include page="parts/header.jsp"/>
 <div>
-    <form action="/selectflights" method="get">
+    <form action="/flights/select" method="get">
         <div>Destination:</div>
         <select name="destination" required>
             <option value="NONE">---Select---</option>
@@ -68,7 +68,7 @@
                         <td>
                             <c:choose>
                                 <c:when test="${not empty user}">
-                                    <a href="/add/preorder?flight_id=${flight.id}">Add to preorder list</a>
+                                    <a href="/preorder/add?flight_id=${flight.id}">Add to preorder list</a>
                                 </c:when>
                                 <c:otherwise>
                                     <div>Only for registered users</div>

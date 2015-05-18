@@ -10,9 +10,9 @@
             <div>
                 Profile: ${user.firstName} ${user.secondName}
             </div>
-            <a href="/editprofile">Edit profile</a>
+            <a href="/profile/edit">Edit profile</a>
             <a href="/logout">Log out</a>
-            <a href="/userbookinglist">Ordered flights</a>
+            <a href="/orders">Ordered flights</a>
         </c:when>
         <c:otherwise>
             <input type="button" onclick="window.location='/login'" value="Log In"/>

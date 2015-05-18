@@ -47,11 +47,7 @@
 </form>
 <a href="/admin/flights/select/all">All flights</a>
 <a href="/admin/flights/add">Add flight</a>
-<c:if test="${not empty emptyResult}">
-    <div>
-        ${emptyResult}
-    </div>
-</c:if>
+<c:if test="${not empty msgEmptyResult}"><div>${msgEmptyResult}</div></c:if>
 <div>
     <c:if test="${not empty selectedFlights}">
         <table>

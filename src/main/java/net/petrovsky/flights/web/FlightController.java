@@ -20,7 +20,7 @@ public class FlightController {
     @Autowired
     private FlightService flightService;
 
-    @RequestMapping(value = "/selectflights", method = RequestMethod.GET)
+    @RequestMapping(value = "/flights/select", method = RequestMethod.GET)
     public String selectFlights(@RequestParam("destination") String destination,
                                 @RequestParam("point_of_departure") String pointOfDeparture,
                                 @RequestParam("from") String from,

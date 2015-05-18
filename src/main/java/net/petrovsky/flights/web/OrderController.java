@@ -3,7 +3,6 @@ package net.petrovsky.flights.web;
 import net.petrovsky.flights.model.Flight;
 import net.petrovsky.flights.model.Order;
 import net.petrovsky.flights.model.User;
-import net.petrovsky.flights.service.AirportService;
 import net.petrovsky.flights.service.FlightService;
 import net.petrovsky.flights.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,15 +22,12 @@ import java.util.Map;
 public class OrderController {
 
     @Autowired
-    private AirportService airportService;
-
-    @Autowired
     private FlightService flightService;
 
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping(value = "/add/preorder", method = RequestMethod.GET)
+    @RequestMapping(value = "/preorder/add", method = RequestMethod.GET)
     public String addToPreorder(@RequestParam("flight_id") String flightId, HttpSession session) {
         if (session.getAttribute("preorder") == null) {
             Map<String, Flight> preorder = new HashMap<>();
@@ -43,7 +39,7 @@ public class OrderController {
         return "forward:/";
     }
 
-    @RequestMapping(value = "/delfrompreorder", method = RequestMethod.GET)
+    @RequestMapping(value = "/preorder/delete", method = RequestMethod.GET)
     public String deleteFromPreorder(@RequestParam("flight_id") String flightId, HttpSession session) {
         ((Map)session.getAttribute("preorder")).remove(flightId);
         return "forward:/";
@@ -58,7 +54,7 @@ public class OrderController {
             session.setAttribute("IDOfOrderedFlights", indexList);
         } else {
             if(((List) session.getAttribute("IDOfOrderedFlights")).contains(Integer.valueOf(flightId))) {
-                model.addAttribute("existentOrder", "This order already exist");
+                model.addAttribute("msgExistentOrder", "This order already exist");
             } else {
                 orderService.save(new Order(null, ((User) session.getAttribute("user")), flightService.getByID(Integer.valueOf(flightId))));
             }
@@ -66,9 +62,9 @@ public class OrderController {
         return "forward:/";
     }
 
-    @RequestMapping(value = "/userbookinglist", method = RequestMethod.GET)
+    @RequestMapping(value = "/orders", method = RequestMethod.GET)
     public String listOfUserOrders(Model model, HttpSession session) {
         model.addAttribute("orders", orderService.getByUser(((User) session.getAttribute("user")).getId()));
-        return "userBookingList";
+        return "userOrders";
     }
 }
