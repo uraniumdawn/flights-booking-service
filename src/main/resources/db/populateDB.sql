@@ -1,4 +1,4 @@
-DELETE FROM booking;
+DELETE FROM flight_order;
 DELETE FROM flights;
 DELETE FROM airports;
 DELETE FROM users;
