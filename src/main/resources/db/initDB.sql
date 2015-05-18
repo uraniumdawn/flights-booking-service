@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS booking;
+DROP TABLE IF EXISTS flight_order;
 DROP TABLE IF EXISTS flights;
 DROP TABLE IF EXISTS airports;
 DROP TABLE IF EXISTS user_Roles;
