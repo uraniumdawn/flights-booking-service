@@ -1,8 +1,8 @@
 package net.petrovsky.flights.repository.jdbc;
 
-import net.petrovsky.flights.model.Booking;
-import net.petrovsky.flights.repository.BookingRepository;
+import net.petrovsky.flights.model.Order;
 import net.petrovsky.flights.repository.FlightRepository;
+import net.petrovsky.flights.repository.OrderRepository;
 import net.petrovsky.flights.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class BookingRepositoryJdbcImpl implements BookingRepository{
+public class OrderRepositoryJdbcImpl implements OrderRepository {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -32,70 +32,70 @@ public class BookingRepositoryJdbcImpl implements BookingRepository{
     @Autowired
     public void init (DataSource dataSource) {
         this.insertUser = new SimpleJdbcInsert(dataSource)
-                .withTableName("booking").usingGeneratedKeyColumns("id");
+                .withTableName("flight_order").usingGeneratedKeyColumns("id");
     }
 
-    public Booking mapRow (ResultSet rs, int rowNum) throws SQLException {
-        Booking booking = new Booking();
-        booking.setId(rs.getInt("id"));
-        booking.setUser(userRepository.getByID(rs.getInt("user_id")));
-        booking.setFlight(flightRepository.getByID(rs.getInt("flight_id")));
-        return booking;
+    public Order mapRow (ResultSet rs, int rowNum) throws SQLException {
+        Order order = new Order();
+        order.setId(rs.getInt("id"));
+        order.setUser(userRepository.getByID(rs.getInt("user_id")));
+        order.setFlight(flightRepository.getByID(rs.getInt("flight_id")));
+        return order;
     }
 
     @Override
-    public Booking save (Booking booking) {
+    public Order save (Order order) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
-                .addValue("id", booking.getId())
-                .addValue("user_id", booking.getUser().getId())
-                .addValue("flight_id", booking.getFlight().getId());
-        if (booking.isNew()) {
+                .addValue("id", order.getId())
+                .addValue("user_id", order.getUser().getId())
+                .addValue("flight_id", order.getFlight().getId());
+        if (order.isNew()) {
             Number newKey = insertUser.executeAndReturnKey(mapSqlParameterSource);
-            booking.setId(newKey.intValue());
+            order.setId(newKey.intValue());
         } else {
             //todo: Add realization of service message of existing such flight
         }
-        return booking;
+        return order;
     }
 
     @Override
-    public Booking update (Booking booking) {
+    public Order update (Order order) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
-                .addValue("id", booking.getId())
-                .addValue("user_id", booking.getUser().getId())
-                .addValue("flight_id", booking.getFlight().getId());
-        namedParameterJdbcTemplate.update("UPDATE booking SET user_id=:user_id, flight_id=:flight_id WHERE id=:id",
+                .addValue("id", order.getId())
+                .addValue("user_id", order.getUser().getId())
+                .addValue("flight_id", order.getFlight().getId());
+        namedParameterJdbcTemplate.update("UPDATE flight_order SET user_id=:user_id, flight_id=:flight_id WHERE id=:id",
                 mapSqlParameterSource);
-        return booking;
+        return order;
     }
 
     @Override
     public boolean delete (int id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
-        return namedParameterJdbcTemplate.update("UPDATE booking SET user_id=:user_id, flight_id=:flight_id WHERE id=:id",
+        return namedParameterJdbcTemplate.update("UPDATE flight_order SET user_id=:user_id, flight_id=:flight_id WHERE id=:id",
                 mapSqlParameterSource) != 0;
     }
 
     @Override
-    public Booking getByID (int id) {
+    public Order getByID (int id) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("id", id);
-        return namedParameterJdbcTemplate.queryForObject("SELECT * FROM booking WHERE id=:id",
+        return namedParameterJdbcTemplate.queryForObject("SELECT * FROM flight_order WHERE id=:id",
                 mapSqlParameterSource, this::mapRow);
     }
 
     @Override
-    public List<Booking> getByUser (int userID) {
+    public List<Order> getByUser (int userID) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("user_id", userID);
-        return namedParameterJdbcTemplate.query("SELECT * FROM booking WHERE user_id=:user_id", mapSqlParameterSource, this::mapRow);
+        return namedParameterJdbcTemplate.query("SELECT * FROM flight_order WHERE user_id=:user_id", mapSqlParameterSource, this::mapRow);
     }
 
     @Override
-    public List<Booking> getByFlight (int flightID) {
+    public List<Order> getByFlight (int flightID) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("flight_id", flightID);
-        return namedParameterJdbcTemplate.query("SELECT * FROM booking WHERE flight_id=:flight_id", mapSqlParameterSource, this::mapRow);
+        return namedParameterJdbcTemplate.query("SELECT * FROM flight_order WHERE flight_id=:flight_id", mapSqlParameterSource, this::mapRow);
     }
 }

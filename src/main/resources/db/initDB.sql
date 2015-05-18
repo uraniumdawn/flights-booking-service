@@ -38,7 +38,7 @@ CREATE TABLE flights (
   CHECK (point_of_departure <> flights.destination)
 );
 
-CREATE TABLE booking (
+CREATE TABLE flight_order (
   id        BIGINT PRIMARY KEY DEFAULT nextval('GLOBAL_SEQUENCE'),
   user_id   INTEGER NOT NULL REFERENCES users (id),
   flight_id INTEGER NOT NULL REFERENCES flights (id),

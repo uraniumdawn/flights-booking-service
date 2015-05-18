@@ -1,6 +1,7 @@
 package net.petrovsky.flights.repository.jdbc;
 
 import net.petrovsky.flights.model.Flight;
+import net.petrovsky.flights.repository.AirportRepository;
 import net.petrovsky.flights.repository.FlightRepository;
 import net.petrovsky.flights.util.DbPopulator;
 import net.petrovsky.flights.util.TimeUtil;
@@ -23,6 +24,9 @@ public class FlightRepositoryJdbcImplTest {
 
     @Autowired
     private FlightRepository flightRepository;
+
+    @Autowired
+    private AirportRepository airportRepository;
 
     Flight lax;
     Flight lar;
@@ -106,7 +110,14 @@ public class FlightRepositoryJdbcImplTest {
 
     @Test
     public void testTest () throws Exception {
-        System.out.println(TimeUtil.toDate("2015-01-01").isAfter(LocalDateTime.now().toLocalDate()) && TimeUtil.toDate("2015-12-31").isAfter(LocalDateTime.now().toLocalDate()));
-        System.out.println(LocalDateTime.now().toLocalDate());
+        flightRepository.save(new Flight(null, airportRepository.getByIATAcode("YUC"), airportRepository.getByIATAcode("ORD"),
+                TimeUtil.toLocalDateTime(""), Double.valueOf("25.36")));
+        System.out.println(TimeUtil.toLocalDateTime(""));
+
+//        System.out.println(flightRepository.getFlightToOrder("YUC", "ORD",
+//                TimeUtil.toDate("2015-01-01").atTime(0, 0, 0), TimeUtil.toDate("2015-12-31").atTime(0, 0, 0)));
+//
+//        System.out.println(TimeUtil.toDate("2015-01-01").isAfter(LocalDateTime.now().toLocalDate()) && TimeUtil.toDate("2015-12-31").isAfter(LocalDateTime.now().toLocalDate()));
+//        System.out.println(LocalDateTime.now().toLocalDate());
     }
 }

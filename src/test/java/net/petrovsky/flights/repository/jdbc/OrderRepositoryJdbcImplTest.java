@@ -1,8 +1,8 @@
 package net.petrovsky.flights.repository.jdbc;
 
-import net.petrovsky.flights.model.Booking;
-import net.petrovsky.flights.repository.BookingRepository;
+import net.petrovsky.flights.model.Order;
 import net.petrovsky.flights.repository.FlightRepository;
+import net.petrovsky.flights.repository.OrderRepository;
 import net.petrovsky.flights.repository.UserRepository;
 import net.petrovsky.flights.util.DbPopulator;
 import org.junit.Assert;
@@ -17,13 +17,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
         "classpath:spring/spring-app.xml",
         "classpath:spring/spring-db.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class BookingRepositoryJdbcImplTest {
+public class OrderRepositoryJdbcImplTest {
 
     @Autowired
     private DbPopulator dbPopulator;
 
     @Autowired
-    private BookingRepository bookingRepository;
+    private OrderRepository orderRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -56,24 +56,24 @@ public class BookingRepositoryJdbcImplTest {
 
     @Test
     public void testGetByID () throws Exception {
-        Booking booking = new Booking(null, userRepository.getByID(1000), flightRepository.getByID(1004));
-        Assert.assertEquals(bookingRepository.getByID(1010), booking);
+        Order order = new Order(null, userRepository.getByID(1000), flightRepository.getByID(1004));
+        Assert.assertEquals(orderRepository.getByID(1010), order);
     }
 
     @Test
     public void testGetByUser () throws Exception {
-        Booking[] three= {
-                new Booking(null, userRepository.getByID(1000), flightRepository.getByID(1004)),
-                new Booking(null, userRepository.getByID(1000), flightRepository.getByID(1007)),
-                new Booking(null, userRepository.getByID(1000), flightRepository.getByID(1005))};
-        Assert.assertArrayEquals(three, bookingRepository.getByUser(1000).toArray());
+        Order[] three= {
+                new Order(null, userRepository.getByID(1000), flightRepository.getByID(1004)),
+                new Order(null, userRepository.getByID(1000), flightRepository.getByID(1007)),
+                new Order(null, userRepository.getByID(1000), flightRepository.getByID(1005))};
+        Assert.assertArrayEquals(three, orderRepository.getByUser(1000).toArray());
     }
 
     @Test
     public void testGetByFlight () throws Exception {
-        Booking[] two= {
-                new Booking(null, userRepository.getByID(1000), flightRepository.getByID(1004)),
-                new Booking(null, userRepository.getByID(1003), flightRepository.getByID(1004))};
-        Assert.assertArrayEquals(two, bookingRepository.getByFlight(1004).toArray());
+        Order[] two= {
+                new Order(null, userRepository.getByID(1000), flightRepository.getByID(1004)),
+                new Order(null, userRepository.getByID(1003), flightRepository.getByID(1004))};
+        Assert.assertArrayEquals(two, orderRepository.getByFlight(1004).toArray());
     }
 }

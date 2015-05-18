@@ -24,7 +24,7 @@
                     </tr>
                     </thead>
                     <c:forEach items="${orders}" var="order">
-                        <jsp:useBean id="order" scope="page" type="net.petrovsky.flights.model.Booking"/>
+                        <jsp:useBean id="order" scope="page" type="net.petrovsky.flights.model.Order"/>
                         <tr>
                             <td>${order.flight.pointOfDeparture.name}</td>
                             <td>${order.flight.destination.name}</td>

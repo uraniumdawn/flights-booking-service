@@ -1,11 +1,11 @@
 package net.petrovsky.flights.web;
 
-import net.petrovsky.flights.model.Booking;
 import net.petrovsky.flights.model.Flight;
+import net.petrovsky.flights.model.Order;
 import net.petrovsky.flights.model.User;
 import net.petrovsky.flights.service.AirportService;
-import net.petrovsky.flights.service.BookingService;
 import net.petrovsky.flights.service.FlightService;
+import net.petrovsky.flights.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class BookingController {
+public class OrderController {
 
     @Autowired
     private AirportService airportService;
@@ -29,9 +29,9 @@ public class BookingController {
     private FlightService flightService;
 
     @Autowired
-    private BookingService bookingService;
+    private OrderService orderService;
 
-    @RequestMapping(value = "/addtopreorder", method = RequestMethod.GET)
+    @RequestMapping(value = "/add/preorder", method = RequestMethod.GET)
     public String addToPreorder(@RequestParam("flight_id") String flightId, HttpSession session) {
         if (session.getAttribute("preorder") == null) {
             Map<String, Flight> preorder = new HashMap<>();
@@ -53,14 +53,14 @@ public class BookingController {
     public String makeAnOrder(@RequestParam("flight_id") String flightId, Model model, HttpSession session) {
         if(session.getAttribute("IDOfOrderedFlights") == null) {
             List<Integer> indexList = new ArrayList<>();
-            bookingService.save(new Booking(null, ((User) session.getAttribute("user")), flightService.getByID(Integer.valueOf(flightId))));
+            orderService.save(new Order(null, ((User) session.getAttribute("user")), flightService.getByID(Integer.valueOf(flightId))));
             indexList.add(Integer.valueOf(flightId));
             session.setAttribute("IDOfOrderedFlights", indexList);
         } else {
             if(((List) session.getAttribute("IDOfOrderedFlights")).contains(Integer.valueOf(flightId))) {
                 model.addAttribute("existentOrder", "This order already exist");
             } else {
-                bookingService.save(new Booking(null, ((User) session.getAttribute("user")), flightService.getByID(Integer.valueOf(flightId))));
+                orderService.save(new Order(null, ((User) session.getAttribute("user")), flightService.getByID(Integer.valueOf(flightId))));
             }
         }
         return "forward:/";
@@ -68,7 +68,7 @@ public class BookingController {
 
     @RequestMapping(value = "/userbookinglist", method = RequestMethod.GET)
     public String listOfUserOrders(Model model, HttpSession session) {
-        model.addAttribute("orders", bookingService.getByUser(((User) session.getAttribute("user")).getId()));
+        model.addAttribute("orders", orderService.getByUser(((User) session.getAttribute("user")).getId()));
         return "userBookingList";
     }
 }

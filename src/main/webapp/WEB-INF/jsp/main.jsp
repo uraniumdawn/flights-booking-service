@@ -68,7 +68,7 @@
                         <td>
                             <c:choose>
                                 <c:when test="${not empty user}">
-                                    <a href="/addtopreorder?flight_id=${flight.id}">Add to preorder list</a>
+                                    <a href="/add/preorder?flight_id=${flight.id}">Add to preorder list</a>
                                 </c:when>
                                 <c:otherwise>
                                     <div>Only for registered users</div>

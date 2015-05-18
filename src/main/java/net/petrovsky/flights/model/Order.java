@@ -2,15 +2,15 @@ package net.petrovsky.flights.model;
 
 import java.util.Objects;
 
-public class Booking extends BaseEntity {
+public class Order extends BaseEntity {
 
     private User user;
     private Flight flight;
 
-    public Booking () {
+    public Order () {
     }
 
-    public Booking (Integer id, User user, Flight flight) {
+    public Order (Integer id, User user, Flight flight) {
         super(id);
         this.user = user;
         this.flight = flight;
@@ -34,7 +34,7 @@ public class Booking extends BaseEntity {
 
     @Override
     public String toString () {
-        return "Booking{" +
+        return "Order{" +
                 "id=" + super.getId() +
                 ", user=" + user +
                 ", flight=" + flight +
@@ -45,9 +45,9 @@ public class Booking extends BaseEntity {
     public boolean equals (Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Booking booking = (Booking) o;
-        return Objects.equals(user, booking.user) &&
-                Objects.equals(flight, booking.flight);
+        Order order = (Order) o;
+        return Objects.equals(user, order.user) &&
+                Objects.equals(flight, order.flight);
     }
 
     @Override
