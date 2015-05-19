@@ -128,6 +128,6 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
 
     @Override
     public List<Flight> getAll () {
-        return namedParameterJdbcTemplate.query("SELECT * FROM flights ORDER BY ORDER BY point_of_departure DESC", this::mapRow);
+        return namedParameterJdbcTemplate.query("SELECT * FROM flights ORDER BY point_of_departure DESC", this::mapRow);
     }
 }

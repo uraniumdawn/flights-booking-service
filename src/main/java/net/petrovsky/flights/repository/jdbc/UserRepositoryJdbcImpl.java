@@ -109,7 +109,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     public List<User> getBySecondName (String secondName) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("second_name", secondName);
-        List<User> users = namedParameterJdbcTemplate.query("SELECT * FROM users WHERE second_name=:second_name",
+        List<User> users = namedParameterJdbcTemplate.query("SELECT * FROM users WHERE second_name=:second_name ORDER BY name ASC",
                 mapSqlParameterSource, this::mapRow);
         users.forEach((user) -> user.setRole(roleRepository.getByUserID(user.getId())));
         return users;
@@ -133,7 +133,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     @Override
     @Transactional(readOnly = true)
     public List<User> getAll () {
-        List<User> users = namedParameterJdbcTemplate.query("SELECT * FROM users ORDER BY email DESC", this::mapRow);
+        List<User> users = namedParameterJdbcTemplate.query("SELECT * FROM users ORDER BY email ASC", this::mapRow);
         users.forEach((user) -> user.setRole(roleRepository.getByUserID(user.getId())));
         return users;
     }
