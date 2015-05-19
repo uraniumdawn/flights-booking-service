@@ -92,7 +92,7 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
     public List<Flight> getByPointOfDeparture (String pointOfDeparture) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("point_of_departure", pointOfDeparture);
-        return namedParameterJdbcTemplate.query("SELECT * FROM flights WHERE point_of_departure=:point_of_departure",
+        return namedParameterJdbcTemplate.query("SELECT * FROM flights WHERE point_of_departure=:point_of_departure ORDER BY point_of_departure DESC",
                 mapSqlParameterSource, this::mapRow);
     }
 
@@ -100,7 +100,7 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
     public List<Flight> getByDestination (String destination) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("destination", destination);
-        return namedParameterJdbcTemplate.query("SELECT * FROM flights WHERE destination=:destination",
+        return namedParameterJdbcTemplate.query("SELECT * FROM flights WHERE destination=:destination ORDER BY destination DESC",
                 mapSqlParameterSource, this::mapRow);
     }
 
@@ -128,6 +128,6 @@ public class FlightsRepositoryJdbcImpl implements FlightRepository{
 
     @Override
     public List<Flight> getAll () {
-        return namedParameterJdbcTemplate.query("SELECT * FROM flights", this::mapRow);
+        return namedParameterJdbcTemplate.query("SELECT * FROM flights ORDER BY ORDER BY point_of_departure DESC", this::mapRow);
     }
 }

@@ -70,7 +70,7 @@ public class AirportRepositoryJdbcImpl implements AirportRepository {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("iata_code", IATAcode);
         try {
-            return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE iata_code=:iata_code",
+            return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE iata_code=:iata_code ORDER BY iata_code DESC",
                     mapSqlParameterSource, this::mapRow);
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -82,7 +82,7 @@ public class AirportRepositoryJdbcImpl implements AirportRepository {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("name", name);
         try {
-            return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE name=:name",
+            return namedParameterJdbcTemplate.queryForObject("SELECT * FROM airports WHERE name=:name ORDER BY name DESC",
                     mapSqlParameterSource, this::mapRow);
         } catch (EmptyResultDataAccessException e) {
             return null;
@@ -93,12 +93,12 @@ public class AirportRepositoryJdbcImpl implements AirportRepository {
     public List<Airport> getByCountry (String country) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("country", country);
-        return namedParameterJdbcTemplate.query("SELECT * FROM airports WHERE country=:country",
+        return namedParameterJdbcTemplate.query("SELECT * FROM airports WHERE country=:country ORDER BY country DESC",
                 mapSqlParameterSource, this::mapRow);
     }
 
     @Override
     public List<Airport> getAll () {
-        return namedParameterJdbcTemplate.query("SELECT * FROM airports", this::mapRow);
+        return namedParameterJdbcTemplate.query("SELECT * FROM airports ORDER BY iata_code DESC", this::mapRow);
     }
 }

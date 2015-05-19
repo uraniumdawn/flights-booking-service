@@ -133,7 +133,7 @@ public class UserRepositoryJdbcImpl implements UserRepository {
     @Override
     @Transactional(readOnly = true)
     public List<User> getAll () {
-        List<User> users = namedParameterJdbcTemplate.query("SELECT * FROM users", this::mapRow);
+        List<User> users = namedParameterJdbcTemplate.query("SELECT * FROM users ORDER BY email DESC", this::mapRow);
         users.forEach((user) -> user.setRole(roleRepository.getByUserID(user.getId())));
         return users;
     }

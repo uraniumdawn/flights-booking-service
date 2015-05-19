@@ -89,7 +89,7 @@ public class OrderRepositoryJdbcImpl implements OrderRepository {
     public List<Order> getByUser (int userID) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
                 .addValue("user_id", userID);
-        return namedParameterJdbcTemplate.query("SELECT * FROM flight_order WHERE user_id=:user_id", mapSqlParameterSource, this::mapRow);
+        return namedParameterJdbcTemplate.query("SELECT * FROM flight_order WHERE user_id=:user_id ORDER BY flight_id DESC", mapSqlParameterSource, this::mapRow);
     }
 
     @Override
