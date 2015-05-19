@@ -19,7 +19,7 @@
             </tr>
             <tr>
                 <td><input type="submit" name="login" value="Login"/></td>
-                <td><input type="button" onclick="window.location='/main'" value="Cancel"/></td>
+                <td><input type="button" onclick="window.location='/'" value="Cancel"/></td>
             </tr>
         </table>
     </form>
