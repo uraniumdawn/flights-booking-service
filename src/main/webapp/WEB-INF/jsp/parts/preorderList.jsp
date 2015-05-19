@@ -28,8 +28,8 @@
                             <a href="/order?flight_id=${flight.id}">Book</a>
                         </td>
                         <td>
-                            <c:if test="${(not empty IDOfOrderedFlights) && (IDOfOrderedFlights.contains(flight.id))}">
-                                <div>Odered</div>
+                            <c:if test="${orders.contains(flight.id)}">
+                                <div>Ordered</div>
                             </c:if>
                         </td>
                         <td>

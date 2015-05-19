@@ -17,4 +17,6 @@ public interface OrderService {
     List<Order> getByUser (int userID);
 
     List<Order> getByFlight (int flightID);
+
+    List<Order> getByUserAndFlight (int userID, int flightID);
 }

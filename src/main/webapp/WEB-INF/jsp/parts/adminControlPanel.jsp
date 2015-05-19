@@ -10,7 +10,6 @@
         <a href="/admin/users/management">Users management</a>
         <a href="/admin/airports/management">Airport management</a>
         <a href="/admin/flights/management">Flight management</a>
-        <a href="/admin/orders/management">Booking management</a>
     </div>
     <hr/>
 </div>

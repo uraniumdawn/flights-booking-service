@@ -98,4 +98,12 @@ public class OrderRepositoryJdbcImpl implements OrderRepository {
                 .addValue("flight_id", flightID);
         return namedParameterJdbcTemplate.query("SELECT * FROM flight_order WHERE flight_id=:flight_id", mapSqlParameterSource, this::mapRow);
     }
+
+    @Override
+    public List<Order> getByUserAndFlight (int userID, int flightID) {
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource()
+                .addValue("user_id", userID)
+                .addValue("flight_id", flightID);
+        return namedParameterJdbcTemplate.query("SELECT * FROM flight_order WHERE user_id=:user_id AND flight_id=:flight_id", mapSqlParameterSource, this::mapRow);
+    }
 }

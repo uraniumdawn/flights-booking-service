@@ -5,6 +5,7 @@ import net.petrovsky.flights.model.Flight;
 import net.petrovsky.flights.model.User;
 import net.petrovsky.flights.service.AirportService;
 import net.petrovsky.flights.service.FlightService;
+import net.petrovsky.flights.service.OrderService;
 import net.petrovsky.flights.service.UserService;
 import net.petrovsky.flights.util.TimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,9 @@ public class AdminController {
 
     @Autowired
     private FlightService flightService;
+
+    @Autowired
+    private OrderService orderService;
 
     /*Common section*/
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -233,10 +237,11 @@ public class AdminController {
         return "redirect:/admin/flights/management";
     }
 
-
-
-
-
     /*Booking section*/
+    @RequestMapping(value = "/admin/orders", method = RequestMethod.GET)
+    public String userOrder (@RequestParam("user_id") String userId, Model model) {
+        model.addAttribute("orders", orderService.getByUser(Integer.valueOf(userId)));
+        return "adminOrders";
+    }
 
 }

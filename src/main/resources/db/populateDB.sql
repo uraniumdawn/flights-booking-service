@@ -35,7 +35,7 @@ INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('ATL'
 INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YYZ', 'ATL', '2015-03-12 15:24:00', 115.00);
 INSERT INTO flights (point_of_departure, destination, time, price) VALUES ('YUC', 'ORD', '2015-05-01 03:07:00', 45.00);
 
-INSERT INTO flight_order (user_id, flight_id) VALUES (1000, 1004);
+-- INSERT INTO flight_order (user_id, flight_id) VALUES (1000, 1004);
 INSERT INTO flight_order (user_id, flight_id) VALUES (1000, 1007);
 INSERT INTO flight_order (user_id, flight_id) VALUES (1000, 1005);
 INSERT INTO flight_order (user_id, flight_id) VALUES (1001, 1006);

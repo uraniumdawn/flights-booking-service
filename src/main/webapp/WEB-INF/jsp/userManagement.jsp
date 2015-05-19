@@ -43,6 +43,7 @@
                 <td>${user.enabled}</td>
                 <td>${user.role}</td>
                 <td><a href="/admin/users/state?user_id=${user.id}">Change state</a> </td>
+                <td><a href="/admin/orders?user_id=${user.id}">Orders</a> </td>
             </tr>
         </c:forEach>
     </table>

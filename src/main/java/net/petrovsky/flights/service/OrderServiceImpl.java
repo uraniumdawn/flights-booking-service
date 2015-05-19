@@ -42,4 +42,9 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getByFlight (int flightID) {
         return orderRepository.getByFlight(flightID);
     }
+
+    @Override
+    public List<Order> getByUserAndFlight (int userID, int flightID) {
+        return orderRepository.getByUserAndFlight(userID, flightID);
+    }
 }
