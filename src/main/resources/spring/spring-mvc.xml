@@ -26,7 +26,7 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/"/>
             <mvc:exclude-mapping path="/login"/>
-            <mvc:exclude-mapping path="/singup"/>
+            <mvc:exclude-mapping path="/signup"/>
             <mvc:exclude-mapping path="/flights/select/**"/>
             <mvc:exclude-mapping path="/admin/**"/>
             <bean class="net.petrovsky.flights.web.interceptors.UserActionInterceptor"/>
