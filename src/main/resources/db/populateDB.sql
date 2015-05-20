@@ -5,10 +5,10 @@ DELETE FROM users;
 ALTER SEQUENCE global_sequence RESTART WITH 1000;
 
 INSERT INTO users (first_name, second_name, email, password)
-VALUES ('Laura', 'Palmer', 'WhoKillLauraPalmer@linch.com', 'FireWalkWithMe');
-INSERT INTO users (first_name, second_name, email, password) VALUES ('Dale', 'Cooper', 'coop@linch.com', 'cherrypie');
-INSERT INTO users (first_name, second_name, email, password) VALUES ('Maddy', 'Ferguson', 'Sheryl@linch.com', 'Lee');
-INSERT INTO users (first_name, second_name, email, password) VALUES ('Audrey', 'Horne', 'Sherilyn@linch.com', 'Fenn');
+VALUES ('Laura', 'Palmer', 'WhoKillLauraPalmer@lynch.com', 'FireWalkWithMe');
+INSERT INTO users (first_name, second_name, email, password) VALUES ('Dale', 'Cooper', 'coop@lynch.com', 'cherrypie');
+INSERT INTO users (first_name, second_name, email, password) VALUES ('Maddy', 'Ferguson', 'Sheryl@lynch.com', 'Lee');
+INSERT INTO users (first_name, second_name, email, password) VALUES ('Audrey', 'Horne', 'Sherilyn@lynch.com', 'Fenn');
 
 INSERT INTO user_roles (user_id, role) VALUES (1000, 'ROLE_ADMIN');
 INSERT INTO user_roles (user_id, role) VALUES (1001, 'ROLE_USER');

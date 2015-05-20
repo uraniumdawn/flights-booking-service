@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Main</title>
+
 </head>
 <body>
 
@@ -87,7 +88,7 @@
 <jsp:include page="parts/preorderList.jsp"/>
 <div>
     <br/>
-    Admin user: Laura Palmer email: WhoKillLauraPalmer@linch.com, pass: FireWalkWithMe<br/>
+    Admin user: Laura Palmer email: WhoKillLauraPalmer@lynch.com, pass: FireWalkWithMe<br/>
     https://flights-booking-service.herokuapp.com/admin<br/>
     App has some pre-defined data
 </div>

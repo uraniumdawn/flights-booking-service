@@ -7,7 +7,7 @@
     <div>Preorder list of flights</div>
     <c:choose>
         <c:when test="${(not empty user) && (not empty preorder)}">
-            <table>
+            <table class="flights">
                 <thead>
                 <tr>
                     <th>Point of departure</th>
@@ -19,8 +19,8 @@
                 <c:forEach items="${preorder.values()}" var="flight">
                     <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                     <tr>
-                        <td>${flight.pointOfDeparture.name}</td>
-                        <td>${flight.destination.name}"</td>
+                        <td class="airport">${flight.pointOfDeparture.name}</td>
+                        <td class="airport">${flight.destination.name}"</td>
                         <td><%=TimeUtil.toString(flight.getTime())%></td>
                         <td>${flight.price}</td>
                         <td>

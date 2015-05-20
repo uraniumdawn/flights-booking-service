@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Flight Management</title>
+    <link  href="/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -50,7 +51,7 @@
 <c:if test="${not empty msgEmptyResult}"><div>${msgEmptyResult}</div></c:if>
 <div>
     <c:if test="${not empty selectedFlights}">
-        <table>
+        <table class="flights">
             <thead>
             <tr>
                 <th>Point of departure</th>
@@ -62,8 +63,8 @@
             <c:forEach items="${selectedFlights}" var="flight">
                 <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                 <tr>
-                    <td>${flight.pointOfDeparture.name}</td>
-                    <td>${flight.destination.name}</td>
+                    <td class="airport">${flight.pointOfDeparture.name}</td>
+                    <td class="airport">${flight.destination.name}</td>
                     <td><%=TimeUtil.toString(flight.getTime())%></td>
                     <td>${flight.price}</td>
                     <td><a href="/admin/flights/edit?flight_id=${flight.id}">Edit</a> </td>

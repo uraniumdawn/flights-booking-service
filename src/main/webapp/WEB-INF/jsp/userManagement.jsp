@@ -22,7 +22,7 @@
 <a href="/admin/users/select/all">All users</a>
 <c:if test="${not empty msgEmptyResult}"><div>${msgEmptyResult}</div></c:if>
 <c:if test="${not empty selectedUsers}">
-    <table>
+    <table class="users">
         <thead>
             <tr>
                 <th>First name</th>

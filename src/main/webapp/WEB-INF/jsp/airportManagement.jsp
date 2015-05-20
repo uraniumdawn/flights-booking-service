@@ -29,7 +29,7 @@
     <div>${msgEmptyResult}</div>
 </c:if>
 <c:if test="${not empty selectedAirports}">
-    <table>
+    <table class="airports">
         <thead>
             <tr>
                 <th>IATA code</th>

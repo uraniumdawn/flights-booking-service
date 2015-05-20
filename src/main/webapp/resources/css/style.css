@@ -1,0 +1,40 @@
+body {
+    font-size: 15px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+th {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid black;
+    background-color: #e6e6e6;
+    font-size: 12px;
+}
+
+table.flights {
+    width: 100%;
+}
+
+table.flights td.airport {
+    text-align: left;
+    padding: 5px;
+}
+
+/*a {*/
+    /*border: 1px solid #333; /!* Рамка *!/*/
+    /*display: inline-block;*/
+    /*padding: 5px 15px; /!* Поля *!/*/
+    /*text-decoration: none; /!* Убираем подчёркивание *!/*/
+    /*color: #000; /!* Цвет текста *!/*/
+/*}*/
+
+/*a:hover {*/
+    /*box-shadow: 0 0 5px rgba(0,0,0,0.3); /!* Тень *!/*/
+    /*background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /!* Градиент *!/*/
+    /*color: #a00;*/
+/*}*/

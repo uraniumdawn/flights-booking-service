@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div>
+
     <c:choose>
         <c:when test="${not empty user}">
             <c:if test="${!user.enabled}">
