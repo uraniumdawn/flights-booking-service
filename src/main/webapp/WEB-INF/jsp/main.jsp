@@ -85,10 +85,11 @@
     </c:choose>
 </div>
 <jsp:include page="parts/preorderList.jsp"/>
-<div>
+<p>
+    <br/>
     Admin user: Laura Palmer email: WhoKillLauraPalmer@linch.com, pass: FireWalkWithMe
     https://flights-booking-service.herokuapp.com/admin
     App has some pre-defined data
-</div>
+</p>
 </body>
 </html>
