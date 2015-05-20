@@ -43,8 +43,8 @@
                 </c:choose>
             </c:forEach>
         </select>
-        <div>Returning:</div><input type="date" name="from" value="${choice['from']}" required>
-        <div>Departing:</div><input type="date" name="to" value="${choice['to']}" required>
+        <div>From:</div><input type="date" name="from" value="${choice['from']}" required>
+        <div>To:</div><input type="date" name="to" value="${choice['to']}" required>
         <c:if test="${not empty msgIncorrectDates}"><div>${msgIncorrectDates}</div></c:if>
         <input type="submit" value="Select">
     </form>
