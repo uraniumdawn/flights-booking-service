@@ -1,40 +1,129 @@
 body {
-    font-size: 15px;
-    font-family: Helvetica, Arial, sans-serif;
+    font: normal 11pt/9pt Arial;
+    width: 1200px;
+    margin: 0px auto;
+    background: url(/resources/images/background.jpg) center;
 }
 
-th {
-    font-size: 15px;
-    font-weight: normal;
-}
-
-td {
-    text-align: center;
-    vertical-align: middle;
-    border: 1px solid black;
-    background-color: #e6e6e6;
-    font-size: 12px;
-}
-
-table.flights {
+table {
+    margin-top: 10px;
     width: 100%;
-}
-
-table.flights td.airport {
+    border-collapse: collapse;
     text-align: left;
     padding: 5px;
 }
 
-/*a {*/
-    /*border: 1px solid #333; /!* Рамка *!/*/
-    /*display: inline-block;*/
-    /*padding: 5px 15px; /!* Поля *!/*/
-    /*text-decoration: none; /!* Убираем подчёркивание *!/*/
-    /*color: #000; /!* Цвет текста *!/*/
-/*}*/
+th {
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
+}
 
-/*a:hover {*/
-    /*box-shadow: 0 0 5px rgba(0,0,0,0.3); /!* Тень *!/*/
-    /*background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /!* Градиент *!/*/
-    /*color: #a00;*/
-/*}*/
+td {
+    vertical-align: middle;
+    /*border: 1px solid black;*/
+    background-color: transparent;
+    font-size: 12px;
+    height: 24px;
+}
+
+hr {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.header {
+    margin-top: 10px;
+}
+
+.profile-text {
+    margin-bottom: 10px;
+}
+
+#block_msg {
+    color: red;
+    font: bold 14px Arial;
+}
+
+.form {
+    margin-bottom: 0px;
+}
+
+.form .row {
+    clear: both;
+    margin-bottom: 5px;
+    height: 22px;
+}
+
+.form .row .left, .form .row .right, .form .row .select {
+    text-align: left;
+    float: left;
+}
+
+.form .row .left {
+    padding-top: 4px;
+    padding-right: 20px;
+    width: 120px;
+}
+
+.form .row .right input {
+    width: 150px;
+    font: 14px/16px 'Arial';
+    height: 22px;
+    margin-right: 5px;
+}
+
+.form .row .right select {
+    width: 150px;
+    font: 14px/16px 'Arial';
+    height: 22px;
+    margin-right: 5px;
+}
+
+.btn {
+    border-radius: 4px;
+    padding: 3px 10px;
+    /*background: #2d56a0 linear-gradient(to top, #006 0%, #12227d 25%, #1f3b8e 50%, #2d56a0 100%);*/
+    background: linear-gradient(to bottom, #0066cc 0%, #0080ff 25%, #3399ff 50%, #66b2ff 100%);
+    border: 1px solid #0066cc;
+    color: #fff;
+    text-shadow: 0 1px rgba(0,0,0,.3);
+    font: normal 9pt/7pt Arial;
+}
+
+.btn:hover {
+    color: #0066cc;
+    text-shadow: none;
+}
+
+a.btn {
+    text-decoration: none;
+}
+
+input.btn {
+    padding: 6px 10px 5px;
+    /*margin-left: 5px;*/
+}
+
+.wr_msg {
+    color: red;
+    font: normal 5px Arial;
+}
+
+.res_msg {
+    text-align: center;
+    margin-top: 10px;
+    color: #2d56a0;
+}
+
+#login, #signup {
+    width: 300px;
+    height: 250px;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin: -50px 0 0 -150px;
+}
+
+
+

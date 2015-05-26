@@ -6,6 +6,7 @@
 <html>
 <head>
     <title>Your all orders</title>
+    <link  href="/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="parts/adminControlPanel.jsp"/>
@@ -33,7 +34,7 @@
                 </table>
             </c:when>
             <c:otherwise>
-                <div>You do not have any booked flights</div>
+                <div class="res_msg">You do not have any booked flights</div>
             </c:otherwise>
         </c:choose>
     </div>

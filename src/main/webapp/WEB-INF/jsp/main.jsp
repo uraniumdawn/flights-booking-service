@@ -6,51 +6,67 @@
 <html>
 <head>
     <title>Main</title>
-
+    <link  href="/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
 
 <jsp:include page="parts/header.jsp"/>
 <div>
-    <form action="/flights/select" method="get">
-        <div>Destination:</div>
-        <select name="destination" required>
-            <option value="NONE">---Select---</option>
-            <c:forEach items="${airportList}" var="airportD">
-                <jsp:useBean id="airportD" scope="page" class="net.petrovsky.flights.model.Airport"/>
-                <c:choose>
-                    <c:when test="${not empty choice}">
-                        <option value="${airportD.IATAcode}" ${choice['destination'].equals(airportD.IATAcode) ? "selected" : ""}>${airportD.name}</option>
-                    </c:when>
-                    <c:otherwise>
-                        <option value="${airportD.IATAcode}">${airportD.name}</option>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </select>
-        <div>Point Of Departure:</div>
-        <select name="point_of_departure" required>
-            <option value="NONE">---Select---</option>
-            <c:forEach items="${airportList}" var="airportPOD">
-                <jsp:useBean id="airportPOD" scope="page" type="net.petrovsky.flights.model.Airport"/>
-                <c:choose>
-                    <c:when test="${not empty choice}">
-                        <option value="${airportPOD.IATAcode}" ${choice['point_of_departure'].equals(airportPOD.IATAcode) ? "selected" : ""}>${airportPOD.name}</option>
-                    </c:when>
-                    <c:otherwise>
-                        <option value="${airportPOD.IATAcode}">${airportPOD.name}</option>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </select>
-        <div>From:</div><input type="date" name="from" value="${choice['from']}" required>
-        <div>To:</div><input type="date" name="to" value="${choice['to']}" required>
-        <c:if test="${not empty msgIncorrectDates}"><div>${msgIncorrectDates}</div></c:if>
-        <input type="submit" value="Select">
+    <form class="form" action="/flights/select" method="get">
+        <div class="row">
+            <div class="left">Destination:</div>
+            <div class="right">
+                <select name="destination" required>
+                    <option value="NONE">---Select---</option>
+                    <c:forEach items="${airportList}" var="airportD">
+                        <jsp:useBean id="airportD" scope="page" class="net.petrovsky.flights.model.Airport"/>
+                        <c:choose>
+                            <c:when test="${not empty choice}">
+                                <option value="${airportD.IATAcode}" ${choice['destination'].equals(airportD.IATAcode) ? "selected" : ""}>${airportD.name}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${airportD.IATAcode}">${airportD.name}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="left">Point of departure:</div>
+            <div class="right">
+                <select name="point_of_departure" required>
+                    <option value="NONE">---Select---</option>
+                    <c:forEach items="${airportList}" var="airportPOD">
+                        <jsp:useBean id="airportPOD" scope="page" type="net.petrovsky.flights.model.Airport"/>
+                        <c:choose>
+                            <c:when test="${not empty choice}">
+                                <option value="${airportPOD.IATAcode}" ${choice['point_of_departure'].equals(airportPOD.IATAcode) ? "selected" : ""}>${airportPOD.name}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${airportPOD.IATAcode}">${airportPOD.name}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="left">from:</div>
+            <div class="right"><input type="date" name="from" value="${choice['from']}" required/></div>
+        </div>
+        <div class="row">
+            <div class="left">to:</div>
+            <div class="right"><input type="date" name="to" value="${choice['to']}" required/></div>
+        </div>
+        <c:if test="${not empty msgIncorrectDates}">
+            <div class="wr_msg">${msgIncorrectDates}</div>
+        </c:if>
+        <input class="btn" type="submit" value="Select">
     </form>
     <c:choose>
         <c:when test="${not empty selectedFlights}">
-            <table>
+            <table class="flights">
                 <thead>
                 <tr>
                     <th>Point of departure</th>
@@ -62,14 +78,14 @@
                 <c:forEach items="${selectedFlights}" var="flight">
                     <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                     <tr>
-                        <td>${flight.pointOfDeparture.name}</td>
-                        <td>${flight.destination.name}</td>
+                        <td class="airport">${flight.pointOfDeparture.name}</td>
+                        <td class="airport">${flight.destination.name}</td>
                         <td><%=TimeUtil.toString(flight.getTime())%></td>
                         <td>${flight.price}</td>
                         <td>
                             <c:choose>
                                 <c:when test="${not empty user}">
-                                    <a href="/preorder/add?flight_id=${flight.id}">Add to preorder list</a>
+                                    <a class="btn" href="/preorder/add?flight_id=${flight.id}">Add to preorder list</a>
                                 </c:when>
                                 <c:otherwise>
                                     <div>Only for registered users</div>
@@ -81,16 +97,16 @@
             </table>
         </c:when>
         <c:otherwise>
-            <div>You did not chose any flights</div>
+            <div class="res_msg">You did not chose any flights</div>
         </c:otherwise>
     </c:choose>
 </div>
 <jsp:include page="parts/preorderList.jsp"/>
 <div>
     <br/>
+    <a href="https://flights-booking-service.herokuapp.com/admin">Admin link</a>
     Admin user: Laura Palmer email: WhoKillLauraPalmer@lynch.com, pass: FireWalkWithMe<br/>
-    https://flights-booking-service.herokuapp.com/admin<br/>
-    App has some pre-defined data
+    list of pre-defined data <a href="">here</a>
 </div>
 </body>
 </html>

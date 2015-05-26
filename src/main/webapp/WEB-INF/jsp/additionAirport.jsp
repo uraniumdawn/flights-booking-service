@@ -3,32 +3,50 @@
 <html>
 <head>
     <title>Addition of a new Airport</title>
+    <link href="/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
-    <form action="/admin/airports/add" method="post">
-        <table>
-            <tr>
-                <td>IATA code:</td>
-                <td><input type="text" name="IATA_code" value="${airport.IATAcode}" required/></td>
-                <c:if test="${not empty msgIATALength}"><td>${msgIATALength}</td></c:if>
-            </tr>
-            <tr>
-                <td>Name:</td>
-                <td><input type="text" name="name" value="${airport.name}" required/></td>
-            </tr>
-            <tr>
-                <td>City:</td>
-                <td><input type="text" name="city" value="${airport.city}" required/></td>
-            </tr>
-            <tr>
-                <td>Country:</td>
-                <td><input type="text" name="country" value="${airport.country}" required/></td>
-            </tr>
-            <tr>
-                <td><input type="submit" name="add" value="Add"/></td>
-                <td><input type="button" onclick="window.location='/admin/airports/management'" value="Cancel"/></td>
-            </tr>
-        </table>
+<jsp:include page="parts/adminControlPanel.jsp"/>
+    <form class="form" action="/admin/airports/add" method="post">
+        <div class="row">
+            <div class="left">
+                IATA code:
+            </div>
+            <div class="right">
+                <input type="text" name="IATA_code" required/>
+                <c:if test="${not empty msgIATALength}">
+                    <div class="wr_msg">${msgIATALength}</div>
+                </c:if>
+            </div>
+        </div>
+        <div class="row">
+            <div class="left">
+                Name:
+            </div>
+            <div class="right">
+                <input type="text" name="name" required/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="left">
+                City:
+            </div>
+            <div class="right">
+                <input type="text" name="city" required/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="left">
+                Country:
+            </div>
+            <div class="right">
+                <input type="text" name="country" required/>
+            </div>
+        </div>
+        <div class="row">
+            <input class="btn" type="submit" name="add" value="Add"/>
+            <input class="btn" type="button" onclick="window.location='/admin/airports/management'" value="Cancel"/>
+        </div>
     </form>
 </body>
 </html>

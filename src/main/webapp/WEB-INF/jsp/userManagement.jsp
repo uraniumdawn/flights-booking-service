@@ -5,24 +5,43 @@
 <html>
 <head>
     <title>User Management</title>
+    <link  href="/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
 
 <jsp:include page="parts/adminControlPanel.jsp"/>
-<form action="/admin/users/select/by/secondname" method="get">
-    <div>Second name:</div>
-    <input type="text" name="second_name" required>
-    <input type="submit" value="Select">
+<form class="form" action="/admin/users/select/by/secondname" method="get">
+    <div class="row">
+        <div class="left">
+            Second name:
+        </div>
+        <div class="right">
+            <input type="text" name="second_name" required>
+        </div>
+        <div class="select">
+            <input class="btn" type="submit" value="Select">
+        </div>
+    </div>
 </form>
-<form action="/admin/users/select/by/email" method="get">
-    <div>Email:</div>
-    <input type="email" name="email" required>
-    <input type="submit" value="Select">
+<form class="form" action="/admin/users/select/by/email" method="get">
+    <div class="row">
+        <div class="left">
+            Email:
+        </div>
+        <div class="right">
+            <input type="email" name="email" required>
+        </div>
+        <div class="select">
+            <input class="btn" type="submit" value="Select">
+        </div>
+    </div>
 </form>
-<a href="/admin/users/select/all">All users</a>
-<c:if test="${not empty msgEmptyResult}"><div>${msgEmptyResult}</div></c:if>
+<div>
+    <a class="btn" href="/admin/users/select/all">All users</a>
+</div>
+<c:if test="${not empty msgEmptyResult}"><div class="res_msg">${msgEmptyResult}</div></c:if>
 <c:if test="${not empty selectedUsers}">
-    <table class="users">
+    <table>
         <thead>
             <tr>
                 <th>First name</th>
@@ -38,12 +57,12 @@
             <tr>
                 <td>${user.firstName}</td>
                 <td>${user.secondName}</td>
-                <td><a href="mailto:${user.email}">${user.email}</a></td>
+                <td>${user.email}</td>
                 <td><%=TimeUtil.toString(user.getRegistration())%></td>
                 <td>${user.enabled}</td>
                 <td>${user.role}</td>
-                <td><a href="/admin/users/state?user_id=${user.id}">Change state</a> </td>
-                <td><a href="/admin/orders?user_id=${user.id}">Orders</a> </td>
+                <td><a class="btn" href="/admin/users/state?user_id=${user.id}">Change state</a> </td>
+                <td><a class="btn" href="/admin/orders?user_id=${user.id}">Orders</a> </td>
             </tr>
         </c:forEach>
     </table>

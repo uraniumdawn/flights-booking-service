@@ -14,7 +14,7 @@
         <div>Your previous orders</div>
         <c:choose>
             <c:when test="${not empty orders}">
-                <table class="flights">
+                <table>
                     <thead>
                     <tr>
                         <th>Point of departure</th>
@@ -26,8 +26,8 @@
                     <c:forEach items="${orders}" var="order">
                         <jsp:useBean id="order" scope="page" type="net.petrovsky.flights.model.Order"/>
                         <tr>
-                            <td class="airport">${order.flight.pointOfDeparture.name}</td>
-                            <td class="airport">${order.flight.destination.name}</td>
+                            <td>${order.flight.pointOfDeparture.name}</td>
+                            <td>${order.flight.destination.name}</td>
                             <td><%=TimeUtil.toString(order.getFlight().getTime())%></td>
                             <td>${order.flight.price}</td>
                         </tr>
