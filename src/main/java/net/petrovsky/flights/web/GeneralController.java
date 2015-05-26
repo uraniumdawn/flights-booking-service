@@ -37,8 +37,9 @@ public class GeneralController {
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password, HttpSession session, Model model) {
         if (userService.check(email, password)){
-            session.setAttribute("user", userService.getByEmail(email));
-            return "redirect:/";
+            User user = userService.getByEmail(email);
+            session.setAttribute("user", user);
+            return user.getRole().equals(Role.ROLE_ADMIN) ? "redirect:/admin" : "redirect:/";
         } else {
             model.addAttribute("msgIncorrectCredentials", "Invalid email/password or you have not registered yet!");
             return "login";
