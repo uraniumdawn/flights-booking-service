@@ -7,7 +7,7 @@
 <body>
 <jsp:include page="parts/header.jsp"/>
 
-    <form class="form" action="/editprofile" method="post">
+    <form class="form" action="/profile/edit" method="post">
         <div class="row">
             <div class="left">
                 First name:
