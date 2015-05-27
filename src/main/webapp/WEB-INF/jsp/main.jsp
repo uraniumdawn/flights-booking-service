@@ -104,9 +104,9 @@
 <jsp:include page="parts/preorderList.jsp"/>
 <div>
     <br/>
-    <a href="https://flights-booking-service.herokuapp.com/admin">Admin link</a>
+    <a href="/admin">Admin link</a>
     Admin user: Laura Palmer email: WhoKillLauraPalmer@lynch.com, pass: FireWalkWithMe<br/>
-    list of pre-defined data <a href="">here</a>
+    list of pre-defined data <a href="/all">here</a>
 </div>
 </body>
 </html>

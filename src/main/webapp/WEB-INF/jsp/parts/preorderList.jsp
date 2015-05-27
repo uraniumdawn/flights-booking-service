@@ -24,8 +24,8 @@
                         <td><%=TimeUtil.toString(flight.getTime())%></td>
                         <td>${flight.price}</td>
                         <td>
-                            <a href="/preorder/delete?flight_id=${flight.id}">Delete</a>
-                            <a href="/order?flight_id=${flight.id}">Book</a>
+                            <a class="btn" href="/preorder/delete?flight_id=${flight.id}">Delete</a>
+                            <a class="btn" href="/order?flight_id=${flight.id}">Book</a>
                         </td>
                         <td>
                             <c:if test="${orders.contains(flight.id)}">

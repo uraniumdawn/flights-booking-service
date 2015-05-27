@@ -19,4 +19,6 @@ public interface OrderRepository {
     List<Order> getByFlight (int flightID);
 
     List<Order> getByUserAndFlight (int userID, int flightID);
+
+    List<Order> getAll ();
 }

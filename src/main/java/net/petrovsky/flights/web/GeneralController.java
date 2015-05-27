@@ -3,6 +3,8 @@ package net.petrovsky.flights.web;
 import net.petrovsky.flights.model.Role;
 import net.petrovsky.flights.model.User;
 import net.petrovsky.flights.service.AirportService;
+import net.petrovsky.flights.service.FlightService;
+import net.petrovsky.flights.service.OrderService;
 import net.petrovsky.flights.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,12 @@ public class GeneralController {
 
     @Autowired
     private AirportService airportService;
+
+    @Autowired
+    private FlightService flightService;
+
+    @Autowired
+    private OrderService orderService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index(Model model) {
@@ -65,5 +73,14 @@ public class GeneralController {
                          @RequestParam("password") String password, HttpSession session) {
         session.setAttribute("user", userService.save(new User(null, firstName, secondName, email, password, null, true, Role.ROLE_USER)));
         return "main";
+    }
+
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public String all(Model model) {
+        model.addAttribute("users", userService.getAll());
+        model.addAttribute("airports", airportService.getAll());
+        model.addAttribute("flights", flightService.getAll());
+        model.addAttribute("orders", orderService.getAll());
+        return "all";
     }
 }
