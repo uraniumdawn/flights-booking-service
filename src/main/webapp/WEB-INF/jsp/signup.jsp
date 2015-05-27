@@ -25,14 +25,6 @@
             </div>
             <div class="row">
                 <div class="left">
-                    Second name:
-                </div>
-                <div class="right">
-                    <input type="text" name="second_name" required/>
-                </div>
-            </div>
-            <div class="row">
-                <div class="left">
                     Email:
                 </div>
                 <div class="right">
