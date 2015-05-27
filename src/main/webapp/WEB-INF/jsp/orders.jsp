@@ -10,8 +10,9 @@
 </head>
 <body>
 <jsp:include page="parts/header.jsp"/>
+
     <div>
-        <div>Your previous orders</div>
+        <div class="title">Your previous orders</div>
         <c:choose>
             <c:when test="${not empty orders}">
                 <table>
@@ -39,5 +40,7 @@
             </c:otherwise>
         </c:choose>
     </div>
+
+<jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

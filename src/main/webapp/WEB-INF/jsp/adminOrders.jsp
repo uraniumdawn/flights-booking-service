@@ -10,6 +10,7 @@
 </head>
 <body>
 <jsp:include page="parts/adminControlPanel.jsp"/>
+
     <div>
         <c:choose>
             <c:when test="${not empty orders}">
@@ -38,5 +39,7 @@
             </c:otherwise>
         </c:choose>
     </div>
+
+<jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

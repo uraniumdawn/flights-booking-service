@@ -104,5 +104,7 @@
         </c:forEach>
     </table>
 </c:if>
+
+<jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

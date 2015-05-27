@@ -107,7 +107,7 @@ input.btn {
 
 .wr_msg {
     color: red;
-    font: normal 5px Arial;
+    font: normal 10px Arial;
 }
 
 .res_msg {
@@ -123,6 +123,22 @@ input.btn {
     top: 30%;
     left: 50%;
     margin: -50px 0 0 -150px;
+}
+
+.note {
+    font: normal 12px/10px Arial;
+}
+
+.title {
+    text-align: center;
+}
+
+.footer {
+    height:20px;
+    position:fixed;
+    bottom:0;
+    width:100%;
+    font: normal 10px/8px Tahoma;
 }
 
 

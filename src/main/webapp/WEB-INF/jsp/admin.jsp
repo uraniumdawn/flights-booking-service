@@ -6,5 +6,6 @@
 </head>
 <body>
     <jsp:include page="parts/adminControlPanel.jsp"/>
+    <jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

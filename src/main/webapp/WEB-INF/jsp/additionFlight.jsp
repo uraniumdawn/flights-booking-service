@@ -7,6 +7,7 @@
 </head>
 <body>
 <jsp:include page="parts/adminControlPanel.jsp"/>
+
     <form class="form" action="/admin/flights/add" method="post">
         <div class="row">
             <div class="left">
@@ -57,5 +58,7 @@
             <input class="btn" type="button" onclick="window.location='/admin/flights/management'" value="Cancel"/>
         </div>
     </form>
+
+<jsp:include page="parts/footer.jsp"/>
 </body>
 </html>

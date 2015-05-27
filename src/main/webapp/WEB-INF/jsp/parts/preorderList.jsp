@@ -4,7 +4,7 @@
 
 <div>
     <hr/>
-    <div>Preorder list of flights</div>
+    <div class="title">Preorder list of flights</div>
     <c:choose>
         <c:when test="${(not empty user) && (not empty preorder)}">
             <table>

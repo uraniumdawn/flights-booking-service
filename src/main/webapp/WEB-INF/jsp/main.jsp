@@ -9,8 +9,8 @@
     <link  href="/resources/css/style.css" rel="stylesheet">
 </head>
 <body>
-
 <jsp:include page="parts/header.jsp"/>
+
 <div>
     <form class="form" action="/flights/select" method="get">
         <div class="row">
@@ -88,7 +88,7 @@
                                     <a class="btn" href="/preorder/add?flight_id=${flight.id}">Add to preorder list</a>
                                 </c:when>
                                 <c:otherwise>
-                                    <div>Only for registered users</div>
+                                    <div>Booking is only for registered users</div>
                                 </c:otherwise>
                             </c:choose>
                         </td>
@@ -102,11 +102,14 @@
     </c:choose>
 </div>
 <jsp:include page="parts/preorderList.jsp"/>
-<div>
+
+<div class="note">
     <br/>
     <a href="/admin">Admin link</a>
     Admin user: Laura Palmer email: WhoKillLauraPalmer@lynch.com, pass: FireWalkWithMe<br/>
     list of pre-defined data <a href="/all">here</a>
 </div>
+
+<jsp:include page="parts/footer.jsp"/>
 </body>
 </html>
