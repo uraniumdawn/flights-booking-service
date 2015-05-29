@@ -48,9 +48,11 @@
             </div>
         </div>
     </form>
-    <div>
-        <a class="btn" href="/admin/airports/select/all">All airports</a>
-        <a class="btn" href="/admin/airports/add">Add a new airport</a>
+    <div class="row">
+        <div class="left">
+            <a class="btn" href="/admin/airports/select/all">All airports</a>
+            <a class="btn" href="/admin/airports/add">Add a new airport</a>
+        </div>
     </div>
     <c:if test="${not empty msgEmptyResult}"><div class="res_msg">${msgEmptyResult}</div></c:if>
     <c:if test="${not empty selectedAirports}">

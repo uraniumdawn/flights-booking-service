@@ -57,11 +57,13 @@
         </div>
         <div class="row">
             <div class="left">to:</div>
-            <div class="right"><input type="date" name="to" value="${choice['to']}" required/></div>
+            <div class="right">
+                <input type="date" name="to" value="${choice['to']}" required/>
+                <c:if test="${not empty msgIncorrectDates}">
+                    <div class="wr_msg">${msgIncorrectDates}</div>
+                </c:if>
+            </div>
         </div>
-        <c:if test="${not empty msgIncorrectDates}">
-            <div class="wr_msg">${msgIncorrectDates}</div>
-        </c:if>
         <input class="btn" type="submit" value="Select">
     </form>
     <c:choose>
@@ -108,6 +110,7 @@
     <a href="/admin">Admin link</a>
     Admin user: Laura Palmer email: WhoKillLauraPalmer@lynch.com, pass: FireWalkWithMe<br/>
     list of pre-defined data <a href="/all">here</a>
+    Preferably to use Google Chrome browser.
 </div>
 
 <jsp:include page="parts/footer.jsp"/>
