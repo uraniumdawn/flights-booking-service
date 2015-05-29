@@ -21,7 +21,7 @@ th {
 
 td {
     vertical-align: middle;
-    /*border: 1px solid black;*/
+    border: 1px solid #0066cc;
     background-color: transparent;
     font-size: 12px;
     height: 24px;
