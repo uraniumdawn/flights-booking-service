@@ -8,13 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
+@SessionAttributes({"choice", "selectedFlights"})
 public class FlightController {
 
     @Autowired
@@ -25,9 +26,9 @@ public class FlightController {
                                 @RequestParam("point_of_departure") String pointOfDeparture,
                                 @RequestParam("from") String from,
                                 @RequestParam("to") String to,
-                                HttpSession session, Model model) {
+                                Model model) {
         if (TimeUtil.toDate(from).isAfter(LocalDateTime.now().toLocalDate().minusDays(1)) && TimeUtil.toDate(to).isAfter(LocalDateTime.now().toLocalDate().minusDays(1))) {
-            session.setAttribute("selectedFlights", flightService.getFlightToOrder(destination, pointOfDeparture,
+            model.addAttribute("selectedFlights", flightService.getFlightToOrder(destination, pointOfDeparture,
                     TimeUtil.toDate(from).atTime(0, 0, 0), TimeUtil.toDate(to).atTime(0, 0, 0)));
         } else {
             model.addAttribute("msgIncorrectDates", "Incorrect dates");
@@ -38,7 +39,7 @@ public class FlightController {
         choice.put("point_of_departure", pointOfDeparture);
         choice.put("from", from);
         choice.put("to", to);
-        session.setAttribute("choice", choice);
+        model.addAttribute("choice", choice);
         return "forward:/";
     }
 }

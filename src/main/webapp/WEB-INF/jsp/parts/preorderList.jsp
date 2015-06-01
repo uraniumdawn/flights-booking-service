@@ -20,21 +20,17 @@
                     <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                     <tr>
                         <td>${flight.pointOfDeparture.name}</td>
-                        <td>${flight.destination.name}"</td>
+                        <td>${flight.destination.name}</td>
                         <td><%=TimeUtil.toString(flight.getTime())%></td>
                         <td>${flight.price}</td>
                         <td>
                             <a class="btn" href="/preorder/delete?flight_id=${flight.id}">Delete</a>
                             <a class="btn" href="/order?flight_id=${flight.id}">Book</a>
-                        </td>
-                        <td>
-                            <c:if test="${orders.contains(flight.id)}">
-                                <div>Ordered</div>
+                            <c:if test="${ordersIndex.contains(flight.id)}">
+                                <span>Ordered</span>
                             </c:if>
-                        </td>
-                        <td>
                             <c:if test="${not empty msgExistentOrder}">
-                                <div>This order already exist</div>
+                                <span>This order already exist</span>
                             </c:if>
                         </td>
                     </tr>

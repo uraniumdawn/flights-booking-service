@@ -177,7 +177,7 @@ public class AdminController {
     public String selectFlightsByPointOfDeparture (@RequestParam(value = "point_of_departure") String pointOfDeparture, Model model) {
         List<Flight> flights = flightService.getByPointOfDeparture(pointOfDeparture);
         if (!flights.isEmpty()) {
-            model.addAttribute("selectedFlights", flights);
+            model.addAttribute("selectedFlights_adm", flights);
             model.addAttribute("choicePOD", pointOfDeparture);
         } else {
             model.addAttribute("msgEmptyResult", "There are not items according your request");
@@ -189,7 +189,7 @@ public class AdminController {
     public String selectFlightsByDestination (@RequestParam(value = "destination") String destination, Model model) {
         List<Flight> flights = flightService.getByDestination(destination);
         if (!flights.isEmpty()) {
-            model.addAttribute("selectedFlights", flights);
+            model.addAttribute("selectedFlights_adm", flights);
             model.addAttribute("choiceD", destination);
         } else {
             model.addAttribute("msgEmptyResult", "There are not items according your request");
@@ -199,7 +199,7 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/flights/select/all", method = RequestMethod.GET)
     public String selectAllFlights (Model model) {
-        model.addAttribute("selectedFlights", flightService.getAll());
+        model.addAttribute("selectedFlights_adm", flightService.getAll());
         return "forward:/admin/flights/management";
     }
 

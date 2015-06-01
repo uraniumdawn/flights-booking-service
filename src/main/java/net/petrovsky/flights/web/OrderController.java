@@ -8,9 +8,7 @@ import net.petrovsky.flights.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
@@ -19,7 +17,8 @@ import java.util.Map;
 import java.util.Set;
 
 @Controller
-public class OrderController {
+@SessionAttributes({"preorder", "ordersIndex", "user"})
+public class  OrderController {
 
     @Autowired
     private FlightService flightService;
@@ -38,34 +37,33 @@ public class OrderController {
         }
 
         Set<Integer> indexSet;
-        if(session.getAttribute("orders") == null) {
+        if(session.getAttribute("ordersIndex") == null) {
             indexSet = new HashSet<>();
-            session.setAttribute("orders", indexSet);
+            session.setAttribute("ordersIndex", indexSet);
         } else {
-            indexSet = (Set)session.getAttribute("orders");
+            indexSet = (Set)session.getAttribute("ordersIndex");
         }
 
         Integer userID = ((User) session.getAttribute("user")).getId();
         if(!orderService.getByUserAndFlight(userID, Integer.valueOf(flightId)).isEmpty()) {
             indexSet.add(Integer.valueOf(flightId));
-            session.setAttribute("orders", indexSet);
+            session.setAttribute("ordersIndex", indexSet);
         }
         return "forward:/";
     }
 
     @RequestMapping(value = "/preorder/delete", method = RequestMethod.GET)
-    public String deleteFromPreorder(@RequestParam("flight_id") String flightId, HttpSession session) {
-        ((Map)session.getAttribute("preorder")).remove(flightId);
+    public String deleteFromPreorder(@RequestParam("flight_id") String flightId, @ModelAttribute("preorder") Map preorder) {
+        preorder.remove(flightId);
         return "forward:/";
     }
 
     @RequestMapping(value = "/order", method = RequestMethod.GET)
-    public String makeAnOrder(@RequestParam("flight_id") String flightId, Model model, HttpSession session) {
-        Set<Integer> indexList = (Set)session.getAttribute("orders");
-        if(!indexList.contains(Integer.valueOf(flightId))) {
-            orderService.save(new Order(null, ((User) session.getAttribute("user")), flightService.getByID(Integer.valueOf(flightId))));
-            indexList.add(Integer.valueOf(flightId));
-            session.setAttribute("orders", indexList);
+    public String makeAnOrder(@RequestParam("flight_id") String flightId, @ModelAttribute("ordersIndex") Set indexSet, @ModelAttribute("user") User user, Model model) {
+        if(!indexSet.contains(Integer.valueOf(flightId))) {
+            orderService.save(new Order(null, user, flightService.getByID(Integer.valueOf(flightId))));
+            indexSet.add(Integer.valueOf(flightId));
+            model.addAttribute("ordersIndex", indexSet);
         } else {
             model.addAttribute("msgExistentOrder", "You have ordered already this flight");
         }
@@ -73,8 +71,8 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders", method = RequestMethod.GET)
-    public String listOfUserOrders(Model model, HttpSession session) {
-        model.addAttribute("orders", orderService.getByUser(((User) session.getAttribute("user")).getId()));
+    public String listOfUserOrders(@ModelAttribute("user") User user, Model model) {
+        model.addAttribute("orders", orderService.getByUser(user.getId()));
         return "orders";
     }
 }

@@ -79,7 +79,7 @@
                     <th>Price</th>
                 </tr>
                 </thead>
-                <c:forEach items="${selectedFlights}" var="flight">
+                <c:forEach items="${selectedFlights_adm}" var="flight">
                     <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                     <tr>
                         <td>${flight.pointOfDeparture.name}</td>
