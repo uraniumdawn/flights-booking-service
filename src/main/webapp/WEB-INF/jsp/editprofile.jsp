@@ -13,7 +13,7 @@
                 First name:
             </div>
             <div class="right">
-                <input type="text" name="first_name" required/>
+                <input type="text" name="first_name" value="${user.firstName}" required/>
             </div>
         </div>
         <div class="row">
@@ -21,7 +21,7 @@
                 Second name:
             </div>
             <div class="right">
-                <input type="text" name="second_name" required/>
+                <input type="text" name="second_name" value="${user.secondName}" required/>
             </div>
         </div>
         <div class="row">
@@ -29,7 +29,7 @@
                 Email:
             </div>
             <div class="right">
-                <input type="email" name="email" required/>
+                <input type="email" name="email" value="${user.email}" required/>
             </div>
         </div>
         <div class="row">

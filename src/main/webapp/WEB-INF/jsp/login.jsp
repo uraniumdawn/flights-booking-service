@@ -7,8 +7,7 @@
 </head>
 <body>
     <div id="login">
-        <c:if test="${not empty requestScope.accessDenied}"><div>${requestScope.accessDenied}</div></c:if>
-        <c:if test="${not empty msgIncorrectCredentials}"><div>${msgIncorrectCredentials}</div></c:if>
+
         <form class="form" action="/login" method="post">
             <div class="row">
                 <div class="left">
@@ -29,6 +28,10 @@
             <div class="row">
                 <input class="btn" type="submit" name="login" value="Login"/>
                 <input class="btn" type="button" onclick="window.location='/'" value="Cancel"/>
+            </div>
+            <div class="row">
+                <c:if test="${not empty requestScope.accessDenied}"><div class="wr_msg">${requestScope.accessDenied}</div></c:if>
+                <c:if test="${not empty msgIncorrectCredentials}"><div class="wr_msg">${msgIncorrectCredentials}</div></c:if>
             </div>
         </form>
     </div>

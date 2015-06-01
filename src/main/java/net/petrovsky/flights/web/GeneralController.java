@@ -12,10 +12,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
+@SessionAttributes("user")
 public class GeneralController {
 
     @Autowired
@@ -42,11 +44,12 @@ public class GeneralController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
+
     public String login(@RequestParam("email") String email,
-                        @RequestParam("password") String password, HttpSession session, Model model) {
+                        @RequestParam("password") String password, /*HttpSession session,*/ Model model) {
         if (userService.check(email, password)){
             User user = userService.getByEmail(email);
-            session.setAttribute("user", user);
+            model.addAttribute("user", user);
             return user.getRole().equals(Role.ROLE_ADMIN) ? "redirect:/admin" : "redirect:/";
         } else {
             model.addAttribute("msgIncorrectCredentials", "Invalid email/password or you have not registered yet!");
@@ -56,8 +59,7 @@ public class GeneralController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(HttpSession session) {
-        session.removeAttribute("user");
-        session.removeAttribute("choice");
+        session.invalidate();
         return "forward:/";
     }
 
