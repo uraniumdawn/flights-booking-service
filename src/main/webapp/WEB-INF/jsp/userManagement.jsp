@@ -36,6 +36,7 @@
             </div>
         </div>
     </form>
+    <div class="embedment"></div>
     <div>
         <a class="btn" href="/admin/users/select/all">All users</a>
     </div>

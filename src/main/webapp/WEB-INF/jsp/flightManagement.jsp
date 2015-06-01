@@ -62,6 +62,7 @@
             </div>
         </div>
     </form>
+    <div class="embedment"></div>
     <div>
         <a class="btn" href="/admin/flights/select/all">All flights</a>
         <a class="btn" href="/admin/flights/add">Add flight</a>

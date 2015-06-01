@@ -48,6 +48,7 @@
             </div>
         </div>
     </form>
+    <div class="embedment"></div>
     <div class="row">
         <div class="left">
             <a class="btn" href="/admin/airports/select/all">All airports</a>
