@@ -27,6 +27,22 @@ td {
     height: 28px;
 }
 
+.clmn_1 {
+    width: 400px;
+}
+.clmn_2 {
+    width: 400px;
+}
+.clmn_3 {
+    width: 120px;
+}
+.clmn_4 {
+    width: 20px;
+}
+.clmn_5 {
+    width: auto;
+}
+
 hr {
     margin-top: 10px;
     margin-bottom: 5px;

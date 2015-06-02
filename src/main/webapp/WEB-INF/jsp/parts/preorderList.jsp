@@ -19,11 +19,11 @@
                 <c:forEach items="${preorder.values()}" var="flight">
                     <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                     <tr>
-                        <td>${flight.pointOfDeparture.name}</td>
-                        <td>${flight.destination.name}</td>
-                        <td><%=TimeUtil.toString(flight.getTime())%></td>
-                        <td>${flight.price}</td>
-                        <td>
+                        <td class="clmn_1">${flight.pointOfDeparture.name}</td>
+                        <td class="clmn_2">${flight.destination.name}</td>
+                        <td class="clmn_3"><%=TimeUtil.toString(flight.getTime())%></td>
+                        <td class="clmn_4">${flight.price}</td>
+                        <td class="clmn_5">
                             <a class="btn" href="/preorder/delete?flight_id=${flight.id}">Delete</a>
                             <a class="btn" href="/order?flight_id=${flight.id}">Book</a>
                             <c:if test="${ordersIndex.contains(flight.id)}">

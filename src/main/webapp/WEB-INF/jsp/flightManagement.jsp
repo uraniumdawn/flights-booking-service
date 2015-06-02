@@ -69,7 +69,7 @@
     </div>
     <c:if test="${not empty msgEmptyResult}"><div class="res_msg">${msgEmptyResult}</div></c:if>
     <div>
-        <c:if test="${not empty selectedFlights}">
+        <c:if test="${not empty selectedFlights_adm}">
             <table>
                 <thead>
                 <tr>
@@ -82,11 +82,11 @@
                 <c:forEach items="${selectedFlights_adm}" var="flight">
                     <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                     <tr>
-                        <td>${flight.pointOfDeparture.name}</td>
-                        <td>${flight.destination.name}</td>
-                        <td><%=TimeUtil.toString(flight.getTime())%></td>
-                        <td>${flight.price}</td>
-                        <td><a class="btn" href="/admin/flights/edit?flight_id=${flight.id}">Edit</a> </td>
+                        <td class="clmn_1">${flight.pointOfDeparture.name}</td>
+                        <td class="clmn_2">${flight.destination.name}</td>
+                        <td class="clmn_3"><%=TimeUtil.toString(flight.getTime())%></td>
+                        <td class="clmn_4">${flight.price}</td>
+                        <td class="clmn_5"><a class="btn" href="/admin/flights/edit?flight_id=${flight.id}">Edit</a> </td>
                     </tr>
                 </c:forEach>
             </table>

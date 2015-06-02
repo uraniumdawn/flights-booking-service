@@ -80,11 +80,11 @@
                 <c:forEach items="${selectedFlights}" var="flight">
                     <jsp:useBean id="flight" scope="page" type="net.petrovsky.flights.model.Flight"/>
                     <tr>
-                        <td class="airport">${flight.pointOfDeparture.name}</td>
-                        <td class="airport">${flight.destination.name}</td>
-                        <td><%=TimeUtil.toString(flight.getTime())%></td>
-                        <td>${flight.price}</td>
-                        <td>
+                        <td class="clmn_1">${flight.pointOfDeparture.name}</td>
+                        <td class="clmn_2">${flight.destination.name}</td>
+                        <td class="clmn_3"><%=TimeUtil.toString(flight.getTime())%></td>
+                        <td class="clmn_4">${flight.price}</td>
+                        <td class="clmn_5">
                             <c:choose>
                                 <c:when test="${not empty user}">
                                     <a class="btn" href="/preorder/add?flight_id=${flight.id}">Add to preorder list</a>
