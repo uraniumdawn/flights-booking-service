@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.servlet.http.HttpSession;
 
@@ -58,9 +59,10 @@ public class GeneralController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
+    public String logout(SessionStatus sessionStatus, HttpSession session) {
         session.invalidate();
-        return "forward:/";
+        sessionStatus.setComplete();
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.GET)
