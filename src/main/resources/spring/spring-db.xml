@@ -41,7 +41,7 @@
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="classpath:${jdbc.initScriptLocation}"/>
-        <jdbc:script location="classpath:${jdbc.populateScriptLocation}"/>
+        <jdbc:script encoding="utf-8" location="classpath:${jdbc.populateScriptLocation}"/>
     </jdbc:initialize-database>
 
     <bean id="namedJdbsTemplated" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
