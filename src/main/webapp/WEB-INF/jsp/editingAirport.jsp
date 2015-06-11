@@ -9,37 +9,37 @@
 
     <form class="form" action="/admin/airports/edit" method="post">
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 IATA code:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="IATA_code" value="${airport.IATAcode}" required/>
-                <c:if test="${not empty msgIATALength}">
-                    <div class="wr_msg">${msgIATALength}</div>
-                </c:if>
             </div>
+            <c:if test="${not empty msgIATALength}">
+                <div class=" brick elem wr_msg">${msgIATALength}</div>
+            </c:if>
         </div>
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Name:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="name" value="${airport.name}" required/>
             </div>
         </div>
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 City:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="city" value="${airport.city}" required/>
             </div>
         </div>
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Country:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="country" value="${airport.country}" required/>
             </div>
         </div>

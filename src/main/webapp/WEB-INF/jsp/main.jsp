@@ -14,8 +14,8 @@
 <div>
     <form class="form" action="/flights/select" method="get">
         <div class="row">
-            <div class="left">Destination:</div>
-            <div class="right">
+            <div class="brick lbl">Destination:</div>
+            <div class="brick">
                 <select name="destination" required>
                     <option value="NONE">---Select---</option>
                     <c:forEach items="${airportList}" var="airportD">
@@ -33,8 +33,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="left">Point of departure:</div>
-            <div class="right">
+            <div class="brick lbl">Point of departure:</div>
+            <div class="brick">
                 <select name="point_of_departure" required>
                     <option value="NONE">---Select---</option>
                     <c:forEach items="${airportList}" var="airportPOD">
@@ -52,17 +52,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="left">from:</div>
-            <div class="right"><input type="date" name="from" value="${choice['from']}" required/></div>
+            <div class="brick lbl">from:</div>
+            <div class="brick"><input type="date" name="from" value="${choice['from']}" required/></div>
+            <c:if test="${not empty msgIncorrectDateFrom}">
+                <div class="brick elem wr_msg">${msgIncorrectDateFrom}</div>
+            </c:if>
         </div>
         <div class="row">
-            <div class="left">to:</div>
-            <div class="right">
-                <input type="date" name="to" value="${choice['to']}" required/>
-                <c:if test="${not empty msgIncorrectDates}">
-                    <div class="wr_msg">${msgIncorrectDates}</div>
-                </c:if>
-            </div>
+            <div class="brick lbl">to:</div>
+            <div class="brick"><input type="date" name="to" value="${choice['to']}" required/></div>
+            <c:if test="${not empty msgIncorrectDateTo}">
+                <div class="brick elem wr_msg">${msgIncorrectDateTo}</div>
+            </c:if>
         </div>
         <input class="btn" type="submit" value="Select">
     </form>
@@ -113,6 +114,8 @@
     Preferably to use Google Chrome browser.
 </div>
 
+
+
 <jsp:include page="parts/footer.jsp"/>
 
 <script>
@@ -123,7 +126,6 @@
 
     ga('create', 'UA-63711550-1', 'auto');
     ga('send', 'pageview');
-
 </script>
 
 </body>

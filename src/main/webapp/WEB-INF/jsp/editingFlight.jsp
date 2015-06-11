@@ -10,10 +10,10 @@
 
     <form class="form" action="/admin/flights/edit" method="post">
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Destination:
             </div>
-            <div class="right">
+            <div class="brick">
                 <select name="destination" required>
                     <option value="NONE">---Select---</option>
                     <c:forEach items="${airportList}" var="airportD">
@@ -31,10 +31,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Point of departure:
             </div>
-            <div class="right">
+            <div class="brick">
                 <select name="point_of_departure" required>
                     <option value="NONE">---Select---</option>
                     <c:forEach items="${airportList}" var="airportPOD">
@@ -52,18 +52,18 @@
             </div>
         </div>
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Time:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="datetime-local" name="time" value="${currentFlight.time}" required/>
             </div>
         </div>
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Price:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="number" step="0.01" name="price" value="${currentFlight.price}" required/>
             </div>
         </div>

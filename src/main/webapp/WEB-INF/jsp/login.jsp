@@ -10,18 +10,18 @@
 
         <form class="form" action="/login" method="post">
             <div class="row">
-                <div class="left">
+                <div class="brick lbl">
                     Email:
                 </div>
-                <div class="right">
+                <div class="brick">
                     <input type="email" name="email"/>
                 </div>
             </div>
             <div class="row">
-                <div class="left">
+                <div class="brick lbl">
                     Password:
                 </div>
-                <div class="right">
+                <div class="brick">
                     <input type="password" name="password"/>
                 </div>
             </div>

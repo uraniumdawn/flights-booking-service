@@ -12,10 +12,10 @@
 
             <form class="form" action="/admin/flights/select/by/destination" method="get">
     <div class="row">
-        <div class="left">
+        <div class="brick lbl">
             Destination:
         </div>
-        <div class="right">
+        <div class="brick">
             <select name="destination" required>
                 <option value="NONE">---Select---</option>
                 <c:forEach items="${airportList}" var="airportD">
@@ -31,17 +31,17 @@
                 </c:forEach>
             </select>
         </div>
-        <div class="select">
+        <div class="brick elem">
             <input class="btn" type="submit" value="Select">
         </div>
     </div>
     </form>
     <form class="form" action="/admin/flights/select/by/pointod" method="get">
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Point of departure:
             </div>
-            <div class="right">
+            <div class="brick">
                 <select name="point_of_departure" required>
                     <option value="NONE">---Select---</option>
                     <c:forEach items="${airportList}" var="airportPOD">
@@ -57,7 +57,7 @@
                     </c:forEach>
                 </select>
             </div>
-            <div class="select">
+            <div class="brick elem">
                 <input class="btn" type="submit" value="Select">
             </div>
         </div>

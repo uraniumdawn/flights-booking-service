@@ -1,8 +1,23 @@
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,
+a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,
+strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend{
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+}
+
 body {
     font: normal 11pt/9pt Arial;
     width: 1200px;
     margin: 0px auto;
     background: url(/resources/images/background.jpg) center;
+}
+
+input, select {
+    height: 22px;
+    box-sizing: border-box;
+    font: 14px/16px 'Arial';
 }
 
 table {
@@ -61,53 +76,50 @@ hr {
     font: bold 14px Arial;
 }
 
-.form {
-    margin-bottom: 0px;
-}
-
-.form .row {
+.row {
     clear: both;
+    display: inline-block;
+    width:100%;
     margin-bottom: 5px;
-    height: 22px;
 }
 
-.form .row .left, .form .row .right, .form .row .select {
+.brick {
     text-align: left;
     float: left;
 }
 
-.form .row .left {
-    padding-top: 4px;
-    padding-right: 20px;
-    width: 120px;
-}
-
-.form .row .right input {
-    width: 150px;
-    font: 14px/16px 'Arial';
+.lbl {
+    width: 140px;
     height: 22px;
-    margin-right: 5px;
+    line-height: 22px;
 }
 
-.form .row .right select {
+.elem {
+    margin-left: 5px;
+}
+
+.row .brick input[type="text"],
+.row .brick input[type="date"],
+.row .brick input[type="email"],
+.row .brick input[type="password"],
+.row .brick select {
     width: 150px;
-    font: 14px/16px 'Arial';
-    height: 22px;
-    margin-right: 5px;
 }
 
-.btn {
+a.btn,
+input.btn{
     border-radius: 4px;
     padding: 3px 10px;
-    /*background: #2d56a0 linear-gradient(to top, #006 0%, #12227d 25%, #1f3b8e 50%, #2d56a0 100%);*/
     background: linear-gradient(to bottom, #0066cc 0%, #0080ff 25%, #3399ff 50%, #66b2ff 100%);
     border: 1px solid #0066cc;
     color: #fff;
     text-shadow: 0 1px rgba(0,0,0,.3);
     font: normal 9pt/7pt Arial;
+    cursor:pointer;
 }
 
-.btn:hover {
+a.btn:hover,
+input.btn:hover {
     color: #0066cc;
     text-shadow: none;
 }
@@ -116,14 +128,11 @@ a.btn {
     text-decoration: none;
 }
 
-input.btn {
-    padding: 6px 10px 5px;
-    /*margin-left: 5px;*/
-}
-
 .wr_msg {
     color: red;
     font: normal 12px Arial;
+    height: 22px;
+    line-height: 22px;
 }
 
 .res_msg {
@@ -154,13 +163,23 @@ input.btn {
     position:fixed;
     bottom:0;
     width:100%;
-    /*height:100px;*/
-    /*margin-top:-100px;*/
     font: normal 10px/8px Tahoma;
 }
 
 .embedment {
     margin-top: 9px;
+}
+
+.notification {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #0066cc 0%, #0080ff 25%, #3399ff 50%, #66b2ff 100%);
+    border: 1px solid #0066cc;
+    color: #fff;
+    text-shadow: 0 1px rgba(0,0,0,.3);
+    font: normal 9pt/7pt Arial;
 }
 
 

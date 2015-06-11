@@ -9,34 +9,34 @@
 
     <form class="form" action="/profile/edit" method="post">
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 First name:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="first_name" value="${user.firstName}" required/>
             </div>
         </div>
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Second name:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="second_name" value="${user.secondName}" required/>
             </div>
         </div>
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Email:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="email" name="email" value="${user.email}" required/>
             </div>
         </div>
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Password:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="password" name="password" required/>
             </div>
         </div>

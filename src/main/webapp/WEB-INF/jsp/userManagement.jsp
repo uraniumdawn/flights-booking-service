@@ -12,26 +12,26 @@
 
     <form class="form" action="/admin/users/select/by/secondname" method="get">
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Second name:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="second_name" required>
             </div>
-            <div class="select">
+            <div class="brick elem">
                 <input class="btn" type="submit" value="Select">
             </div>
         </div>
     </form>
     <form class="form" action="/admin/users/select/by/email" method="get">
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Email:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="email" name="email" required>
             </div>
-            <div class="select">
+            <div class="brick elem">
                 <input class="btn" type="submit" value="Select">
             </div>
         </div>

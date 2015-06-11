@@ -11,39 +11,39 @@
 
     <form class="form" action="/admin/airports/select/by/iatacode" method="get">
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 IATA code:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="IATA_code" required>
             </div>
-            <div class="select">
+            <div class="brick elem">
                 <input class="btn" type="submit" value="Select">
             </div>
         </div>
     </form>
     <form class="form" action="/admin/airports/select/by/name" method="get">
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Name:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="name" required>
             </div>
-            <div class="select">
+            <div class="brick elem">
                 <input class="btn" type="submit" value="Select">
             </div>
         </div>
     </form>
     <form class="form" action="/admin/airports/select/by/country" method="get">
         <div class="row">
-            <div class="left">
+            <div class="brick lbl">
                 Country:
             </div>
-            <div class="right">
+            <div class="brick">
                 <input type="text" name="country" required>
             </div>
-            <div class="select">
+            <div class="brick elem">
                 <input class="btn" type="submit" value="Select">
             </div>
         </div>

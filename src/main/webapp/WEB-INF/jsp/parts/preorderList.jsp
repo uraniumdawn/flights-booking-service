@@ -29,8 +29,10 @@
                             <c:if test="${ordersIndex.contains(flight.id)}">
                                 <span>Ordered</span>
                             </c:if>
-                            <c:if test="${not empty msgExistentOrder}">
-                                <span>This order already exist</span>
+                            <c:if test="${ordersIndex.contains(flight.id)}">
+                                <%--<div class="notification">--%>
+                                    <%--You have ordered this flight already!--%>
+                                <%--</div>--%>
                             </c:if>
                         </td>
                     </tr>

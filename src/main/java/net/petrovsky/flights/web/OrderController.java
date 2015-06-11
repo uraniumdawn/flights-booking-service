@@ -65,7 +65,7 @@ public class  OrderController {
             indexSet.add(Integer.valueOf(flightId));
             model.addAttribute("ordersIndex", indexSet);
         } else {
-            model.addAttribute("msgExistentOrder", "You have ordered already this flight");
+            //NOP
         }
         return "forward:/";
     }

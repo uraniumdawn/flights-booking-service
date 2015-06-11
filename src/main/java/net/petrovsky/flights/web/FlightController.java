@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,11 +28,17 @@ public class FlightController {
                                 @RequestParam("from") String from,
                                 @RequestParam("to") String to,
                                 Model model) {
-        if (TimeUtil.toDate(from).isAfter(LocalDateTime.now().toLocalDate().minusDays(1)) && TimeUtil.toDate(to).isAfter(LocalDateTime.now().toLocalDate().minusDays(1))) {
+        LocalDate localDateBorder = LocalDateTime.now().toLocalDate().minusDays(1);
+        if (!(TimeUtil.toDate(from).isAfter(LocalDateTime.now().toLocalDate().minusDays(1)) && TimeUtil.toDate(to).isAfter(LocalDateTime.now().toLocalDate().minusDays(1)))) {
+            if (!TimeUtil.toDate(from).isAfter(LocalDateTime.now().toLocalDate().minusDays(1))) {
+                model.addAttribute("msgIncorrectDateFrom", "Incorrect date");
+            }
+            if (!TimeUtil.toDate(to).isAfter(LocalDateTime.now().toLocalDate().minusDays(1))) {
+                model.addAttribute("msgIncorrectDateTo", "Incorrect date");
+            }
+        } else {
             model.addAttribute("selectedFlights", flightService.getFlightToOrder(destination, pointOfDeparture,
                     TimeUtil.toDate(from).atTime(0, 0, 0), TimeUtil.toDate(to).atTime(0, 0, 0)));
-        } else {
-            model.addAttribute("msgIncorrectDates", "Incorrect dates");
         }
 
         Map choice = new HashMap<>();
